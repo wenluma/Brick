@@ -100,6 +100,15 @@ final class RockTreeTests: XCTestCase {
     XCTAssertTrue(result[2].count == 2)
   }
   
+  func testBuildTree() {
+    let preList = [3,9,20,15,7]
+    let inList = [9,3,15,20,7]
+    
+    let root = BuildTree<Int>.testMake(preList: preList, inList: inList)
+    printLevel(of: root)
+
+  }
+  
   func testClosure() {
     var more = 0
     stride(from: 1, to: 18, by: 3).forEach { (i) in

@@ -34,6 +34,49 @@ open class TreeFacctory {
   }
 }
 
+public class BuildTree<T: Comparable & Hashable> {
+  private var map = [T: Int]()
+  func makeTree(preList: [T], inList: [T]) -> TreeNode<T>? {
+    for (index, e) in inList.enumerated() {
+      map[e] = index
+    }
+    
+    return _buildTree(preList: preList, inList: inList, preStart: 0, preEnd: preList.count-1, inStart: 0, inEnd: inList.count-1)
+  }
+  
+  private func _buildTree(preList: [T], inList: [T], preStart: Int, preEnd: Int, inStart: Int, inEnd: Int) -> TreeNode<T>? {
+    guard !preList.isEmpty, preList.count == inList.count else {
+      return nil
+    }
+    
+    if preStart > preEnd || inStart > inEnd {
+      return nil
+    }
+    let root = preList[preStart]
+    let rootIndexInOrder = map[root]!
+    let leftCount = rootIndexInOrder - inStart
+    let rootNode = TreeNode(value: root)
+    rootNode.left = _buildTree(preList: preList,
+                               inList: inList,
+                               preStart: preStart + 1,
+                               preEnd: preStart + 1 + leftCount ,
+                               inStart: inStart,
+                               inEnd: inStart + leftCount - 1)
+    rootNode.right = _buildTree(preList: preList,
+                                inList: inList,
+                                preStart: preStart + leftCount + 1,
+                                preEnd: preEnd,
+                                inStart: rootIndexInOrder + 1,
+                                inEnd: inEnd)
+    return rootNode
+  }
+  
+  public class func testMake<T: Comparable & Hashable>(preList: [T], inList: [T]) -> TreeNode<T>? {
+    let builder = BuildTree<T>()
+    return builder.makeTree(preList: preList, inList: inList)
+  }
+}
+
 public class TreeNode<T> {
   let value: T?
   var left: TreeNode<T>?
