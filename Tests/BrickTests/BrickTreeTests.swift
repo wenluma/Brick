@@ -100,6 +100,7 @@ final class RockTreeTests: XCTestCase {
     XCTAssertTrue(result[2].count == 2)
   }
   
+  // MARK: - build tree
   func testBuildTree() {
     let preList = [3,9,20,15,7]
     let inList = [9,3,15,20,7]
