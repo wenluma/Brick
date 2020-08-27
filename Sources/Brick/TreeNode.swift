@@ -115,6 +115,58 @@ public class BuildTree<T: Comparable & Hashable> {
   }
 }
 
+
+/// 将二叉树，转成单链表, 前序遍历
+public class FlattenTree<T: Comparable & Hashable> {
+  // 前序遍历
+  public func flatten(root: TreeNode<T>?) -> TreeNode<T>? {
+    // 构建前序遍历序列
+    var list = [TreeNode<T>]()
+    preOrder(root: root, list: &list)
+    if list.count == 1 {
+      return list.first
+    }
+    // 展开数组变链表
+    var pre: TreeNode = list[0]
+    for index in 1 ..< list.count {
+      let current = list[index]
+      pre.right = current
+      pre.left = nil
+      pre = current
+    }
+    return list.first
+  }
+  
+  private func preOrder(root: TreeNode<T>?, list: inout [TreeNode<T>]) {
+    guard let root = root else {
+      return
+    }
+    var stack = [TreeNode<T>]()
+    var node: TreeNode<T>? = root
+    while node != nil || !stack.isEmpty {
+      while node != nil {
+        stack.append(node!)
+        list.append(node!)
+        node = node?.left
+      }
+      node = stack.removeLast()
+      node = node?.right
+    }
+  }
+  
+  class public func test() {
+    let list: [Int] = orderList(lower: 0, upper: 5)
+    let node = TreeFacctory.treeNode(from: list)
+    let flattenNode = FlattenTree<Int>().flatten(root: node)
+    
+    var tmp: TreeNode<Int>? = flattenNode
+    while tmp != nil {
+      print(tmp!.value)
+      tmp = tmp!.right
+    }
+  }
+}
+
 public class TreeNode<T> {
   let value: T?
   var left: TreeNode<T>?

@@ -117,6 +117,19 @@ final class RockTreeTests: XCTestCase {
     printLevel(of: root)
   }
   
+  func testFlattenTree1() {
+    let list: [Int] = orderList(lower: 0, upper: 5)
+    let node: TreeNode<Int>? = TreeFacctory.treeNode(from: list)
+    let flattenNode = FlattenTree<Int>().flatten(root: node)
+    
+    XCTAssert(flattenNode?.value == 0)
+    XCTAssert(flattenNode?.right?.value == 1)
+    XCTAssert(flattenNode?.right?.right?.value == 3)
+    XCTAssert(flattenNode?.right?.right?.right?.value == 4)
+    XCTAssert(flattenNode?.right?.right?.right?.right?.value == 2)
+    XCTAssert(flattenNode?.right?.right?.right?.right?.right?.value == 5)
+   }
+   
   func testClosure() {
     var more = 0
     stride(from: 1, to: 18, by: 3).forEach { (i) in
