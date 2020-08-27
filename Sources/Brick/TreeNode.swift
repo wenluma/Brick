@@ -71,9 +71,47 @@ public class BuildTree<T: Comparable & Hashable> {
     return rootNode
   }
   
+  
+  public func makeTree2(preList: [T], inList: [T]) -> TreeNode<T>? {
+    guard !preList.isEmpty, preList.count == inList.count else {
+      return nil
+    }
+    let rootNode = TreeNode<T>(value: preList[0])
+    var stack = [TreeNode<T>]()
+    stack.append(rootNode)
+    var inOrderIndex = 0
+    for index in 1 ..< preList.count {
+      let preValue = preList[index]
+      
+      var node = stack.last!
+      if node.value! != inList[inOrderIndex] {
+        let left = TreeNode<T>(value: preValue)
+        node.left = left
+        stack.append(left)
+        print("left = \(preValue)")
+      } else {
+        while !stack.isEmpty && stack.last!.value! == inList[inOrderIndex] {
+          node = stack.removeLast()
+          print("remove node = \(node.value!)")
+          inOrderIndex += 1
+        }
+        let right = TreeNode(value: preValue)
+        node.right = right
+        stack.append(right)
+        print("right = \(preValue)")
+      }
+    }
+    return rootNode
+  }
+  
   public class func testMake<T: Comparable & Hashable>(preList: [T], inList: [T]) -> TreeNode<T>? {
     let builder = BuildTree<T>()
     return builder.makeTree(preList: preList, inList: inList)
+  }
+  
+  public class func testMake2<T: Comparable & Hashable>(preList: [T], inList: [T]) -> TreeNode<T>? {
+    let builder = BuildTree<T>()
+    return builder.makeTree2(preList: preList, inList: inList)
   }
 }
 

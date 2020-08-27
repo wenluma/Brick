@@ -107,7 +107,14 @@ final class RockTreeTests: XCTestCase {
     
     let root = BuildTree<Int>.testMake(preList: preList, inList: inList)
     printLevel(of: root)
-
+  }
+  
+  func testBuildTree2() {
+    let preList = [3,9,20,15,7]
+    let inList = [9,3,15,20,7]
+    
+    let root = BuildTree<Int>.testMake2(preList: preList, inList: inList)
+    printLevel(of: root)
   }
   
   func testClosure() {
