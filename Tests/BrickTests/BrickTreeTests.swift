@@ -139,4 +139,16 @@ final class RockTreeTests: XCTestCase {
     }
     XCTAssert(more == 51, "")
   }
+  
+  func testIndexSet() {
+    // indexset 用来记录 另一个集合中的索引
+    var indexSet = IndexSet(integersIn: 0...5)
+    indexSet.insert(9)
+    XCTAssertTrue(indexSet.contains(3))
+    XCTAssertTrue(indexSet.contains(9))
+    XCTAssertFalse(indexSet.contains(7))
+    XCTAssertFalse(indexSet.contains(6))
+    indexSet.remove(integersIn: 7..<10)
+    XCTAssertFalse(indexSet.contains(9))
+  }
 }
