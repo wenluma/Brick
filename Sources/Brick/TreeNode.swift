@@ -188,6 +188,19 @@ class MaxPathSumTree {
   }
 }
 
+public class InvertTree<T> {
+  public func invert(_ root: TreeNode<T>?) -> TreeNode<T>? {
+    guard let root = root else {
+      return nil
+    }
+    let left = invert(root.left)
+    let right = invert(root.right)
+    root.left = right
+    root.right = left
+    return root
+  }
+}
+
 public class TreeNode<T> {
   let value: T?
   var left: TreeNode<T>?
