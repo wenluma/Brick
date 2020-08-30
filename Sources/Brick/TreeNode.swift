@@ -167,6 +167,27 @@ public class FlattenTree<T: Comparable & Hashable> {
   }
 }
 
+class MaxPathSumTree {
+  public typealias IntTreeNode = TreeNode<Int>
+  
+  private var maxSum = Int.min
+  func maxSum(_ root: IntTreeNode?) -> Int {
+    guard let root = root else { return 0 }
+    dfs(root)
+    return maxSum
+  }
+  
+  @discardableResult
+  private func dfs(_ root: IntTreeNode?) -> Int {
+    guard let root = root else { return 0 }
+    let left = max(dfs(root.left), 0)
+    let right = max(dfs(root.right), 0)
+    let current = root.value! + left + right
+    maxSum = max(maxSum, current)
+    return root.value! + max(left, right)
+  }
+}
+
 public class TreeNode<T> {
   let value: T?
   var left: TreeNode<T>?
@@ -182,9 +203,6 @@ public class TreeNode<T> {
   
   deinit {
   }
-  
-  
-
 }
 
 extension TreeNode: Hashable {

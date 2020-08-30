@@ -128,8 +128,32 @@ final class RockTreeTests: XCTestCase {
     XCTAssert(flattenNode?.right?.right?.right?.value == 4)
     XCTAssert(flattenNode?.right?.right?.right?.right?.value == 2)
     XCTAssert(flattenNode?.right?.right?.right?.right?.right?.value == 5)
-   }
-   
+  }
+  
+  func testMaxPathSumTree() {
+    let root = TreeNode(value: -10)
+    let l1_l = TreeNode(value: 9)
+    let l1_r = TreeNode(value: 20)
+    let l2_2_l = TreeNode(value: 15)
+    let l2_2_r = TreeNode(value: 7)
+    
+    root.left = l1_l
+    root.right = l1_r
+    l1_r.left = l2_2_l
+    l1_r.right = l2_2_r
+    
+    
+    /*
+            -10
+          9     20
+              15  7
+     */
+
+    let max = MaxPathSumTree().maxSum(root)
+    print(max)
+    XCTAssertTrue(max == 42)
+  }
+  
   func testClosure() {
     var more = 0
     stride(from: 1, to: 18, by: 3).forEach { (i) in
