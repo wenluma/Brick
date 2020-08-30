@@ -199,6 +199,21 @@ public class InvertTree<T> {
     root.right = left
     return root
   }
+  
+  public func invert2(_ root: TreeNode<T>?) -> TreeNode<T>? {
+    guard let node = root else { return nil }
+    var queue = [TreeNode<T>]()
+    queue.append(node)
+    while !queue.isEmpty {
+      let current = queue.removeFirst()
+      let tmp = current.left
+      current.left = current.right
+      current.right = tmp
+      current.left.map({ queue.append($0) })
+      current.right.map({ queue.append($0) })
+    }
+    return node
+  }
 }
 
 public class TreeNode<T> {

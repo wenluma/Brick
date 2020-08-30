@@ -163,6 +163,16 @@ final class RockTreeTests: XCTestCase {
     XCTAssertTrue(array == [4,7,2,9,6,3,1])
   }
   
+  func testInvert2() {
+    let list = [4, 2, 7, 1,3, 6,9]
+    let node: TreeNode<Int>? = TreeFacctory.treeNode(from: list)
+    let invert = InvertTree<Int>().invert2(node)
+    let result = levelTraversal(root: invert).joined()
+    let array = Array(result)
+    XCTAssertTrue(array == [4,7,2,9,6,3,1])
+  }
+  
+  
   func testClosure() {
     var more = 0
     stride(from: 1, to: 18, by: 3).forEach { (i) in
