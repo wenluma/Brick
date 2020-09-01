@@ -172,6 +172,12 @@ final class RockTreeTests: XCTestCase {
     XCTAssertTrue(array == [4,7,2,9,6,3,1])
   }
   
+  func testLCA() {
+    let list = [3,5,1,6,2,0,8,nil,nil,7,4]
+    let node: TreeNode<Int>? = TreeFacctory.treeNode(from: list)
+    let lcaNode = LowestCommentAncestorTree.init().lowestCommonAncestor(node, 5, 1)
+    XCTAssert(lcaNode?.value == 3)
+  }
   
   func testClosure() {
     var more = 0

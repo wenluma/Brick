@@ -32,6 +32,39 @@ open class TreeFacctory {
     }
     return root
   }
+    
+  public class func treeNode(from list: [Int?]) -> TreeNode<Int>? {
+    
+    func createNode(list: [Int?], idx: inout Int) -> TreeNode<Int>? {
+      idx += 1
+      if idx < list.count, let value = list[idx] {
+        return TreeNode<Int>(value: value)
+      }
+      return nil
+    }
+    
+    guard let vaildIndex = list.firstIndex(where: { $0 != nil })  else {
+      return nil
+    }
+    var root = TreeNode<Int>(value: list[vaildIndex])
+    var queue = [TreeNode<Int>]()
+    queue.append(root)
+    var idx = vaildIndex
+    while idx < list.count {
+      let current = queue.removeFirst()
+      if let node = createNode(list: list, idx: &idx) {
+        current.left = node
+        queue.append(node)
+      }
+      
+      if let node = createNode(list: list, idx: &idx) {
+        current.right = node
+        queue.append(node)
+      }
+    }
+    queue.removeAll()
+    return root
+  }
 }
 
 public class BuildTree<T: Comparable & Hashable> {
@@ -216,12 +249,38 @@ public class InvertTree<T> {
   }
 }
 
+public class LowestCommentAncestorTree<T: Equatable> {
+  // 最近公共祖先
+  func lowestCommonAncestor(_ root: TreeNode<T>?, _ p: T, _ q: T) -> TreeNode<T>? {
+      if root == nil || p == root?.value || q == root?.value {
+          return root
+      }
+      let left = lowestCommonAncestor(root?.left, p, q)
+      let right = lowestCommonAncestor(root?.right, p, q)
+      if left != nil && right != nil {
+          return root
+      }
+      if left != nil {
+          return left
+      }
+      if right != nil {
+          return right
+      }
+      return nil
+  }
+  
+}
+
 public class TreeNode<T> {
   let value: T?
   var left: TreeNode<T>?
   var right: TreeNode<T>?
 
-  init(value: T? = nil,
+  convenience init(value: T? = nil) {
+    self.init(value: value, left: nil, right: nil)
+  }
+  
+  required init(value: T? = nil,
        left: TreeNode<T>? = nil,
        right: TreeNode<T>? = nil) {
     self.value = value
