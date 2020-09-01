@@ -5,7 +5,7 @@
 //  Created by miao gaoliang on 2020/8/12.
 //
 import Foundation
-
+// 可视化查看树的遍历 https://visualgo.net/zh/bst
 open class TreeFacctory {
   static public func treeNode<T>(from list:[T] ) -> TreeNode<T>? {
     if list.isEmpty {
