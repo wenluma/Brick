@@ -46,7 +46,7 @@ open class TreeFacctory {
     guard let vaildIndex = list.firstIndex(where: { $0 != nil })  else {
       return nil
     }
-    var root = TreeNode<Int>(value: list[vaildIndex])
+    let root = TreeNode<Int>(value: list[vaildIndex])
     var queue = [TreeNode<Int>]()
     queue.append(root)
     var idx = vaildIndex
