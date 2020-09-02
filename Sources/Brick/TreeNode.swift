@@ -271,6 +271,34 @@ public class LowestCommentAncestorTree<T: Equatable> {
   
 }
 
+// 对二叉树编码解码
+public class CoderTree {
+  public func split(source: String, separator: Character) -> [Substring] {
+    var last: String.IndexDistance = -1
+    var offset: String.IndexDistance = 0
+    let start = source.startIndex
+    var list = [Substring]()
+    //a,bd,c,x,d
+    repeat {
+      let currentIdx = source.index(start, offsetBy: offset)
+      if currentIdx >= source.endIndex {
+        break
+      }
+      
+      if source[currentIdx] == separator {
+        let rs = source.index(start, offsetBy: last + 1)
+        let re = source.index(start, offsetBy: offset)
+        let substring: Substring = source[rs..<re]
+        list.append(substring)
+        last = offset
+      }
+      offset += 1
+    } while (offset < source.count)
+
+    return list
+  }
+}
+
 public class TreeNode<T> {
   let value: T?
   var left: TreeNode<T>?

@@ -179,6 +179,37 @@ final class RockTreeTests: XCTestCase {
     XCTAssert(lcaNode?.value == 3)
   }
   
+  func testStringSplit() {
+    let str = "a,bc,d,e,,,"
+    let tr = CoderTree()
+
+    let list = tr.split(source:str, separator: ",")
+    XCTAssert(list[0] == "a")
+    XCTAssert(list[1] == "bc")
+    XCTAssert(list[2] == "d")
+    XCTAssert(list[3] == "e")
+    XCTAssert(list[4] == "")
+    XCTAssert(list[5] == "")
+    
+    
+    let str2 = ",a,bc,d,e,"
+
+    let list2 = tr.split(source:str2, separator: ",")
+    XCTAssert(list2[0] == "")
+    XCTAssert(list2[1] == "a")
+    XCTAssert(list2[2] == "bc")
+    XCTAssert(list2[3] == "d")
+    XCTAssert(list2[4] == "e")
+    
+    let str3 = ""
+    let list3 = tr.split(source:str3, separator: ",")
+    XCTAssert(list3.isEmpty)
+
+    let str4 = "a"
+    let list4 = tr.split(source:str4, separator: ",")
+    XCTAssert(list4.isEmpty)
+  }
+  
   func testClosure() {
     var more = 0
     stride(from: 1, to: 18, by: 3).forEach { (i) in
