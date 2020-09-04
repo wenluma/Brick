@@ -271,8 +271,35 @@ public class LowestCommentAncestorTree<T: Equatable> {
   
 }
 
-// 对二叉树编码解码
+// 对二叉树编码解码 https://leetcode-cn.com/problems/serialize-and-deserialize-binary-tree/solution/shou-hui-tu-jie-gei-chu-dfshe-bfsliang-chong-jie-f/
 public class CoderTree {
+  public func serialize(root: TreeNode<Int>?) -> String {
+    guard let root = root else {
+      return "x,"
+    }
+    let leftFlag = serialize(root: root.left)
+    let rightFlag = serialize(root: root.right)
+    let value: String = String(format: "%d,%@%@", root.value!, leftFlag, rightFlag)
+    return value
+  }
+  
+  public func deserialize(source: String) -> TreeNode<Int>? {
+    var sub = source.split(separator: ",")
+    let tree = buildTree(list: &sub)
+    return tree
+  }
+  
+  private func buildTree(list: inout [Substring]) -> TreeNode<Int>? {
+    let sub: Substring = list.removeFirst()
+    if sub == "x" {
+      return nil
+    }
+    let root: TreeNode<Int> = TreeNode(value: Int(sub))
+    root.left = buildTree(list: &list)
+    root.right = buildTree(list: &list)
+    return root
+  }
+  
   public func split(source: String, separator: Character) -> [Substring] {
     var last: String.IndexDistance = -1
     var offset: String.IndexDistance = 0
