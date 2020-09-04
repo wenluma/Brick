@@ -283,6 +283,61 @@ public class CoderTree {
     return value
   }
   
+  public func bfsSerialize(root: TreeNode<Int>?) -> String {
+    var queue = [TreeNode<Int>?]()
+    queue.append(root)
+    var res = [String]()
+    while !queue.isEmpty {
+      let node = queue.removeFirst()
+      if let node = node {
+        res.append(String(node.value!))
+        queue.append(node.left)
+        queue.append(node.right)
+      } else {
+        res.append("x")
+      }
+    }
+    return res.joined(separator: ",")
+  }
+  
+  private func nodeFrom(_ str: Substring, flag: String) -> TreeNode<Int>? {
+    if str == flag {
+      return nil
+    } else {
+      return TreeNode<Int>(value: Int(str))
+    }
+  }
+  
+  public func bfsDeserialize(source: String) -> TreeNode<Int>? {
+    let list = split(source: source, separator: ",")
+    if list.count <= 1  {
+      return nodeFrom(list[0], flag: "x")
+    }
+    
+    let root: TreeNode<Int>? =  nodeFrom(list[0], flag: "x")
+    var queue = [TreeNode<Int>?]()
+    queue.append(root)
+    var nextIdx = 1
+    while nextIdx < list.count {
+      let node = queue.removeFirst()
+      if nextIdx < list.count {
+        let left = nodeFrom(list[nextIdx], flag: "x")
+        node?.left = left
+        queue.append(left)
+        nextIdx += 1
+      }
+      
+      if nextIdx < list.count {
+        let right = nodeFrom(list[nextIdx], flag: "x")
+        node?.right = right
+        queue.append(right)
+        nextIdx+=1
+      }
+    }
+    queue.removeAll()
+    return root
+  }
+  
   public func deserialize(source: String) -> TreeNode<Int>? {
     var sub = source.split(separator: ",")
     let tree = buildTree(list: &sub)

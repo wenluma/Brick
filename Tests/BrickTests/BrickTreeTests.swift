@@ -192,7 +192,21 @@ final class RockTreeTests: XCTestCase {
     let result = levelTraversal(root: tree).joined()
     let array = Array(result)
     XCTAssert(array == [1,2,3,4,5])
-
+  }
+  
+  func testCoder2() {
+    let list = [1,2,3,nil,nil,4,5]
+    let node: TreeNode<Int>? = TreeFacctory.treeNode(from: list)
+  
+    let coder = CoderTree()
+    let ser = coder.bfsSerialize(root: node)
+    let tree = coder.bfsDeserialize(source: ser)
+    
+    XCTAssert(ser == "1,2,3,x,x,4,5,x,x,x,x")
+    
+    let result = levelTraversal(root: tree).joined()
+    let array = Array(result)
+    XCTAssert(array == [1,2,3,4,5])
   }
   
   func testStringSplit() {
