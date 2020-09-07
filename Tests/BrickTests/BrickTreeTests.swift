@@ -209,6 +209,31 @@ final class RockTreeTests: XCTestCase {
     XCTAssert(array == [1,2,3,4,5])
   }
   
+  func testRobTree() {
+    let list:[Int?] = [3,2,3,nil,3,nil,1]
+    let node: TreeNode<Int>? = TreeFacctory.treeNode(from: list)
+
+    let value: Int = RobTree().rob(node: node)
+    XCTAssertTrue(value == 7)
+  }
+  
+  func testRobTree2() {
+    let list:[Int?] = [3,2,3,nil,3,nil,1]
+    let node: TreeNode<Int>? = TreeFacctory.treeNode(from: list)
+
+    let value: Int = RobTree().rob2(node: node)
+    XCTAssertTrue(value == 7)
+  }
+  
+  func testRobTree3() {
+    let list:[Int?] = [3,2,3,nil,3,nil,1]
+    let node: TreeNode<Int>? = TreeFacctory.treeNode(from: list)
+
+    let value: Int = RobTree().rob3(node: node)
+    XCTAssertTrue(value == 7)
+  }
+  
+  
   func testStringSplit() {
     let str = "a,bc,d,e,,,"
     let tr = CoderTree()

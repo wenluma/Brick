@@ -381,6 +381,56 @@ public class CoderTree {
   }
 }
 
+//https://leetcode-cn.com/problems/house-robber-iii/solution/san-chong-fang-fa-jie-jue-shu-xing-dong-tai-gui-hu/
+//337. 打家劫舍 III
+public class RobTree {
+  // 动态规划，最优子结构， max (爷爷 + 孙子 ， 儿子）
+  public func rob(node: TreeNode<Int>?) -> Int {
+    guard let node = node else {
+      return 0
+    }
+    let money = node.value! + rob(node: node.left?.left) + rob(node: node.left?.right) + rob(node: node.right?.left) + rob(node: node.right?.right)
+    let child = rob(node: node.left) + rob(node: node.right)
+    return max(money, child)
+  }
+  
+  var sums = [TreeNode<Int> : Int]()
+  
+  public func rob2(node: TreeNode<Int>?) -> Int {
+    return rob2Internal(node: node)
+  }
+  
+  func rob2Internal(node: TreeNode<Int>?) -> Int {
+    guard let node = node else {
+      return 0
+    }
+    if let value = sums[node] {
+      return value
+    }
+    let part1 = node.value! + rob2Internal(node: node.left?.left) + rob2Internal(node: node.left?.right) + rob2Internal(node: node.right?.left) + rob2Internal(node: node.right?.right)
+    let part2 = rob2Internal(node: node.left) + rob2Internal(node: node.right)
+    let value =  max(part1, part2)
+    sums[node] = value
+    return value
+  }
+  
+  public func rob3(node: TreeNode<Int>?) -> Int {
+    let (rob, not) = rob3Internal(node: node)
+    return max(rob, not)
+  }
+  
+  public func rob3Internal(node: TreeNode<Int>?) -> (Int, Int) {
+    guard let node = node else {
+      return (0, 0)
+    }
+    let (l0, l1) = rob3Internal(node: node.left)
+    let (r0, r1) = rob3Internal(node: node.right)
+    let v0 = max(l0, l1) + max(r0, r1)
+    let v1 = l0 + r0 + node.value!
+    return (v0, v1)
+  }
+}
+
 public class TreeNode<T> {
   let value: T?
   var left: TreeNode<T>?
