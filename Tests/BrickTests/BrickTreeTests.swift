@@ -233,6 +233,47 @@ final class RockTreeTests: XCTestCase {
     XCTAssertTrue(value == 7)
   }
   
+  func testPathSum() {
+    let list = [10,5,-3,3,2,nil,11,3,-2,nil,1]
+    let node: TreeNode<Int>? = TreeFacctory.treeNode(from: list)
+    
+    let paths = PathSumTree().sum(node: node, target: 8)
+    XCTAssertTrue(paths == 3)
+    
+    let l2 = [5,4,8,11,nil,13,4,7,2,nil,nil,5,1]
+    let node2: TreeNode<Int>? = TreeFacctory.treeNode(from: l2)
+    
+    let paths2 = PathSumTree().sum(node: node2, target: 22)
+    XCTAssertTrue(paths2 == 3, "paths2 = \(paths2)")
+  }
+  
+  func testPathSum2() {
+    let list = [10,5,-3,3,2,nil,11,3,-2,nil,1]
+    let node: TreeNode<Int>? = TreeFacctory.treeNode(from: list)
+    
+    let paths = PathSumTree().sum2(node: node, target: 8)
+    XCTAssertTrue(paths == 3, "paths = \(paths)")
+    
+    let l2 = [5,4,8,11,nil,13,4,7,2,nil,nil,5,1]
+    let node2: TreeNode<Int>? = TreeFacctory.treeNode(from: l2)
+    
+    let paths2 = PathSumTree().sum2(node: node2, target: 22)
+    XCTAssertTrue(paths2 == 3, "paths2 = \(paths2)")
+  }
+  
+  func testPathSum3() {
+    let list = [10,5,-3,3,2,nil,11,3,-2,nil,1]
+    let node: TreeNode<Int>? = TreeFacctory.treeNode(from: list)
+
+    let paths = PathSumTree().sum3(node: node, target: 8)
+    XCTAssertTrue(paths == 3, "paths = \(paths)")
+    
+    let l2 = [5,4,8,11,nil,13,4,7,2,nil,nil,5,1]
+    let node2: TreeNode<Int>? = TreeFacctory.treeNode(from: l2)
+    
+    let paths2 = PathSumTree().sum3(node: node2, target: 22)
+    XCTAssertTrue(paths2 == 3, "paths2 = \(paths2)")
+  }
   
   func testStringSplit() {
     let str = "a,bc,d,e,,,"

@@ -5,6 +5,7 @@
 //  Created by miao gaoliang on 2020/8/12.
 //
 import Foundation
+
 // 可视化查看树的遍历 https://visualgo.net/zh/bst
 open class TreeFacctory {
   static public func treeNode<T>(from list:[T] ) -> TreeNode<T>? {
@@ -450,6 +451,81 @@ public class TreeNode<T> {
   
   deinit {
   }
+}
+
+// 节点路径，只能从 super -》 child 的方式 来获取 子路径和，满足target 的路径总和
+public class PathSumTree {
+  
+  public func sum(node: TreeNode<Int>?, target: Int) -> Int {
+    // [sum: count]
+    var map = [Int: Int]()
+    map[0] = 0
+    return recursionPathSum(node: node, prefixSum: &map, target: target, currentSum: 0)
+  }
+  
+  func recursionPathSum(node: TreeNode<Int>?, prefixSum: inout [Int: Int], target: Int, currentSum: Int) -> Int {
+    guard let node = node else {return 0}
+    var res = 0
+    var current = currentSum + node.value!
+    let key = current - target
+    res += prefixSum[key, default: 0]
+    prefixSum[current] = prefixSum[current, default: 0] + 1
+    
+    // 3.进入下一层
+    res += recursionPathSum(node: node.left, prefixSum: &prefixSum, target: target, currentSum: current)
+    res += recursionPathSum(node: node.right, prefixSum: &prefixSum, target: target, currentSum: current)
+
+    // 4.回到本层，恢复状态，去除当前节点的前缀和数量
+    prefixSum[current] = prefixSum[current, default: 0] - 1
+    return res
+  }
+  
+  public func sum2(node: TreeNode<Int>?, target: Int) -> Int {
+    
+    func dfs(node: TreeNode<Int>?, list: inout [Int]) -> Int {
+      guard let node = node else {
+        return 0
+      }
+      list = list.map({ $0 + node.value! })
+      list.append(node.value!)
+      
+      let count = list.reduce(0) { (times, num) -> Int in
+        if num == target {
+          return times + 1
+        }
+        return times
+      }
+      let all = count + dfs(node: node.left, list: &list) + dfs(node: node.right, list: &list)
+      list = list.map({ $0 - node.value! })
+      list.removeLast()
+      return all
+    }
+    
+    var list = [Int]()
+    return dfs(node: node, list: &list)
+  }
+  
+  public func sum3(node: TreeNode<Int>?, target: Int) -> Int {
+    var res = 0
+    func dfs(node: TreeNode<Int>?, list: [Int]) {
+      guard let node = node else {
+        return ;
+      }
+      var vector = list.map({ $0 + node.value! })
+      vector.append(node.value!)
+      for item in vector {
+        if item == target {
+          res += 1
+        }
+      }
+      dfs(node: node.left, list: vector)
+      dfs(node: node.right, list: vector)
+    }
+    
+    dfs(node: node, list: [])
+    return res
+  }
+  
 }
 
 extension TreeNode: Hashable {
