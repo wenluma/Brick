@@ -6,6 +6,36 @@
 //
 import Foundation
 
+public class TreeNode<T> {
+  var value: T?
+  var left: TreeNode<T>?
+  var right: TreeNode<T>?
+
+  convenience init(value: T? = nil) {
+    self.init(value: value, left: nil, right: nil)
+  }
+  
+  required init(value: T? = nil,
+       left: TreeNode<T>? = nil,
+       right: TreeNode<T>? = nil) {
+    self.value = value
+    self.left = left
+    self.right = right
+  }
+  
+  deinit {
+  }
+}
+
+extension TreeNode: Hashable {
+  public static func == (lhs: TreeNode<T>, rhs: TreeNode<T>) -> Bool {
+    lhs.hashValue == rhs.hashValue
+  }
+  
+  public func hash(into hasher: inout Hasher) {
+    hasher.combine(ObjectIdentifier(self))
+  }
+}
 // 可视化查看树的遍历 https://visualgo.net/zh/bst
 open class TreeFacctory {
   static public func treeNode<T>(from list:[T] ) -> TreeNode<T>? {
@@ -432,27 +462,6 @@ public class RobTree {
   }
 }
 
-public class TreeNode<T> {
-  let value: T?
-  var left: TreeNode<T>?
-  var right: TreeNode<T>?
-
-  convenience init(value: T? = nil) {
-    self.init(value: value, left: nil, right: nil)
-  }
-  
-  required init(value: T? = nil,
-       left: TreeNode<T>? = nil,
-       right: TreeNode<T>? = nil) {
-    self.value = value
-    self.left = left
-    self.right = right
-  }
-  
-  deinit {
-  }
-}
-
 // 节点路径，只能从 super -》 child 的方式 来获取 子路径和，满足target 的路径总和
 public class PathSumTree {
   
@@ -528,13 +537,38 @@ public class PathSumTree {
   
 }
 
-extension TreeNode: Hashable {
-  public static func == (lhs: TreeNode<T>, rhs: TreeNode<T>) -> Bool {
-    lhs.hashValue == rhs.hashValue
+
+//https://leetcode-cn.com/problems/convert-bst-to-greater-tree/ 二叉树转累加树 binary search tree to greater tree
+public class BST2GT {
+  var num: Int = 0
+  public func convert2GT(node: TreeNode<Int>?) -> TreeNode<Int>? {
+    guard let node = node else {
+      return nil
+    }
+    convert2GT(node: node.right)
+    var current = node.value! + num
+    node.value = current
+    num = current
+    convert2GT(node: node.left)
+    return node
   }
   
-  public func hash(into hasher: inout Hasher) {
-    hasher.combine(ObjectIdentifier(self))
+  public func convert2GT2(node: TreeNode<Int>?) -> TreeNode<Int>? {
+    var stack = [TreeNode<Int>]()
+    var current = node
+    var root = node
+    var num = 0
+    while current != nil || !stack.isEmpty {
+      while current != nil {
+        stack.append(current!)
+        current = current?.right
+      }
+      current = stack.removeLast()
+      current.map({ num += $0.value! })
+      current?.value = num
+      current =  current?.left
+    }
+    return root
   }
 }
 

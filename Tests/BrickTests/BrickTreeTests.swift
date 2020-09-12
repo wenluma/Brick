@@ -275,6 +275,36 @@ final class RockTreeTests: XCTestCase {
     XCTAssertTrue(paths2 == 3, "paths2 = \(paths2)")
   }
   
+  func testBinarySearchTree2GreaterTree() {
+    let list = [5,2,13]
+    let node: TreeNode<Int>? = TreeFacctory.treeNode(from: list)
+
+    let root = BST2GT().convert2GT(node: node)
+    let list2: [Int]?  = inOrderTraversal(node: root)
+  
+    XCTAssertTrue(list2 != nil, "list2 is nil, faild")
+    for (idx, item) in list.enumerated() {
+      if list2![idx] != item {
+        XCTAssertFalse(false, " idx = \(idx) value not equal")
+      }
+    }
+  }
+  
+  func testBinarySearchTree2GreaterTree2() {
+    let list = [5,2,13]
+    let node: TreeNode<Int>? = TreeFacctory.treeNode(from: list)
+
+    let root = BST2GT().convert2GT2(node: node)
+    let list2: [Int]?  = inOrderTraversal(node: root)
+  
+    XCTAssertTrue(list2 != nil, "list2 is nil, faild")
+    for (idx, item) in list.enumerated() {
+      if list2![idx] != item {
+        XCTAssertFalse(false, " idx = \(idx) value not equal")
+      }
+    }
+  }
+  
   func testStringSplit() {
     let str = "a,bc,d,e,,,"
     let tr = CoderTree()
