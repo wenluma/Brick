@@ -572,6 +572,28 @@ public class BST2GT {
   }
 }
 
+// https://leetcode-cn.com/problems/diameter-of-binary-tree/solution/er-cha-shu-de-zhi-jing-by-leetcode-solution/
+// 二叉树的，最大直径，转 左，右，子树的最大深度 和
+public class DiameterOfBinaryTree {
+  var ans: Int = 1
+  
+  @discardableResult
+  func depth(node: TreeNode<Int>?) -> Int {
+    guard let node = node else {
+      return 0
+    }
+    let L = depth(node: node.left)
+    let R = depth(node: node.right)
+    ans = max(ans, L + R + 1)
+    return max(L, R) + 1
+  }
+  
+  public func diameter(node: TreeNode<Int>?) -> Int {
+    depth(node: node)
+    return ans - 1
+  }
+}
+
 func testTreeDepth() {
   let list = orderList(lower: 0, upper: 14)
   //print(list)

@@ -305,6 +305,14 @@ final class RockTreeTests: XCTestCase {
     }
   }
   
+  func testDiameterOfBinaryTree() {
+    let list = [1,2,3,4,5]
+    let node: TreeNode<Int>? = TreeFacctory.treeNode(from: list)
+    let diameter = DiameterOfBinaryTree()
+    let value = diameter.diameter(node: node)
+    XCTAssertTrue(value == 3, "failed value = \(value)")
+  }
+  
   func testStringSplit() {
     let str = "a,bc,d,e,,,"
     let tr = CoderTree()
