@@ -313,6 +313,32 @@ final class RockTreeTests: XCTestCase {
     XCTAssertTrue(value == 3, "failed value = \(value)")
   }
   
+  func testMergeTree() {
+    let list1 = [1,3,2,5]
+    let list2 = [2,1,3,nil,4,nil,7]
+    let node1: TreeNode<Int>? = TreeFacctory.treeNode(from: list1)
+    let node2: TreeNode<Int>? = TreeFacctory.treeNode(from: list2)
+    
+    let node = MergeTree().merge(t1: node1, t2: node2)
+    let array = levelTraversal(root: node)
+    XCTAssertTrue(array[0] == [3])
+    XCTAssertTrue(array[1] == [4,5])
+    XCTAssertTrue(array[2] == [5,4,7])
+  }
+  
+  func testMergeTree2() {
+    let list1 = [1,3,2,5]
+    let list2 = [2,1,3,nil,4,nil,7]
+    let node1: TreeNode<Int>? = TreeFacctory.treeNode(from: list1)
+    let node2: TreeNode<Int>? = TreeFacctory.treeNode(from: list2)
+    
+    let node = MergeTree().merge2(t1: node1, t2: node2)
+    let array = levelTraversal(root: node)
+    XCTAssertTrue(array[0] == [3])
+    XCTAssertTrue(array[1] == [4,5])
+    XCTAssertTrue(array[2] == [5,4,7])
+  }
+  
   func testStringSplit() {
     let str = "a,bc,d,e,,,"
     let tr = CoderTree()

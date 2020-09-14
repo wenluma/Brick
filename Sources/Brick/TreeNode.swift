@@ -594,6 +594,55 @@ public class DiameterOfBinaryTree {
   }
 }
 
+// 合并二叉树，将2个二叉树，合并成一个 https://leetcode-cn.com/problems/merge-two-binary-trees/
+public class MergeTree {
+  public func merge(t1: TreeNode<Int>?, t2: TreeNode<Int>?) -> TreeNode<Int>? {
+    if t1 == nil {
+      return t2
+    }
+    
+    if t2 == nil {
+      return t1
+    }
+    
+    t1!.value! += t2!.value!
+    
+    t1?.left = merge(t1: t1?.left, t2: t2?.left)
+    t1?.right = merge(t1: t1?.right, t2: t2?.right)
+    return t1
+  }
+  
+  public func merge2(t1: TreeNode<Int>?, t2: TreeNode<Int>?) -> TreeNode<Int>? {
+    if t1 == nil {
+      return t2
+    }
+    
+    var stack = [(TreeNode<Int>?, TreeNode<Int>?)]()
+    stack.append((t1, t2))
+    
+    while !stack.isEmpty {
+      let (l1, l2) = stack.removeLast()
+      if l1 == nil || l2 == nil {
+        continue
+      }
+      l1!.value! += l2!.value!
+      
+      if l1?.left == nil {
+        l1?.left = l2?.left
+      } else {
+        stack.append((l1?.left, l2?.left))
+      }
+      
+      if l1?.right == nil {
+        l1?.right = l2?.right
+      } else {
+        stack.append((l1?.right, l2?.right))
+      }
+    }
+    return t1
+  }
+}
+
 func testTreeDepth() {
   let list = orderList(lower: 0, upper: 14)
   //print(list)
