@@ -35,4 +35,12 @@ final class BrickStackTests: XCTestCase {
     let s7 = "([{}()[]()])"
     XCTAssertTrue(checker.check(source: s7))
   }
+  
+  // 接雨水
+  func testRainWater() {
+    let list: [Int] = [0,1,0,2,1,0,1,3,2,1,2,1]
+    let item = TrapRainWater()
+    let sum = item.trap(list: list)
+    XCTAssertTrue(sum == 6)
+  }
 }
