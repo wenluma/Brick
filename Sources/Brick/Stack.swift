@@ -42,27 +42,52 @@ public class VaildParentheses {
 public class TrapRainWater {
   // https://leetcode-cn.com/problems/trapping-rain-water/solution/trapping-rain-water-by-ikaruga/
   func trap(list: [Int]) -> Int {
-    if list.isEmpty {
-      return 0
-    }
-    
-    // element is list index
+    var ans = 0
     var stack = [Int]()
-    var ans: Int = 0
-    
     for (index, item) in list.enumerated() {
       while !stack.isEmpty && item > list[stack.last!] {
-        let cur = stack.removeLast()
-        if stack.isEmpty {
-          break
-        }
-        let L = stack.last!
-        let R = index
-        let h = min(list[R], list[L]) - list[cur]
-        ans += (R - L - 1) * h
+        let current = stack.removeLast()
+        if stack.isEmpty { break }
+        let l = stack.last!
+        let r = index
+        let h = min(list[r], list[l]) - list[current]
+        ans += (r - l - 1) * h
       }
       stack.append(index)
     }
     return ans
+  }
+  
+  func trap2(list: [Int]) -> Int {
+    if list.count < 2 {
+      return 0
+    }
+    var sum = 0
+    var maxLeft = 0, maxRight = 0
+    var left = 1
+    var right = list.count - 2
+    
+    for _ in 1 ..< list.count-1 {
+      if list[left-1] < list[right+1] {
+        // l ->> r
+        maxLeft = max(maxLeft, list[left-1])
+        let min = maxLeft
+        if min > list[left] {
+          sum += min - list[left]
+        }
+        left+=1
+      } else {
+        //   r ->> l
+        maxRight = max(maxRight, list[right+1])
+        let min = maxRight
+        if min > list[right] {
+          sum += min - list[right]
+        }
+        right -= 1
+      }
+    }
+    
+    return sum
+  
   }
 }

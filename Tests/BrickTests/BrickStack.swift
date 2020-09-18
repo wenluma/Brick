@@ -43,4 +43,16 @@ final class BrickStackTests: XCTestCase {
     let sum = item.trap(list: list)
     XCTAssertTrue(sum == 6)
   }
+  
+  func testRainWater2() {
+    let list: [Int] = [0,1,0,2,1,0,1,3,2,1,2,1]
+    let item = TrapRainWater()
+    let sum = item.trap2(list: list)
+    XCTAssertTrue(sum == 6)
+    
+    let list1 = [1,0]
+    let sum2 = item.trap2(list: list1)
+    XCTAssert(sum2 == 0)
+  }
+  
 }
