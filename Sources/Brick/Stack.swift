@@ -41,6 +41,7 @@ public class VaildParentheses {
 // 接雨水，给定非负数组， 求能接雨水的最大和
 public class TrapRainWater {
   // https://leetcode-cn.com/problems/trapping-rain-water/solution/trapping-rain-water-by-ikaruga/
+  // 按行算的
   func trap(list: [Int]) -> Int {
     var ans = 0
     var stack = [Int]()
@@ -58,6 +59,7 @@ public class TrapRainWater {
     return ans
   }
   
+  // 按列算的
   func trap2(list: [Int]) -> Int {
     if list.count < 2 {
       return 0
