@@ -55,4 +55,31 @@ final class BrickStackTests: XCTestCase {
     XCTAssert(sum2 == 0)
   }
   
+  func testLargestRectangleArea() {
+    let item = LargestRectangleArea()
+
+    let list0 = [2]
+    let area = item.area(heights: list0)
+    XCTAssertTrue(area == 2, "area = \(area)")
+    
+    let list2 = [2,1,5,6,2,3]
+    let area2 = item.area(heights: list2)
+    XCTAssertTrue(area2 == 10, "area = \(area2)")
+  }
+  
+  func testList() {
+    let list = [0,1]
+    print("list.startindex = \(list.startIndex)")
+    print("list.endindex = \(list.endIndex)")
+    
+    for index in list.startIndex ..< list.endIndex {
+      print("index = \(index); item = \(list[index])")
+    }
+  
+    for i in 0 ..< 0 {
+      print("i = \(i)")
+    }
+  }
+  
+  
 }

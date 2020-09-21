@@ -93,3 +93,28 @@ public class TrapRainWater {
   
   }
 }
+
+// https://leetcode-cn.com/problems/largest-rectangle-in-histogram/solution/84-by-ikaruga/
+// 非负数组，计算能获取到的，最大的面积
+public class LargestRectangleArea {
+  func area(heights: [Int]) -> Int {
+    var list = [Int]()
+    list.append(0)
+    list.append(contentsOf: heights)
+    list.append(0)
+    
+    var sum = 0
+    var stack = [Int]()
+    for index in list.startIndex ..< list.endIndex {
+      while !stack.isEmpty && list[stack.last!] > list[index] {
+        let current = stack.removeLast()
+        let left = stack.last! + 1
+        let right = index - 1
+        let area = (right - left + 1) * list[current]
+        sum = max(sum, area)
+      }
+      stack.append(index)
+    }
+    return sum
+  }
+}
