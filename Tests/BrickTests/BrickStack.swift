@@ -13,6 +13,9 @@ final class BrickStackTests: XCTestCase {
   // 有效括号
   func testVaildParentheses() {
     let checker = VaildParentheses()
+    let s0 = "{{}"
+    XCTAssertFalse(checker.check(source: s0))
+
     let s1 = "{}"
     XCTAssertTrue(checker.check(source: s1))
     
