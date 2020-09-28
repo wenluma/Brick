@@ -118,3 +118,49 @@ public class LargestRectangleArea {
     return sum
   }
 }
+
+// https://leetcode-cn.com/problems/maximal-rectangle/solution/xiang-xi-tong-su-de-si-lu-fen-xi-duo-jie-fa-by-1-8/
+/*
+ 给出二维数组
+ 输入:
+ [
+   ["1","0","1","0","0"],
+   ["1","0","1","1","1"],
+   ["1","1","1","1","1"],
+   ["1","0","0","1","0"]
+ ]
+ 输出: 6
+
+ 链接：https://leetcode-cn.com/problems/maximal-rectangle
+ */
+public struct Array2D<T> {
+  let row: Int
+  let columns: Int
+  let container: [T] // row * columns
+  init(row: Int, columns: Int, initial: T) {
+    self.row = row
+    self.columns = columns
+    container = Array(repeating: initial, count: row * columns)
+  }
+  
+  public subscript(row: Int, columns: Int) -> T {
+    get {
+      precondition(row < self.row, "row must less than \(self.row)")
+      precondition(columns < self.columns, "columns must less than \(self.columns)")
+      let index = row * self.columns + columns
+      return container[index]
+    }
+    set {
+      precondition(row < self.row, "row must less than \(self.row)")
+      precondition(columns < self.columns, "columns must less than \(self.columns)")
+      let index = row * self.columns + columns
+      container[index] = newValue
+    }
+  }
+}
+public class MaxtriaRectangleArea {
+  
+  func rectArea(list: []) -> Int {
+    
+  }
+}
