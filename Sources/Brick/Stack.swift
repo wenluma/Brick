@@ -136,7 +136,7 @@ public class LargestRectangleArea {
 public struct Array2D<T> {
   let row: Int
   let columns: Int
-  let container: [T] // row * columns
+    var container: [T] // row * columns
   init(row: Int, columns: Int, initial: T) {
     self.row = row
     self.columns = columns
@@ -158,9 +158,58 @@ public struct Array2D<T> {
     }
   }
 }
+
 public class MaxtriaRectangleArea {
-  
-  func rectArea(list: []) -> Int {
+    let bounds = -1
     
-  }
+    // 入口函数
+    func maximalRectangle(_ matrix: [[Character]]) -> Int {
+        let cols = addColumns(matrix)
+        var maxArea = 0
+        for heights in cols {
+            let current = rectArea(heights:heights)
+            maxArea = max(maxArea, current)
+        }
+        return maxArea
+    }
+    
+    // 累加
+    func addColumns(_ matrix: [[Character]]) -> [[Int]] {
+        let colCount = matrix[0].count
+        var myHeighs = [[Int]]()
+        var heighs = Array(repeating: 0, count: colCount)
+        for i in 0 ..< matrix.count {
+            for j in 0 ..< colCount {
+                let current = matrix[i][j]
+                if current == "1" {
+                    heighs[j] += 1
+                } else {
+                    heighs[j] = 0
+                }
+            }
+            myHeighs.append(heighs)
+        }
+        return myHeighs
+    }
+    
+    // 计算rect 的面积
+    func rectArea(heights: [Int]) -> Int {
+        var maxArea = 0
+        var stack = [Int]()
+        stack.append(bounds)
+        
+        for i in heights.indices {
+            print(i)
+            while stack.last! != bounds, heights[stack.last!] >= heights[i] {
+                let last = stack.removeLast()
+                maxArea = max(maxArea, (i - stack.last! - 1) * heights[last])
+            }
+            stack.append(i)
+        }
+        
+        while stack.last! != bounds {
+            maxArea = max(maxArea, heights[stack.removeLast()] * (heights.count - stack.last! - 1))
+        }
+        return maxArea
+    }
 }
