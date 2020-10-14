@@ -213,3 +213,38 @@ public class MaxtriaRectangleArea {
         return maxArea
     }
 }
+
+public class MinStack<T: Comparable> {
+  private var queue = [T]()
+  private var minQueue = [T]()
+  
+  func push(_ element: T) {
+    queue.append(element)
+    if minQueue.isEmpty {
+      minQueue.append(element)
+    } else {
+      if let top = minQueue.last {
+        let minValue = Swift.min(top, element)
+        minQueue.append(minValue)
+      }
+    }
+  }
+  
+  @discardableResult
+  func pop() -> T {
+    minQueue.removeLast()
+    return queue.removeLast()
+  }
+  
+  func top() -> T? {
+    if queue.isEmpty {
+      return nil
+    }
+    return queue.last
+  }
+  
+  func min() -> T? {
+    return minQueue.last
+  }
+}
+

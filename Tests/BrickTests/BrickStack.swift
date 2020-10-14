@@ -91,4 +91,24 @@ final class BrickStackTests: XCTestCase {
     XCTAssertTrue(result == 6, "failed result = \(result)")
   }
   
+  func testMinStack() {
+    let stack = MinStack<Int>()
+    stack.push(-1) // -1
+    stack.push(0) // -1
+    stack.push(-3) // -3
+    stack.push(-4)  // -4
+    stack.push(-1) // -4
+
+    XCTAssertTrue(stack.min()! == -4)
+    stack.pop()
+    XCTAssertTrue(stack.min()! == -4)
+    stack.pop()
+    XCTAssertTrue(stack.min()! == -3)
+    stack.pop()
+    XCTAssertTrue(stack.min()! == -1)
+    stack.pop()
+    XCTAssertTrue(stack.min()! == -1)
+    stack.pop()
+    XCTAssertTrue(stack.min() == nil)
+  }
 }
