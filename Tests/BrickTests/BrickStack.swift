@@ -84,12 +84,11 @@ final class BrickStackTests: XCTestCase {
     }
   }
   
-
-    func testMaxtriaRectangleArea() {
-        let matrix: [[Character]] =  [["1","0","1","0","0"],["1","0","1","1","1"],["1","1","1","1","1"],["1","0","0","1","0"]]
-        let item = MaxtriaRectangleArea()
-        let result = item.maximalRectangle(matrix)
-        XCTAssertTrue(result == 6, "failed result = \(result)")
-    }
+  func testMaxtriaRectangleArea() {
+    let matrix: [[Character]] =  [["1","0","1","0","0"],["1","0","1","1","1"],["1","1","1","1","1"],["1","0","0","1","0"]]
+    let item = MaxtriaRectangleArea()
+    let result = item.maximalRectangle(matrix)
+    XCTAssertTrue(result == 6, "failed result = \(result)")
+  }
   
 }

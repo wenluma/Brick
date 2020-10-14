@@ -25,4 +25,19 @@ final class MyArrayTests: XCTestCase {
     XCTAssertTrue(c5 == 2)
   }
   
+  func testArrayIndices() {
+    let list = [5,4,3,2,1,0]
+    // 数组切片，可以通过它，直接获取元素
+    for i in list.indices {
+      let value = list[i]
+      print("i = \(i), value = \(value)")
+    }
+    
+    let elist = [Int]()
+    // 数组切片，可以通过它，直接获取元素
+    for i in elist.indices {
+      let value = elist[i]
+      print("i = \(i), value = \(value)")
+    }
+  }
 }
