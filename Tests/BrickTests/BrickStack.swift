@@ -111,4 +111,44 @@ final class BrickStackTests: XCTestCase {
     stack.pop()
     XCTAssertTrue(stack.min() == nil)
   }
+  
+  func testDecodeString() {
+    let item = DecodeString()
+    let str1 = "3[a]2[bc]"
+    let r1 = item.decodeString(str1)
+    XCTAssertTrue(r1 == "aaabcbc", "failed \(r1)")
+    
+
+    let str3 = "3[a2[c]]"
+    let r3 = item.decodeString(str3)
+    XCTAssertTrue(r3 == "accaccacc", "failed \(r3)")
+
+    do {
+      let str4 = "2[abc]3[cd]ef"
+      let r4 = item.decodeString(str4)
+      XCTAssertTrue(r4 == "abcabccdcdcdef", "failed \(r4)")
+    }
+
+    do {
+        let str5 = "abc3[cd]xyz"
+        let r5 = item.decodeString(str5)
+        XCTAssertTrue(r5 == "abccdcdcdxyz", "failed \(r5)")
+    }
+  }
+  
+  func testStringCheck() {
+    let str = "0123456789[aAzZ2[b]]"
+    for c in str {
+      if c.isNumber {
+        print("\(c) isNumber")
+      } else if c.isLetter {
+        print("\(c) isLetter")
+      } else if c == "[" {
+        print("\(c) 左括弧")
+      } else {
+        print("\(c) 右括弧")
+      }
+    }
+  }
+  
 }

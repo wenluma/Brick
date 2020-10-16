@@ -248,3 +248,40 @@ public class MinStack<T: Comparable> {
   }
 }
 
+//https://leetcode-cn.com/problems/decode-string/solution/zi-fu-chuan-jie-ma-by-leetcode-solution/
+// "3[a]2[bc]" => "aaabcbc"
+// "3[a2[c]]" => "accaccacc"
+// "2[abc]3[cd]ef" => "abcabccdcdcdef"
+// "abc3[cd]xyz" => "abccdcdcdxyz"
+public class DecodeString {
+  func decodeString(_ s: String) -> String {
+    var digitStack = [Int]()
+    var alphaStack = [String]()
+
+    var ans: String = ""
+    var mutil: Int = 0
+    for c in s {
+      if c.isNumber {
+        print("\(c) isNumber")
+        if let number = Int(String(c)) {
+          mutil = mutil * 10 + number
+        }
+      } else if c.isLetter {
+        ans.append(c)
+        print("\(c) isLetter")
+      } else if c == "[" {
+        digitStack.append(mutil)
+        mutil = 0
+        alphaStack.append(ans)
+        ans = ""
+        print("\(c) 左括弧")
+      } else {
+        print("\(c) 右括弧")
+        let last = alphaStack.removeLast()
+        let times = digitStack.removeLast()
+        ans = last + String(repeating: ans, count: times)
+      }
+    }
+    return ans
+  }
+}
