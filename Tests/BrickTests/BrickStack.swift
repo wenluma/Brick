@@ -151,4 +151,10 @@ final class BrickStackTests: XCTestCase {
     }
   }
   
+  func testDailyTemperatures() {
+    let temperatures = [73, 74, 75, 71, 69, 72, 76, 73]
+    let item = DailyTemperatures()
+    let output = item.transfor(temperatures)
+    XCTAssert([1, 1, 4, 2, 1, 1, 0, 0] == output, "faile output = \(output)")
+  }
 }

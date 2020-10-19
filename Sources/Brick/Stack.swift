@@ -285,3 +285,20 @@ public class DecodeString {
     return ans
   }
 }
+
+// 739. 每日温度
+// https://leetcode-cn.com/problems/daily-temperatures/
+public class DailyTemperatures {
+  public func transfor(_ T: [Int]) -> [Int] {
+    var stack = [Int]()
+    var result = Array(repeating: 0, count: T.count)
+    for index in T.indices {
+      while !stack.isEmpty,  T[index] > T[stack.last!] {
+        let last = stack.removeLast()
+        result[last] = index - last
+      }
+      stack.append(index)
+    }
+    return result
+  }
+}
