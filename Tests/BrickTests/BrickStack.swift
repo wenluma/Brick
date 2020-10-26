@@ -41,10 +41,16 @@ final class BrickStackTests: XCTestCase {
   
   // 接雨水
   func testRainWater() {
-    let list: [Int] = [0,1,0,2,1,0,1,3,2,1,2,1]
     let item = TrapRainWater()
+
+    let list: [Int] = [0,1,0,2,1,0,1,3,2,1,2,1]
     let sum = item.trap(list: list)
-    XCTAssertTrue(sum == 6)
+    XCTAssertTrue(sum == 6, "failed = \(sum)")
+    
+    let list2 = [4,2,0,3,2,5]
+    let sum2 = item.trap(list: list2)
+    XCTAssertTrue(sum2 == 9, "failed = \(sum2)")
+
   }
   
   func testRainWater2() {
@@ -62,11 +68,11 @@ final class BrickStackTests: XCTestCase {
     let item = LargestRectangleArea()
 
     let list0 = [2]
-    let area = item.area(heights: list0)
+    let area = item.area(list: list0)
     XCTAssertTrue(area == 2, "area = \(area)")
     
     let list2 = [2,1,5,6,2,3]
-    let area2 = item.area(heights: list2)
+    let area2 = item.area(list: list2)
     XCTAssertTrue(area2 == 10, "area = \(area2)")
   }
   
