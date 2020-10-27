@@ -68,11 +68,11 @@ final class BrickStackTests: XCTestCase {
     let item = LargestRectangleArea()
 
     let list0 = [2]
-    let area = item.area(list: list0)
+    let area = item.area(heights: list0)
     XCTAssertTrue(area == 2, "area = \(area)")
     
     let list2 = [2,1,5,6,2,3]
-    let area2 = item.area(list: list2)
+    let area2 = item.area(heights: list2)
     XCTAssertTrue(area2 == 10, "area = \(area2)")
   }
   
