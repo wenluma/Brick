@@ -33,5 +33,51 @@ final class BrickStringTests: XCTestCase {
     } while false
   }
   
+  func testLongestPalindromicSubstring() {
+    let item = LongestPalindromicSubstring()
+    repeat {
+      let s0 = "babad"
+      let sub = item.subLength(source: s0)
+      XCTAssertTrue(sub == "bab", "failed len = \(sub)")
+    } while false
+    
+    repeat {
+      let s0 = "bbbbbbbb"
+      let sub = item.subLength(source: s0)
+      XCTAssertTrue(sub == "bbbbbbbb", "failed len = \(sub)")
+    } while false
+    
+    repeat {
+      let s0 = "cbbd"
+      let sub = item.subLength(source: s0)
+      XCTAssertTrue(sub == "bb", "failed len = \(sub)")
+    } while false
+  }
+  
+  func testPalindromic() {
+    let item = LongestPalindromicSubstring()
+    repeat {
+      let isPalindromic = item.isPalindromic("ab")
+      XCTAssertFalse(isPalindromic)
+    } while false
+    repeat {
+      let isPalindromic = item.isPalindromic("b")
+      XCTAssertFalse(isPalindromic)
+    } while false
+    repeat {
+      let isPalindromic = item.isPalindromic("")
+      XCTAssertFalse(isPalindromic)
+    } while false
+    repeat {
+      let isPalindromic = item.isPalindromic("bab")
+      XCTAssertTrue(isPalindromic)
+    } while false
+
+    repeat {
+      let isPalindromic = item.isPalindromic("bb")
+      XCTAssertTrue(isPalindromic)
+    } while false
+  }
+  
   
 }
