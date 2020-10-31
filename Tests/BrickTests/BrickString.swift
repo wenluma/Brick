@@ -14,6 +14,12 @@ final class BrickStringTests: XCTestCase {
   func testLengthOfLongestSubstring() {
     let item = LengthOfLongestSubstring()
     repeat {
+      let s0 = ""
+      let len = item.subLength(source: s0)
+      XCTAssertTrue(len == 0, "failed len = \(len)")
+    } while false
+    
+    repeat {
       let s0 = "abcabcbb"
       let len = item.subLength(source: s0)
       XCTAssertTrue(len == 3, "failed len = \(len)")
@@ -26,6 +32,11 @@ final class BrickStringTests: XCTestCase {
       XCTAssertTrue(len == 1, "failed len = \(len)")
     } while false
     
+    repeat {
+      let s0 = "abcdefght"
+      let len = item.subLength(source: s0)
+      XCTAssertTrue(len == 9, "failed len = \(len)")
+    } while false
     repeat {
       let s0 = "pwwkew"
       let len = item.subLength(source: s0)
