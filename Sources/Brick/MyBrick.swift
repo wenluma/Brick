@@ -254,7 +254,6 @@ public class LinkRev {
   // 1. 栈存储，push， pop 来完成
   public func reverse(source: LKNode?) -> [Int] {
     var items = [Int]()
-    
     var stack = [LKNode]()
     var current = source
     while current != nil {
@@ -266,7 +265,6 @@ public class LinkRev {
       let top = stack.removeLast()
       items.append(top.value)
     }
-    
     return items
   }
 }
@@ -286,6 +284,34 @@ public class LinkRev2 {
     }
     reverseNode(node: node.next, items: &items)
     items.append(node.value)
-    print("node = \(node.value)")
+  }
+}
+
+// 链表反转, 迭代方式
+public class LinkRev3 {
+  public func reverse(source: LKNode?) -> LKNode? {
+    // 1 -> 2 -> null
+    var current = source
+    var pre: LKNode? = nil
+    while current != nil {
+      let tmp = current?.next
+      current?.next = pre
+      pre = current
+      current = tmp
+    }
+    return pre
+  }
+}
+
+// 链表反转递归写法
+public class LinkRev4 {
+  public func reverse(source: LKNode?) -> LKNode? {
+    if source == nil || source?.next == nil {
+      return source
+    }
+    let node = reverse(source: source?.next)
+    source?.next?.next = source
+    source?.next = nil
+    return node
   }
 }

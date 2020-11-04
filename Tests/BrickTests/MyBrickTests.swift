@@ -141,7 +141,7 @@ final class MyBrickTests: XCTestCase {
     } while false
     
   }
-  
+ // 逆序输出 栈
   func testLinkRev() {
     let item = LinkRev()
     repeat {
@@ -164,6 +164,7 @@ final class MyBrickTests: XCTestCase {
     } while false
   }
   
+  // 逆序输出 递归
   func testLinkRev2() {
     let item = LinkRev2()
     repeat {
@@ -183,6 +184,58 @@ final class MyBrickTests: XCTestCase {
       let node = LKNode.makeLKNode(items: empty)
       let result: [Int] = item.reverse(source: node)
       XCTAssertTrue(result == empty, "failed = \(result)")
+    } while false
+  }
+  
+  // 列表反转
+  func testLinkRev3() {
+    let item = LinkRev3()
+    repeat {
+      let node = LKNode.makeLKNode(items: [1,2,3])
+      let result: LKNode? = item.reverse(source: node)
+      let list = LKNode.node2Array(node: result)
+      XCTAssertTrue(list == [3,2,1], "failed = \(String(describing: result))")
+    } while false
+    
+    repeat {
+      let node = LKNode.makeLKNode(items: [1])
+      let result: LKNode? = item.reverse(source: node)
+      let list = LKNode.node2Array(node: result)
+      XCTAssertTrue(list == [1], "failed = \(String(describing: result))")
+    } while false
+    
+    repeat {
+      let empty = [Int]()
+      let node = LKNode.makeLKNode(items: empty)
+      let result: LKNode? = item.reverse(source: node)
+      let list = LKNode.node2Array(node: result)
+      XCTAssertTrue(list == empty, "failed = \(String(describing: result))")
+    } while false
+  }
+  
+  // 链表递归反转
+  func testLinkRev4() {
+    let item = LinkRev4()
+    repeat {
+      let node = LKNode.makeLKNode(items: [1,2,3])
+      let result: LKNode? = item.reverse(source: node)
+      let list = LKNode.node2Array(node: result)
+      XCTAssertTrue(list == [3,2,1], "failed = \(String(describing: result))")
+    } while false
+    
+    repeat {
+      let node = LKNode.makeLKNode(items: [1])
+      let result: LKNode? = item.reverse(source: node)
+      let list = LKNode.node2Array(node: result)
+      XCTAssertTrue(list == [1], "failed = \(String(describing: result))")
+    } while false
+    
+    repeat {
+      let empty = [Int]()
+      let node = LKNode.makeLKNode(items: empty)
+      let result: LKNode? = item.reverse(source: node)
+      let list = LKNode.node2Array(node: result)
+      XCTAssertTrue(list == empty, "failed = \(String(describing: result))")
     } while false
   }
 }
