@@ -320,7 +320,8 @@ public class BTTree {
   let value: Int
   var left: BTTree?
   var right: BTTree?
-  init(value: Int, left: BTTree? = nil, right: BTTree? = nil) {
+  var parent: BTTree?
+  init(value: Int, left: BTTree? = nil, right: BTTree? = nil, parent: BTTree? = nil) {
     self.value = value
     self.left = left
     self.right = right
@@ -363,6 +364,21 @@ public class BTTree {
 //  static func postOrder(tree: BTTree?) -> [Int] {
 //
 //  }
+  
+  static func connect(parent: BTTree?, left: BTTree?, right: BTTree?) {
+    guard let p = parent else {
+      return
+    }
+    p.left = left
+    if left != nil {
+      left?.parent = p
+    }
+    
+    p.right = right
+    if right != nil {
+      right?.parent = p
+    }
+  }
 }
 
 // 面试题7：重建二叉树
@@ -397,5 +413,36 @@ public class ConstructTree {
     node.left = core(root + 1, left, i - 1)
     node.right = core(root + i - left + 1, i + 1, right)
     return node
+  }
+}
+
+// 面试题8：二叉树的下一个结点
+// 题目：给定一棵二叉树和其中的一个结点，如何找出中序遍历顺序的下一个结点？
+// 树中的结点除了有两个分别指向左右子结点的指针以外，还有一个指向父结点的指针。
+public class TreeNextNode {
+  public func getNext(node: BTTree?) -> BTTree? {
+    if node == nil {
+      return nil
+    }
+    var pNext: BTTree?
+    if node?.right != nil {
+      // 那么它的下一个节点就是右子树中的最左节点；
+      var right = node?.right
+      while right?.left != nil {
+        right = right?.left
+      }
+      pNext = right
+    } else if node?.parent != nil {
+      var current = node
+      // 节点为其父节点的左子节点，那么其父节点就是它的下一个节点；
+      var parent = node?.parent
+      // 节点为其父节点的右子节点，那么需要沿其父指针一直向上遍历，一直找到某个节点是其父节点的左子节点为止，那么这个节点的父节点即是需要寻找的下一个节点
+      while parent != nil && current?.value == parent?.right?.value {
+        current = parent
+        parent = parent?.parent
+      }
+      pNext = parent
+    }
+    return pNext
   }
 }

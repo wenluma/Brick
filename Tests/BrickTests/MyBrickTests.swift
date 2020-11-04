@@ -266,4 +266,60 @@ final class MyBrickTests: XCTestCase {
   }
   
   
+  func testTreeNextNode() {
+    let item = TreeNextNode()
+    repeat {
+      let node: BTTree? = nil
+      let result = item.getNext(node: node)
+      XCTAssertNil(result, "result != nil")
+    } while false
+    
+    // 当前有右值
+    repeat {
+      let root: BTTree = BTTree(value: 1)
+      let r1 = BTTree(value: 2)
+      root.right = r1
+      r1.parent = root
+      
+      let l1 = BTTree(value: 3)
+      root.left = l1
+      l1.parent = root
+      let result = item.getNext(node: root)
+      XCTAssertTrue(result?.value == r1.value, "failed = \(result?.value)")
+    } while false
+    
+    // 当前有左值
+    repeat {
+      let root: BTTree = BTTree(value: 1)
+      let r1 = BTTree(value: 2)
+      root.right = r1
+      r1.parent = root
+      
+      let l1 = BTTree(value: 3)
+      root.left = l1
+      l1.parent = root
+      
+      let l2 =  BTTree(value: 4)
+      l1.left = l2
+      l2.parent = l1
+
+      let result = item.getNext(node: l2)
+      XCTAssertTrue(result?.value == l1.value, "failed = \(result?.value)")
+    } while false
+    
+    // 节点为其父节点的右子节点，那么需要沿其父指针一直向上遍历，一直找到某个节点是其父节点的左子节点为止，那么这个节点的父节点即是需要寻找的下一个节点
+    repeat {
+      var root: BTTree = BTTree(value: 1)
+      var l1 = BTTree(value: 3)
+      var r1 = BTTree(value: 2)
+      var ll2 = BTTree(value: 4)
+      var lr2 = BTTree(value: 5)
+      BTTree.connect(parent: root, left: l1, right: r1)
+      BTTree.connect(parent: l1, left: ll2, right: lr2)
+      
+      let result = item.getNext(node: lr2)
+      XCTAssertTrue(result?.value == root.value, "failed = \(result?.value)")
+    } while false
+    
+  }
 }
