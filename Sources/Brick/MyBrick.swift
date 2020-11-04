@@ -48,32 +48,11 @@ public class DuplicateNumbers  {
     }
     return false
   }
-  // 改变数组，交换
-  func isDuplicate2(_  source: inout [Int], target: inout Int?) -> Bool {
-    if source.isEmpty || source.count == 1 {
-      return false
-    }
-    
-    for idx in source.indices {
-//      s[a] , s[b], 如果s[a] 与 s[b]
-//     s[0] = 1  s[1] = 2, s[2] = 3, s[3] = 2
-      let current = source[idx]
-      while source[idx] != idx {
-        if source[idx] == source[source[idx]] {
-          target = source[idx]
-          return true
-        }
-//        source.swapAt(idx, source[idx])
-        let tmp = source[idx]
-        source[idx] = source[tmp]
-        source[tmp] = tmp
-      }
-    }
-    return false
-  }
+  
 }
 
 public class DuplicateNumbers2  {
+  // 改变数组，交换下标
   // 改变数组，交换
   func isDuplicate(source: inout [Int], target: inout Int?) -> Bool {
     if source.isEmpty || source.count == 1 {
@@ -87,17 +66,17 @@ public class DuplicateNumbers2  {
     }
     
     for idx in source.indices {
-//      s[a] , s[b], 如果s[a] 与 s[b]
-//     s[0] = 1  s[1] = 2, s[2] = 3, s[3] = 2
+      //      s[a] , s[b], 如果s[a] 与 s[b]
+      //     s[0] = 1  s[1] = 2, s[2] = 3, s[3] = 2
       while source[idx] != idx {
         if source[idx] == source[source[idx]] {
           target = source[idx]
           return true
         }
-        source.swapAt(idx, source[idx])
-//        let tmp = source[idx]
-//        source[idx] = source[tmp]
-//        source[tmp] = tmp
+        //        source.swapAt(idx, source[idx])
+        let tmp = source[idx]
+        source[idx] = source[tmp]
+        source[tmp] = tmp
       }
     }
     return false
