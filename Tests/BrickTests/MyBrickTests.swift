@@ -314,4 +314,34 @@ final class MyBrickTests: XCTestCase {
     } while false
     
   }
+  
+  // 双stack，模拟queue
+  func testMyQueue() {
+    let item = MyQueue<Int>()
+    
+    item.appendTail(1)
+    item.appendTail(2)
+    item.appendTail(3)
+    
+    repeat {
+      let top = item.deleteHead()
+      XCTAssertTrue(top == 3, "failed = \(top)")
+    } while false
+
+    repeat {
+      let top = item.deleteHead()
+      XCTAssertTrue(top == 2, "failed = \(top)")
+    } while false
+
+    item.appendTail(4)
+    repeat {
+      let top = item.deleteHead()
+      XCTAssertTrue(top == 4, "failed = \(top)")
+    } while false
+    
+    repeat {
+      let top = item.deleteHead()
+      XCTAssertTrue(top == 1, "failed = \(top)")
+    } while false
+  }
 }
