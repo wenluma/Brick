@@ -82,3 +82,47 @@ public class DuplicateNumbers2  {
     return false
   }
 }
+
+// 面试题3（二）：不修改数组找出重复的数字
+// 题目：在一个长度为n+1的数组里的所有数字都在1到n的范围内，所以数组中至
+// 少有一个数字是重复的。请找出数组中任意一个重复的数字，但不能修改输入的
+// 数组。例如，如果输入长度为8的数组{2, 3, 5, 4, 3, 2, 6, 7}，那么对应的
+// 输出是重复的数字2或者3。
+public class DuplicateNumbers3  {
+  // 负数 时，直接为无效； 正数时, 有效值
+  func isDuplicate(source: [Int]) -> Int {
+    if source.isEmpty || source.count == 1 {
+      return -1
+    }
+
+    var start = 1
+    var end = source.count - 1
+    while end >= start {
+      let middle = ((end - start) >> 1) + start
+      let times = countRange(source, start: start, end: middle)
+      if end == start {
+        if times > 1 {
+          return start
+        } else {
+          break
+        }
+      }
+      if times > (middle - start + 1) {
+        end = middle
+      } else {
+        start = middle + 1
+      }
+    }
+    return -1
+  }
+  
+  private func countRange(_ source: [Int], start: Int, end: Int) -> Int {
+    var count = 0
+    for item in source {
+      if item >= start , item <= end {
+        count += 1
+      }
+    }
+    return count
+  }
+}

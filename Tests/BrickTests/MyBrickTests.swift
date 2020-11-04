@@ -61,4 +61,30 @@ final class MyBrickTests: XCTestCase {
       XCTAssertEqual(target, nil)
     } while false
   }
+  
+  func testDupicateNumbers3() {
+    let item = DuplicateNumbers3()
+
+    repeat {
+      let s0 = [2, 3, 5, 4, 3, 2, 6, 7]
+      let result: Int = item.isDuplicate(source: s0)
+      let duplicates = [2,3]
+      XCTAssertTrue(duplicates.contains(result))
+    } while false
+    
+    repeat {
+      let s0 = [3, 2, 1, 4, 4, 5, 6, 7]
+      let result = item.isDuplicate(source: s0)
+      let duplicates = [4]
+      XCTAssertTrue(duplicates.contains(result))
+    } while false
+    
+    repeat {
+      // 内容边界
+      let s0 = [1, 2, 3, 4, 5, 6, 7, 1, 8]
+      let result = item.isDuplicate(source: s0)
+      let duplicates = [1]
+      XCTAssertTrue(duplicates.contains(result))
+    } while false
+  }
 }
