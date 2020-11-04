@@ -238,4 +238,32 @@ final class MyBrickTests: XCTestCase {
       XCTAssertTrue(list == empty, "failed = \(String(describing: result))")
     } while false
   }
+  
+  func testConstructTree() {
+    repeat {
+      let preOrder = [1, 2, 4, 7, 3, 5, 6, 8]
+      let inOrder = [4, 7, 2, 1, 5, 3, 8, 6]
+
+      let item = ConstructTree(preOrder: preOrder, inOrder: inOrder)
+      let result: BTTree? = item.build()
+      let preO = BTTree.preOrder(tree: result)
+      let inO = BTTree.inOrder(tree: result)
+      XCTAssertTrue(preO == preOrder, "failed = \(String(describing: preO))")
+      XCTAssertTrue(inO == inOrder, "failed = \(String(describing: inO))")
+    } while false
+    
+    repeat {
+      let preOrder = [3,9,20,15,7]
+      let inOrder = [9,3,15,20,7]
+      
+      let item = ConstructTree(preOrder: preOrder, inOrder: inOrder)
+      let result: BTTree? = item.build()
+      let preO = BTTree.preOrder(tree: result)
+      let inO = BTTree.inOrder(tree: result)
+      XCTAssertTrue(preO == preOrder, "failed = \(String(describing: preO))")
+      XCTAssertTrue(inO == inOrder, "failed = \(String(describing: inO))")
+    } while false
+  }
+  
+  
 }

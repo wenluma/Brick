@@ -315,3 +315,87 @@ public class LinkRev4 {
     return node
   }
 }
+
+public class BTTree {
+  let value: Int
+  var left: BTTree?
+  var right: BTTree?
+  init(value: Int, left: BTTree? = nil, right: BTTree? = nil) {
+    self.value = value
+    self.left = left
+    self.right = right
+  }
+  
+  // 前序遍历定义， 根左右
+  static func preOrder(tree: BTTree?) -> [Int] {
+    var items = [Int]()
+    var current = tree
+    var stack = [BTTree]()
+    while current != nil || !stack.isEmpty {
+      while current != nil {
+        stack.append(current!)
+        items.append(current!.value)
+        current = current!.left
+      }
+      let top = stack.removeLast()
+      current = top.right
+    }
+    return items
+  }
+  
+  // 中续遍历定义，左根右
+  static func inOrder(tree: BTTree?) -> [Int] {
+    var stack = [BTTree]()
+    var items = [Int]()
+    var current: BTTree? = tree
+    while current != nil || !stack.isEmpty {
+      while current != nil {
+        stack.append(current!)
+        current = current!.left
+      }
+      let top = stack.removeLast()
+      items.append(top.value)
+      current = top.right
+    }
+    return items
+  }
+//  // 后续遍历定义 根左右
+//  static func postOrder(tree: BTTree?) -> [Int] {
+//
+//  }
+}
+
+// 面试题7：重建二叉树
+// 题目：输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。假设输
+// 入的前序遍历和中序遍历的结果中都不含重复的数字。例如输入前序遍历序列{1,
+// 2, 4, 7, 3, 5, 6, 8}和中序遍历序列{4, 7, 2, 1, 5, 3, 8, 6}，则重建出
+// 图2.6所示的二叉树并输出它的头结点。
+public class ConstructTree {
+  let preOrder: [Int] // preorder
+  var map: [Int: Int] = [Int: Int]() // inorder: value - index
+  init(preOrder: [Int], inOrder: [Int]) {
+    self.preOrder = preOrder
+    for (idx, item) in inOrder.enumerated() {
+      map[item] = idx
+    }
+  }
+  
+  public func build() -> BTTree? {
+    core( 0, 0, preOrder.count - 1)
+  }
+  // left, right 用来计算宽度的
+  private func core(_ root: Int,
+                    _ left: Int,
+                    _ right: Int
+                    ) -> BTTree? {
+    if left > right {
+      return nil
+    }
+    let rootValue = preOrder[root]
+    let i: Int! = map[rootValue]
+    let node = BTTree(value: rootValue)
+    node.left = core(root + 1, left, i - 1)
+    node.right = core(root + i - left + 1, i + 1, right)
+    return node
+  }
+}
