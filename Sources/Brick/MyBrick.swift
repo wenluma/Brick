@@ -155,3 +155,51 @@ public class MatrixFind {
     return false
   }
 }
+
+// 面试题5：替换空格
+// 题目：请实现一个函数，把字符串中的每个空格替换成"%20"。例如输入“We are happy.”，
+// 则输出“We%20are%20happy.”。
+public class ReplaceBlank {
+  // 空格 使用 %20 替换
+  // 倒序设定，每次改变的是一致的
+  // swift 中 将 string -> [Character]
+  public func replace(source: String) -> String {
+    var blankCount = 0
+    for c in source {
+      if c == " " {
+        blankCount += 1
+      }
+    }
+    
+    let originLength = source.count
+    let resultLength = source.count + blankCount << 1
+    if originLength == resultLength {
+      return source
+    }
+    
+    let origin: [Character] = Array(source)
+    var result: [Character] = Array(repeating: "x", count: resultLength)
+    
+    var originIdx = originLength - 1
+    var resultIdx = resultLength - 1
+    
+    while originIdx >= 0 {
+      if origin[originIdx] == " " {
+        result[resultIdx] = "0"
+        resultIdx -= 1
+        
+        result[resultIdx] = "2"
+        resultIdx -= 1
+        
+        result[resultIdx] = "%"
+        resultIdx -= 1
+      } else {
+        result[resultIdx] = origin[originIdx]
+        resultIdx -= 1
+      }
+      originIdx -= 1
+    }
+    
+    return String(result)
+  }
+}

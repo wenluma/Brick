@@ -124,4 +124,21 @@ final class MyBrickTests: XCTestCase {
       XCTAssertTrue(result, "result = \(result)")
     } while false
   }
+  
+  func testReplaceBlank() {
+    let item = ReplaceBlank()
+
+    repeat {
+      let s0 = "We are happy."
+      let result = item.replace(source: s0)
+      XCTAssertEqual(result, "We%20are%20happy.", "failed = \(result)")
+    } while false
+    
+    repeat {
+      let s0 = "We are happy. "
+      let result = item.replace(source: s0)
+      XCTAssertEqual(result, "We%20are%20happy.%20", "failed = \(result)")
+    } while false
+    
+  }
 }
