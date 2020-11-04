@@ -126,3 +126,32 @@ public class DuplicateNumbers3  {
     return count
   }
 }
+
+// 面试题4：二维数组中的查找
+// 题目：在一个二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按
+// 照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个
+// 整数，判断数组中是否含有该整数。
+public class MatrixFind {
+  // 二维数组的columns 是一样的
+  public func isExist(source: [[Int]], target: Int) -> Bool {
+    if source.isEmpty {
+      return false
+    }
+    
+    var col = source[0].count - 1
+    var row = 0
+    let rows = source.count - 1
+    
+    while row <= rows , col >= 0 {
+      if source[row][col] == target {
+        return true
+      }
+      if source[row][col] > target {
+        col -= 1
+      } else {
+        row += 1
+      }
+    }
+    return false
+  }
+}

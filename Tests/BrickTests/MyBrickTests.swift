@@ -87,4 +87,41 @@ final class MyBrickTests: XCTestCase {
       XCTAssertTrue(duplicates.contains(result), "result = \(result)")
     } while false
   }
+  
+  func testMatrixFind() {
+    let item = MatrixFind()
+
+    repeat {
+      let s0 = [
+        [1, 2, 8, 9],
+        [2, 4, 9, 12],
+        [4, 7, 10, 13],
+        [6, 8, 11, 15]
+      ]
+      let result: Bool = item.isExist(source: s0, target: 7)
+      XCTAssertTrue(result, "result = \(result)")
+    } while false
+    
+    repeat {
+      let s0 = [
+        [1, 2, 8, 9],
+        [2, 4, 9, 12],
+        [4, 7, 10, 13],
+        [6, 8, 11, 15]
+      ]
+      let result: Bool = item.isExist(source: s0, target: 0)
+      XCTAssertFalse(result, "result = \(result)")
+    } while false
+    
+    repeat {
+      let s0 = [
+        [1, 2, 8, 9],
+        [2, 4, 9, 12],
+        [4, 7, 10, 13],
+        [6, 8, 11, 15]
+      ]
+      let result: Bool = item.isExist(source: s0, target: 4)
+      XCTAssertTrue(result, "result = \(result)")
+    } while false
+  }
 }
