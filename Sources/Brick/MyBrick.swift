@@ -203,3 +203,89 @@ public class ReplaceBlank {
     return String(result)
   }
 }
+
+// 面试题6：从尾到头打印链表
+// 题目：输入一个链表的头结点，从尾到头反过来打印出每个结点的值。 链表反转
+public class LKNode {
+  let value: Int
+  var next: LKNode?
+  init(_ value: Int, next: LKNode? = nil) {
+    self.value = value
+    self.next = next
+  }
+  
+  // 如果不设置 items
+  
+  static func makeLKNode(items: [Int]) -> LKNode? {
+    let dumpy = LKNode(0)
+    var head: LKNode? = dumpy
+    for i in items {
+        head?.next = LKNode(i)
+        head = head?.next
+    }
+    return dumpy.next
+  }
+  
+  static func makeRandomLKNode(count: Int) -> LKNode? {
+    let dumpy = LKNode(0)
+    var head: LKNode? = dumpy
+    
+    for _ in 0 ..< count {
+      let random = Int.random(in: 0...100)
+      head?.next = LKNode(random)
+      head = head?.next
+    }
+    return dumpy.next
+  }
+  
+  static func node2Array(node: LKNode?) -> [Int] {
+    var items = [Int]()
+    var current = node
+    while current != nil {
+      items.append(current!.value)
+      current = current?.next
+    }
+    return items
+  }
+}
+
+// 链表逆序输出
+public class LinkRev {
+  // 1. 栈存储，push， pop 来完成
+  public func reverse(source: LKNode?) -> [Int] {
+    var items = [Int]()
+    
+    var stack = [LKNode]()
+    var current = source
+    while current != nil {
+      stack.append(current!)
+      current = current?.next
+    }
+    
+    while !stack.isEmpty {
+      let top = stack.removeLast()
+      items.append(top.value)
+    }
+    
+    return items
+  }
+}
+
+// 2. 递归
+public class LinkRev2 {
+  
+  public func reverse(source: LKNode?) -> [Int] {
+    var items = [Int]()
+    reverseNode(node: source, items: &items)
+    return items
+  }
+  
+  private func reverseNode(node: LKNode?, items: inout [Int]) {
+    guard let node = node else {
+      return
+    }
+    reverseNode(node: node.next, items: &items)
+    items.append(node.value)
+    print("node = \(node.value)")
+  }
+}

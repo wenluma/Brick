@@ -141,4 +141,48 @@ final class MyBrickTests: XCTestCase {
     } while false
     
   }
+  
+  func testLinkRev() {
+    let item = LinkRev()
+    repeat {
+      let node = LKNode.makeLKNode(items: [1,2,3])
+      let result: [Int] = item.reverse(source: node)
+      XCTAssertTrue(result == [3,2,1], "failed = \(result)")
+    } while false
+    
+    repeat {
+      let node = LKNode.makeLKNode(items: [1])
+      let result: [Int] = item.reverse(source: node)
+      XCTAssertTrue(result == [1], "failed = \(result)")
+    } while false
+    
+    repeat {
+      let empty = [Int]()
+      let node = LKNode.makeLKNode(items: empty)
+      let result: [Int] = item.reverse(source: node)
+      XCTAssertTrue(result == empty, "failed = \(result)")
+    } while false
+  }
+  
+  func testLinkRev2() {
+    let item = LinkRev2()
+    repeat {
+      let node = LKNode.makeLKNode(items: [1,2,3])
+      let result: [Int] = item.reverse(source: node)
+      XCTAssertTrue(result == [3,2,1], "failed = \(result)")
+    } while false
+    
+    repeat {
+      let node = LKNode.makeLKNode(items: [1])
+      let result: [Int] = item.reverse(source: node)
+      XCTAssertTrue(result == [1], "failed = \(result)")
+    } while false
+    
+    repeat {
+      let empty = [Int]()
+      let node = LKNode.makeLKNode(items: empty)
+      let result: [Int] = item.reverse(source: node)
+      XCTAssertTrue(result == empty, "failed = \(result)")
+    } while false
+  }
 }
