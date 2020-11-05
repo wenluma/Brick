@@ -344,4 +344,125 @@ final class MyBrickTests: XCTestCase {
       XCTAssertTrue(top == 1, "failed = \(top)")
     } while false
   }
+  
+  func testFib1() {
+    let item = Fibonacci1()
+    repeat {
+      let r = item.fib(0)
+      XCTAssertEqual(r, 0)
+    } while false
+    
+    repeat {
+      let r = item.fib(1)
+      XCTAssertEqual(r, 1)
+    } while false
+    
+    repeat {
+      let r = item.fib(2)
+      XCTAssertEqual(r, 1)
+    } while false
+    
+    repeat {
+      let r = item.fib(3)
+      XCTAssertEqual(r, 2)
+    } while false
+    
+    repeat {
+      let r = item.fib(4)
+      XCTAssertEqual(r, 3)
+    } while false
+    
+    repeat {
+      let r = item.fib(5)
+      XCTAssertEqual(r, 5)
+    } while false
+    
+    repeat {
+      let r = item.fib(6)
+      XCTAssertEqual(r, 8)
+    } while false
+    
+    repeat {
+      let r = item.fib(7)
+      XCTAssertEqual(r, 13)
+    } while false
+    
+    repeat {
+      let r = item.fib(8)
+      XCTAssertEqual(r, 21)
+    } while false
+    
+    repeat {
+      let r = item.fib(9)
+      XCTAssertEqual(r, 34)
+    } while false
+    
+    repeat {
+      let r = item.fib(10)
+      XCTAssertEqual(r, 55)
+    } while false
+
+  }
+  
+  func testFib2() {
+    let item = Fibonacci2()
+    repeat {
+      let r = item.fib(0)
+      XCTAssertEqual(r, 0)
+    } while false
+    
+    repeat {
+      let r = item.fib(1)
+      XCTAssertEqual(r, 1)
+    } while false
+    
+    repeat {
+      let r = item.fib(2)
+      XCTAssertEqual(r, 1)
+    } while false
+    
+    repeat {
+      let r = item.fib(3)
+      XCTAssertEqual(r, 2)
+    } while false
+    
+    repeat {
+      let r = item.fib(4)
+      XCTAssertEqual(r, 3)
+    } while false
+    
+    repeat {
+      let r = item.fib(5)
+      XCTAssertEqual(r, 5)
+    } while false
+    
+    repeat {
+      let r = item.fib(6)
+      XCTAssertEqual(r, 8)
+    } while false
+    
+    repeat {
+      let r = item.fib(7)
+      XCTAssertEqual(r, 13)
+    } while false
+    
+    repeat {
+      let r = item.fib(8)
+      XCTAssertEqual(r, 21)
+    } while false
+    
+    repeat {
+      let r = item.fib(9)
+      XCTAssertEqual(r, 34)
+    } while false
+    
+    repeat {
+      let r = item.fib(10)
+      XCTAssertEqual(r, 55)
+    } while false
+
+    
+  }
+
+  
 }

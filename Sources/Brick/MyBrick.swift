@@ -475,3 +475,42 @@ public class MyQueue<T> {
     return nil
   }
 }
+
+// 面试题10：斐波那契数列
+// 题目：写一个函数，输入n，求斐波那契（Fibonacci）数列的第n项。
+public class Fibonacci1 {
+  // 递归
+  func fib(_ n: UInt) -> Int {
+    if n <= 0 {
+      return 0
+    }
+    if n == 1 {
+      return 1
+    }
+    return fib(n - 1) + fib(n - 2)
+  }
+}
+
+public class Fibonacci2 {
+  // 迭代
+  // 0 - 0
+  // 1 - 1
+  // f(n) = f(n-1) + f(n-2)
+  func fib(_ n: UInt) -> Int {
+    if n <= 0 {
+      return 0
+    }
+    if n == 1 {
+      return 1
+    }
+    
+    var fn_1 = 1
+    var fn_2 = 0
+    for _ in 2 ... n {
+      let fn = fn_1 + fn_2
+      fn_2 = fn_1
+      fn_1 = fn
+    }
+    return fn_1
+  }
+}
