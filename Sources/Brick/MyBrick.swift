@@ -554,3 +554,84 @@ public class RotationArray {
     return min
   }
 }
+
+// 面试题12：矩阵中的路径
+// 题目：请设计一个函数，用来判断在一个矩阵中是否存在一条包含某字符串所有
+// 字符的路径。路径可以从矩阵中任意一格开始，每一步可以在矩阵中向左、右、
+// 上、下移动一格。如果一条路径经过了矩阵的某一格，那么该路径不能再次进入
+// 该格子。例如在下面的3×4的矩阵中包含一条字符串“bfce”的路径（路径中的字
+// 母用下划线标出）。但矩阵中不包含字符串“abfb”的路径，因为字符串的第一个
+// 字符b占据了矩阵中的第一行第二个格子之后，路径不能再次进入这个格子。
+// A B T G
+// C F C S
+// J D E H
+
+public class MatrixPath {
+  var board: [[Character]]
+  var word: [Character]
+  var rows: Int
+  var cols: Int
+  init(board: [[Character]], word: String) {
+    self.board = board
+    self.word = Array(word)
+    self.rows = board.count - 1
+    self.cols = board[0].count - 1
+  }
+  
+  public func check() -> Bool {
+    if board.isEmpty || word.isEmpty {
+      return false
+    }
+    // 列固定
+    for i in 0 ... rows {
+      for j in 0 ... cols {
+        if dsp(i, j, 0) {
+          return true
+        }
+      }
+    }
+    return false
+  }
+  
+  private func dsp(_ i: Int,
+                   _ j: Int,
+                   _ k: Int) -> Bool {
+    if i < 0 ||
+      j < 0 ||
+      i > rows ||
+      j > cols ||
+      board[i][j] != word[k] {
+      return false
+    }
+    
+    if k == word.count - 1 {
+      return true
+    }
+    
+    let tmp = board[i][j]
+    board[i][j] = "/"
+    let r = dsp(i+1, j, k+1) ||
+      dsp(i, j+1, k+1) ||
+      dsp(i - 1, j, k+1) ||
+      dsp(i, j - 1, k+1)
+    board[i][j] = tmp
+    return r
+  }
+  
+  class func make2D(source: String, rows: Int, cols: Int) -> [[Character]] {
+    var items: [[Character]] = Array(repeating: Array(repeating: "#", count: cols), count: rows)
+    var i = 0
+    var j = 0
+    for c in source {
+      if j < cols {
+        items[i][j] = c
+        j += 1
+      } else {
+        i += 1
+        items[i][0] = c
+        j = 1
+      }
+    }
+    return items
+  }
+}

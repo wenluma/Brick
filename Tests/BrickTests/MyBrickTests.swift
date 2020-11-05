@@ -509,4 +509,114 @@ final class MyBrickTests: XCTestCase {
     } while false
   }
   
+  func testMatrixPath() {
+    repeat {
+      let s = "ABTGCFCSJDEH"
+      let board = MatrixPath.make2D(source: s, rows: 3, cols: 4)
+      let word = "BFCE"
+      
+      let item = MatrixPath(board: board, word: word)
+      let r = item.check()
+      XCTAssertTrue(r, "failed r = \(r)")
+    } while false
+    
+    repeat {
+      let s = "ABCESFCSADEE"
+      let board = MatrixPath.make2D(source: s, rows: 3, cols: 4)
+      let word = "SEE"
+      
+      let item = MatrixPath(board: board, word: word)
+      let r = item.check()
+      XCTAssertTrue(r, "failed r = \(r)")
+    } while false
+    
+    repeat {
+      let s = "ABTGCFCSJDEH"
+      let board = MatrixPath.make2D(source: s, rows: 3, cols: 4)
+      let word = "ABFB"
+      
+      let item = MatrixPath(board: board, word: word)
+      let r = item.check()
+      XCTAssertFalse(r, "failed r = \(r)")
+    } while false
+    
+    repeat {
+      let s = "ABCEHJIGSFCSLOPQADEEMNOEADIDEJFMVCEIFGGS"
+      let board = MatrixPath.make2D(source: s, rows: 5, cols: 8)
+      let word = "SLHECCEIDEJFGGFIE"
+      
+      let item = MatrixPath(board: board, word: word)
+      let r = item.check()
+      XCTAssertTrue(r, "failed r = \(r)")
+    } while false
+    
+    repeat {
+      let s = "ABCEHJIGSFCSLOPQADEEMNOEADIDEJFMVCEIFGGS"
+      let board = MatrixPath.make2D(source: s, rows: 5, cols: 8)
+      let word = "SGGFIECVAASABCEHJIGQEM"
+      
+      let item = MatrixPath(board: board, word: word)
+      let r = item.check()
+      XCTAssertTrue(r, "failed r = \(r)")
+    } while false
+    
+    repeat {
+      let s = "ABCEHJIGSFCSLOPQADEEMNOEADIDEJFMVCEIFGGS"
+      let board = MatrixPath.make2D(source: s, rows: 5, cols: 8)
+      let word = "SGGFIECVAASABCEEJIGOEM"
+      
+      let item = MatrixPath(board: board, word: word)
+      let r = item.check()
+      XCTAssertFalse(r, "failed r = \(r)")
+    } while false
+    
+    repeat {
+      let s = "ABCEHJIGSFCSLOPQADEEMNOEADIDEJFMVCEIFGGS"
+      let board = MatrixPath.make2D(source: s, rows: 5, cols: 8)
+      let word = "SGGFIECVAASABCEHJIGQEMS"
+      
+      let item = MatrixPath(board: board, word: word)
+      let r = item.check()
+      XCTAssertFalse(r, "failed r = \(r)")
+    } while false
+    
+    repeat {
+      let s = "AAAAAAAAAAAA"
+      let board = MatrixPath.make2D(source: s, rows: 3, cols: 4)
+      let word = "AAAAAAAAAAAA"
+      
+      let item = MatrixPath(board: board, word: word)
+      let r = item.check()
+      XCTAssertTrue(r, "failed r = \(r)")
+    } while false
+    
+    repeat {
+      let s = "AAAAAAAAAAAA"
+      let board = MatrixPath.make2D(source: s, rows: 3, cols: 4)
+      let word = "AAAAAAAAAAAAA"
+      
+      let item = MatrixPath(board: board, word: word)
+      let r = item.check()
+      XCTAssertFalse(r, "failed r = \(r)")
+    } while false
+    
+    repeat {
+      let s = "A"
+      let board = MatrixPath.make2D(source: s, rows: 1, cols: 1)
+      let word = "A"
+      let item = MatrixPath(board: board, word: word)
+      let r = item.check()
+      XCTAssertTrue(r, "failed r = \(r)")
+    } while false
+    
+    repeat {
+      let s = "A"
+      let board = MatrixPath.make2D(source: s, rows: 1, cols: 1)
+      let word = "B"
+      let item = MatrixPath(board: board, word: word)
+      let r = item.check()
+      XCTAssertFalse(r, "failed r = \(r)")
+    } while false
+    
+  }
 }
