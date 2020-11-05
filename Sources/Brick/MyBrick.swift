@@ -618,3 +618,43 @@ extension MatrixPath {
   }
 }
 
+// 面试题13：机器人的运动范围
+// 题目：地上有一个m行n列的方格。一个机器人从坐标(0, 0)的格子开始移动，它
+// 每一次可以向左、右、上、下移动一格，但不能进入行坐标和列坐标的数位之和
+// 大于k的格子。例如，当k为18时，机器人能够进入方格(35, 37)，因为3+5+3+7=18。
+// 但它不能进入方格(35, 38)，因为3+5+3+8=19。请问该机器人能够到达多少个格子？
+public class RobotMoveRange {
+  private var visited: [[Bool]]
+  private let m: Int
+  private let n: Int
+  private let k: Int
+  init(_ k: Int, _ m: Int, _ n: Int) {
+    self.m = m
+    self.n = n
+    self.k = k
+    visited = Array(repeating: Array(repeating: false, count: n), count: m)
+  }
+ 
+  func move() -> Int {
+    return dfs(i: 0, j: 0)
+  }
+  
+  private func dfs(i: Int, j: Int) -> Int {
+    if i >= m || j >= n || visited[i][j] || (bitSum(i) + bitSum(j)) > k {
+      return 0
+    }
+    visited[i][j] = true
+    return 1 + dfs(i: i+1, j: j) + dfs(i: i, j: j+1)
+  }
+  
+  private func bitSum(_ s: Int) -> Int {
+    var current = s
+    var sum = 0
+    while current > 0 {
+      sum += current % 10
+      current = current / 10
+    }
+    return sum
+  }
+  
+}

@@ -619,4 +619,64 @@ final class MyBrickTests: XCTestCase {
     } while false
     
   }
+  
+  func testRobotMoveRange() {
+    repeat {
+      let item = RobotMoveRange(5, 10, 10)
+      let r = item.move()
+      XCTAssertEqual(r, 21, "failed r = \(r)")
+    } while false
+    
+    repeat {
+      let item = RobotMoveRange(15, 20, 20)
+      let r = item.move()
+      XCTAssertEqual(r, 359, "failed r = \(r)")
+    } while false
+
+
+    repeat {
+      let item = RobotMoveRange(10, 1, 100)
+      let r = item.move()
+      XCTAssertEqual(r, 29, "failed r = \(r)")
+    } while false
+
+
+    repeat {
+      let item = RobotMoveRange(10, 1, 10)
+      let r = item.move()
+      XCTAssertEqual(r, 10, "failed r = \(r)")
+    } while false
+
+    repeat {
+      let item = RobotMoveRange(15, 100, 1)
+      let r = item.move()
+      XCTAssertEqual(r, 79, "failed r = \(r)")
+    } while false
+
+    repeat {
+      let item = RobotMoveRange(15, 10, 1)
+      let r = item.move()
+      XCTAssertEqual(r, 10, "failed r = \(r)")
+    } while false
+
+    repeat {
+      let item = RobotMoveRange(15, 1, 1)
+      let r = item.move()
+      XCTAssertEqual(r, 1, "failed r = \(r)")
+    } while false
+
+    repeat {
+      let item = RobotMoveRange(0, 1, 1)
+      let r = item.move()
+      XCTAssertEqual(r, 1, "failed r = \(r)")
+    } while false
+
+    repeat {
+      let item = RobotMoveRange(-10, 10, 10)
+      let r = item.move()
+      XCTAssertEqual(r, 0, "failed r = \(r)")
+    } while false
+
+  }
+  
 }
