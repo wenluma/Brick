@@ -702,4 +702,75 @@ final class MyBrickTests: XCTestCase {
     } while false
     
   }
+  
+  func testBitCount() {
+    let item = BitCount()
+    repeat {
+      let r = item.number(9)
+      XCTAssertEqual(r, 2, "failed r = \(r)")
+    } while false
+    
+    
+    repeat {
+      let r = item.number(0)
+      XCTAssertEqual(r, 0, "failed r = \(r)")
+    } while false
+    
+    repeat {
+      let r = item.number(10)
+      XCTAssertEqual(r, 2, "failed r = \(r)")
+    } while false
+    
+    repeat {
+      let r = item.number(0x7FFFFFFF)
+      XCTAssertEqual(r, 31, "failed r = \(r)")
+    } while false
+    
+    repeat {
+      let r = item.number(0xFFFFFFFF)
+      XCTAssertEqual(r, 32, "failed r = \(r)")
+    } while false
+    
+    repeat {
+      let r = item.number(0x80000000)
+      XCTAssertEqual(r, 1, "failed r = \(r)")
+    } while false
+  }
+  
+  func testBitCount2() {
+    let item = BitCount2()
+    repeat {
+      let r = item.number(9)
+      XCTAssertEqual(r, 2, "failed r = \(r)")
+    } while false
+    
+    
+    repeat {
+      let r = item.number(0)
+      XCTAssertEqual(r, 0, "failed r = \(r)")
+    } while false
+    
+    repeat {
+      let r = item.number(10)
+      XCTAssertEqual(r, 2, "failed r = \(r)")
+    } while false
+    
+    repeat {
+      let r = item.number(0x7FFFFFFF)
+      XCTAssertEqual(r, 31, "failed r = \(r)")
+    } while false
+    
+    repeat {
+      let r = item.number(0xFFFFFFFF)
+      XCTAssertEqual(r, 32, "failed r = \(r)")
+    } while false
+    
+    repeat {
+      let r = item.number(0x80000000)
+      XCTAssertEqual(r, 1, "failed r = \(r)")
+    } while false
+  }
+  
+  
+  
 }
