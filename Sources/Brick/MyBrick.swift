@@ -514,3 +514,43 @@ public class Fibonacci2 {
     return fn_1
   }
 }
+
+// 面试题11：旋转数组的最小数字
+// 题目：把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。
+// 输入一个递增排序的数组的一个旋转，输出旋转数组的最小元素。例如数组
+// {3, 4, 5, 1, 2}为{1, 2, 3, 4, 5}的一个旋转，该数组的最小值为1。
+public class RotationArray {
+  func findMin(in list: [Int]) -> Int {
+    var left = 0
+    var right = list.count - 1
+    var middle = left
+    while list[left] >= list[right] {
+      if right - left == 1 {
+        middle = right
+        break
+      }
+      
+      let middle = (right + left) >> 1
+      if list[left] == list[middle] && list[right] == list[middle] {
+        return minInOrder(list, left, right)
+      }
+      
+      if list[middle] > list[left] {
+        left = middle
+      } else {
+        right = middle
+      }
+    }
+    return list[middle]
+  }
+  
+  private func minInOrder(_ source: [Int], _ start: Int , _ end: Int) -> Int {
+    var min = source[start]
+    for i in start ... end {
+      if min > source[i] {
+        min = source[i]
+      }
+    }
+    return min
+  }
+}

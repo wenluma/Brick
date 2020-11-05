@@ -464,5 +464,49 @@ final class MyBrickTests: XCTestCase {
     
   }
 
+  func testRotationArray() {
+    let item = RotationArray()
+    repeat {
+      let source = [3, 4, 5, 1, 2]
+      let r = item.findMin(in: source)
+      XCTAssertEqual(r, 1, "failed r = \(r)")
+    } while false
+    
+    repeat {
+      let source = [3, 4, 5, 5, 2, 2, 3]
+      let r = item.findMin(in: source)
+      XCTAssertEqual(r, 2, "failed r = \(r)")
+    } while false
+    
+    repeat {
+      let source = [3, 4, 5, 1, 1, 2]
+      let r = item.findMin(in: source)
+      XCTAssertEqual(r, 1, "failed r = \(r)")
+    } while false
+    
+    repeat {
+      let source = [3, 4, 5, 1, 2, 2]
+      let r = item.findMin(in: source)
+      XCTAssertEqual(r, 1, "failed r = \(r)")
+    } while false
+    
+    repeat {
+      let source = [1, 0, 1, 1, 1]
+      let r = item.findMin(in: source)
+      XCTAssertEqual(r, 0, "failed r = \(r)")
+    } while false
+    
+    repeat {
+      let source = [1, 2, 3, 4, 5]
+      let r = item.findMin(in: source)
+      XCTAssertEqual(r, 1, "failed r = \(r)")
+    } while false
+    
+    repeat {
+      let source = [1]
+      let r = item.findMin(in: source)
+      XCTAssertEqual(r, 1, "failed r = \(r)")
+    } while false
+  }
   
 }
