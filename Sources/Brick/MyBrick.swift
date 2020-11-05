@@ -568,24 +568,20 @@ public class RotationArray {
 
 public class MatrixPath {
   var board: [[Character]]
-  var word: [Character]
-  var rows: Int
-  var cols: Int
+  let word: [Character]
+  let rows: Int
+  let cols: Int
   init(board: [[Character]], word: String) {
     self.board = board
     self.word = Array(word)
-    self.rows = board.count - 1
-    self.cols = board[0].count - 1
+    rows = board.count
+    cols = board[0].count
   }
   
   public func check() -> Bool {
-    if board.isEmpty || word.isEmpty {
-      return false
-    }
-    // 列固定
-    for i in 0 ... rows {
-      for j in 0 ... cols {
-        if dsp(i, j, 0) {
+    for i in 0 ..< rows {
+      for j in 0 ..< cols {
+        if dfs(i, j, 0) {
           return true
         }
       }
@@ -593,45 +589,32 @@ public class MatrixPath {
     return false
   }
   
-  private func dsp(_ i: Int,
-                   _ j: Int,
-                   _ k: Int) -> Bool {
-    if i < 0 ||
-      j < 0 ||
-      i > rows ||
-      j > cols ||
-      board[i][j] != word[k] {
+  private func dfs(_ i: Int, _ j: Int, _ k: Int) -> Bool {
+    if i < 0 || i >= rows || j < 0 || j >= cols || board[i][j] != word[k] {
       return false
     }
-    
     if k == word.count - 1 {
       return true
     }
-    
     let tmp = board[i][j]
     board[i][j] = "/"
-    let r = dsp(i+1, j, k+1) ||
-      dsp(i, j+1, k+1) ||
-      dsp(i - 1, j, k+1) ||
-      dsp(i, j - 1, k+1)
+    let r = dfs(i+1, j, k+1) || dfs(i - 1, j, k+1) || dfs(i, j-1, k+1) || dfs(i, j+1, k+1)
     board[i][j] = tmp
     return r
   }
-  
+}
+
+extension MatrixPath {
   class func make2D(source: String, rows: Int, cols: Int) -> [[Character]] {
-    var items: [[Character]] = Array(repeating: Array(repeating: "#", count: cols), count: rows)
-    var i = 0
+    var items: [[Character]] = Array(repeating: Array(repeating:"#", count: cols), count: rows)
     var j = 0
     for c in source {
-      if j < cols {
-        items[i][j] = c
-        j += 1
-      } else {
-        i += 1
-        items[i][0] = c
-        j = 1
-      }
+      let col = j % cols
+      let row = j / cols
+      items[row][col] = c
+      j += 1
     }
     return items
   }
 }
+
