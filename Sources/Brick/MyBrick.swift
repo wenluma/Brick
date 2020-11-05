@@ -718,4 +718,30 @@ public class BitCount2 {
   }
 }
 
+// 面试题16：数值的整数次方
+// 题目：实现函数double Power(double base, int exponent)，求base的exponent
+// 次方。不得使用库函数，同时不需要考虑大数问题。
+public class MyPower {
+  func pow(_ base: Double, _ exponent: Int) throws ->  Double {
+    if base.isZero, exponent < 0 {
+      throw NSError(domain: "invald pow", code: 0, userInfo: nil)
+    }
+    
+    let absexp: UInt = UInt(abs(exponent))
+    let r = cal(base, absexp)
+    if exponent < 0 {
+      return 1.0 / r
+    }
+    return r
+  }
+  
+  private func cal(_ base: Double, _ exp: UInt) -> Double {
+    var r = 1.0
+    for _ in 0 ..< exp {
+      r = base * r
+    }
+    return r
+  }
+}
+
 

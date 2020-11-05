@@ -772,5 +772,42 @@ final class MyBrickTests: XCTestCase {
   }
   
   
+  func testMyPower() {
+    let item = MyPower()
+    repeat {
+      let r = try? item.pow(2,3)
+      XCTAssertEqual(r, 8, "failed r = \(r)")
+    } while false
+    
+    repeat {
+      let r = try? item.pow(-2,3)
+      XCTAssertEqual(r, -8, "failed r = \(r)")
+    } while false
+    
+    repeat {
+      let r = try? item.pow(2,-3)
+      XCTAssertEqual(r, 0.125, "failed r = \(r)")
+    } while false
+    
+    repeat {
+      let r = try? item.pow(2, 0)
+      XCTAssertEqual(r, 1, "failed r = \(r)")
+    } while false
+    
+    repeat {
+      let r = try? item.pow(0, 0)
+      XCTAssertEqual(r, 1, "failed r = \(r)")
+    } while false
+    
+    repeat {
+      let r = try? item.pow(0, 4)
+      XCTAssertEqual(r, 0, "failed r = \(r)")
+    } while false
+
+    repeat {
+      XCTAssertThrowsError(try item.pow(0,-4))
+    } while false
+    
+  }
   
 }
