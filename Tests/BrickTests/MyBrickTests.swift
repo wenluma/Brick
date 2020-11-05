@@ -679,4 +679,27 @@ final class MyBrickTests: XCTestCase {
 
   }
   
+  func testCutRope() {
+    let item = CutRope()
+    repeat {
+      let r = item.cut(2)
+      XCTAssertEqual(r, 1, "failed r = \(r)")
+    } while false
+    
+    repeat {
+      let r = item.cut(3)
+      XCTAssertEqual(r, 2, "failed r = \(r)")
+    } while false
+
+    repeat {
+      let r = item.cut(4)
+      XCTAssertEqual(r, 4, "failed r = \(r)")
+    } while false
+
+    repeat {
+      let r = item.cut(10)
+      XCTAssertEqual(r, 36, "failed r = \(r)")
+    } while false
+    
+  }
 }
