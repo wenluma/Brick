@@ -207,7 +207,8 @@ public class ReplaceBlank {
 // 面试题6：从尾到头打印链表
 // 题目：输入一个链表的头结点，从尾到头反过来打印出每个结点的值。 链表反转
 public class LKNode {
-  let value: Int
+  private let uuid = UUID()
+  var value: Int!
   var next: LKNode?
   init(_ value: Int, next: LKNode? = nil) {
     self.value = value
@@ -224,6 +225,17 @@ public class LKNode {
         head = head?.next
     }
     return dumpy.next
+  }
+  
+  // index head 后的个数，index = 1, node 之后，第一个
+  static func get(node: LKNode?, index: Int) -> LKNode? {
+    var i = 0
+    var current = node
+    while i < index {
+      current = current?.next
+      i += 1
+    }
+    return current
   }
   
   static func makeRandomLKNode(count: Int) -> LKNode? {
@@ -247,6 +259,13 @@ public class LKNode {
     }
     return items
   }
+}
+
+extension LKNode: Equatable {
+  public static func == (lhs: LKNode, rhs: LKNode) -> Bool {
+    return lhs.uuid == rhs.uuid
+  }
+
 }
 
 // 链表逆序输出
@@ -909,7 +928,36 @@ public class Permutations {
   }
 }
 
+// 面试题18（一）：在O(1)时间删除链表结点
+// 题目：给定单向链表的头指针和一个结点指针，定义一个函数在O(1)时间删除该
+// 结点。
+public class MDeleteNode {
+  public func delete(head: inout LKNode?, beDeleted: inout LKNode?) {
+    // 中间
+    if beDeleted?.next != nil {
+      let next = beDeleted?.next
+      beDeleted?.value = next?.value
+      beDeleted?.next = next?.next
+      print("中间：\(next?.value)")
+    } else if head == beDeleted {
+      let tmp = head?.next
+      head?.next = nil
+      // 头
+      head = tmp
+      print("头部：\(tmp?.value)")
 
+    } else {
+      // 尾巴
+      var current = head
+      while current?.next != beDeleted {
+        current = current?.next
+      }
+      current?.next = nil
+      print("尾部：\(current?.value)")
+
+    }
+  }
+}
 
 
 

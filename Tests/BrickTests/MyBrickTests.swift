@@ -856,8 +856,47 @@ final class MyBrickTests: XCTestCase {
   func testPermutations() {
     let item =  Permutations()
     repeat {
-      let res = item.permute([1,2,3])
+      _ = item.permute([1,2,3])
     } while false
+  }
+  
+  
+  func testMDeleteNode() {
+    let item = MDeleteNode()
+    repeat {
+      var head: LKNode? = nil
+      var deletedNode: LKNode? = nil
+      item.delete(head: &head, beDeleted: &deletedNode)
+      XCTAssertNil(head)
+    } while false
+    
+    repeat {
+      let list = [1,2,3]
+      var head = LKNode.makeLKNode(items: list)
+      var deletedNode: LKNode? = LKNode.get(node: head, index: 1) // 2
+      item.delete(head: &head, beDeleted: &deletedNode)
+      let result = LKNode.node2Array(node: head)
+      XCTAssertEqual(result, [1,3])
+    } while false
+    
+    repeat {
+      let list = [1,2,3]
+      var head = LKNode.makeLKNode(items: list)
+      var deletedNode: LKNode? = LKNode.get(node: head, index: 0) // 1
+      item.delete(head: &head, beDeleted: &deletedNode)
+      let result = LKNode.node2Array(node: head)
+      XCTAssertEqual(result, [2,3])
+    } while false
+
+    repeat {
+      let list = [1,2,3]
+      var head = LKNode.makeLKNode(items: list)
+      var deletedNode: LKNode? = LKNode.get(node: head, index: 2) // 3
+      item.delete(head: &head, beDeleted: &deletedNode)
+      let result = LKNode.node2Array(node: head)
+      XCTAssertEqual(result, [1,2])
+    } while false
+    
   }
   
   func teststride() {
