@@ -810,4 +810,54 @@ final class MyBrickTests: XCTestCase {
     
   }
   
+  func testMaxNDigit() {
+    let item = MaxNDigit()
+    
+    repeat {
+       XCTAssertThrowsError(try item.excute(n: 0))
+    } while false
+    
+    repeat {
+      try? item.excute(n: 1)
+    } while false
+    
+    repeat {
+       try? item.excute(n: 2)
+    } while false
+    
+    repeat {
+       try? item.excute(n: 4)
+    } while false
+    
+  }
+  
+  func testMaxNDigit2() {
+    let item = MaxNDigit2()
+    
+    repeat {
+       XCTAssertThrowsError(try item.excute(n: 0))
+    } while false
+    
+    repeat {
+      try? item.excute(n: 1)
+    } while false
+    
+    repeat {
+       try? item.excute(n: 2)
+    } while false
+    
+    repeat {
+       try? item.excute(n: 4)
+    } while false
+    
+  }
+ 
+  func teststride() {
+    // [from, to)
+    // [0, -1) -1
+    // [0, 1) +1
+    for i in stride(from: 0, to: -1, by: -1) {
+      print(i)
+    }
+  }
 }

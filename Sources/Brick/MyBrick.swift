@@ -744,4 +744,119 @@ public class MyPower {
   }
 }
 
+// 面试题17：打印1到最大的n位数
+// 题目：输入数字n，按顺序打印出从1最大的n位十进制数。比如输入3，则
+// 打印出1、2、3一直到最大的3位数即999。
+enum BrickError: Error {
+  case invaildInput(Int)
+}
+
+public class MaxNDigit {
+  func excute(n: Int) throws {
+    if n <= 0 {
+      throw BrickError.invaildInput(n)
+    }
+    
+    var items = Array<Int8>(repeating: 0, count: n)
+    while !increment(items: &items) {
+      printNumber(items: items)
+    }
+    print("===\n")
+  }
+  
+  private func printNumber(items: [Int8]) {
+    var isBegin0 = true
+    let len = items.count
+    var str = ""
+    for i in 0 ..< len {
+      if isBegin0 && items[i] != 0 {
+        isBegin0 = false
+      }
+      
+      if !isBegin0 {
+        str.append(String(items[i]))
+      }
+    }
+    print("\(str),  ")
+  }
+  
+  private func increment(items: inout [Int8]) -> Bool {
+    var isOverflow = false
+    var carray: Int8 = 0
+    let len = items.count
+    
+    var i = len - 1
+    while i >= 0 {
+      var nsum: Int8 = items[i] + carray
+      if i == len - 1 {
+        nsum += 1
+      }
+      
+      if nsum >= 10 {
+        if i == 0 {
+          isOverflow = true
+        } else {
+          nsum -= 10
+          carray = 1
+          items[i] = nsum
+        }
+      } else {
+        items[i] = nsum
+        break
+      }
+      i -= 1
+    }
+    
+    return isOverflow
+  }
+}
+
+public class MaxNDigit2 {
+  func excute(n: Int) throws {
+    if n <= 0 {
+      throw BrickError.invaildInput(n)
+    }
+    var items = Array<Int8>(repeating: 0, count: n)
+    
+    for i in 0 ... 9 {
+      items[0] = Int8(i)
+      recursively(items: &items, index: 0)
+    }
+    print("===\n")
+  }
+  
+  private func recursively(items: inout [Int8], index: Int) {
+    if index == items.count - 1 {
+      printNumber(items: items)
+      return
+    }
+    let range: ClosedRange<Int8> = 0 ... 9
+    for i in range {
+      items[index + 1] = i
+      recursively(items: &items, index: index + 1)
+    }
+  }
+  
+  private func printNumber(items: [Int8]) {
+    var isBegin0 = true
+    let len = items.count
+    var str = ""
+    for i in 0 ..< len {
+      if isBegin0 && items[i] != 0 {
+        isBegin0 = false
+      }
+      
+      if !isBegin0 {
+        str.append(String(items[i]))
+      }
+    }
+    if !str.isEmpty {
+      print("\(str),  ")
+    }
+  }
+}
+
+
+
+
 
