@@ -899,6 +899,44 @@ final class MyBrickTests: XCTestCase {
     
   }
   
+  func testMDeleteDupNode() {
+    let item = MDeleteDupNode()
+    repeat {
+      var head: LKNode? = nil
+      var deletedNode: LKNode? = nil
+      item.delete(head: &head)
+      XCTAssertNil(head)
+    } while false
+    
+    repeat {
+      let list = [1,1,3]
+      var head = LKNode.makeLKNode(items: list)
+      var deletedNode: LKNode? = LKNode.get(node: head, index: 1) // 2
+      item.delete(head: &head)
+      let result = LKNode.node2Array(node: head)
+      XCTAssertEqual(result, [1,3])
+    } while false
+    
+    repeat {
+      let list = [1,1,1]
+      var head = LKNode.makeLKNode(items: list)
+      var deletedNode: LKNode? = LKNode.get(node: head, index: 0) // 1
+      item.delete(head: &head)
+      let result = LKNode.node2Array(node: head)
+      XCTAssertEqual(result, [1])
+    } while false
+
+    repeat {
+      let list = [1,1,2,2,3,3,3]
+      var head = LKNode.makeLKNode(items: list)
+      var deletedNode: LKNode? = LKNode.get(node: head, index: 2) // 3
+      item.delete(head: &head)
+      let result = LKNode.node2Array(node: head)
+      XCTAssertEqual(result, [1,2,3])
+    } while false
+    
+  }
+  
   func teststride() {
     // [from, to)
     // [0, -1) -1

@@ -959,6 +959,24 @@ public class MDeleteNode {
   }
 }
 
+// 面试题18（二）：删除链表中重复的结点
+// 题目：在一个排序的链表中，如何删除重复的结点？例如，在图3.4（a）中重复
+// 结点被删除之后，链表如图3.4（b）所示。
+public class MDeleteDupNode {
+  public func delete(head: inout LKNode?) {
+    var current = head
+    while current != nil && current?.next != nil {
+      if current?.value == current?.next?.value {
+        var tmp = current?.next
+        current?.next = tmp?.next
+        tmp = nil
+      } else {
+        current = current?.next
+      }
+    }
+  }
+}
+
 
 
 
