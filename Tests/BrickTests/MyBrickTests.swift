@@ -937,6 +937,229 @@ final class MyBrickTests: XCTestCase {
     
   }
   
+  
+  func testRegularMatcher() {
+    let item = RegularMatcher()
+    
+    // "aaa", "ab*a*c*a", true);
+    repeat {
+      let s = "aaa"
+      let p = "ab*a*c*a"
+      let result = item.isMatch(s, p)
+      XCTAssertEqual(result, true)
+    } while false
+    
+    repeat {
+      let s = ""
+      let p = ""
+      let result = item.isMatch(s, p)
+      XCTAssertEqual(result, true)
+    } while false
+    
+    // "", ".*",
+    repeat {
+      let s = ""
+      let p = ".*"
+      let result = item.isMatch(s, p)
+      XCTAssertEqual(result, true)
+    } while false
+    
+    // "", ".", false);
+    repeat {
+      let s = ""
+      let p = "."
+      let result = item.isMatch(s, p)
+      XCTAssertEqual(result, false)
+    } while false
+    
+    
+    // "", "c*", true
+    repeat {
+      let s = ""
+      let p = "c*"
+      let result = item.isMatch(s, p)
+      XCTAssertEqual(result, true)
+    } while false
+    
+    // "a", ".*", true)
+    repeat {
+      let s = "a"
+      let p = ".*"
+      let result = item.isMatch(s, p)
+      XCTAssertEqual(result, true)
+    } while false
+    
+    // a", "a.", false);
+    repeat {
+      let s = "a"
+      let p = "a."
+      let result = item.isMatch(s, p)
+      XCTAssertEqual(result, false)
+    } while false
+    
+    // "a", "", false);
+    repeat {
+      let s = "a"
+      let p = ""
+      let result = item.isMatch(s, p)
+      XCTAssertEqual(result, false)
+    } while false
+    
+    // "a", ".", true);
+    repeat {
+      let s = "a"
+      let p = "."
+      let result = item.isMatch(s, p)
+      XCTAssertEqual(result, true)
+    } while false
+    
+    // "a", "ab*", true);
+    repeat {
+      let s = "a"
+      let p = "ab*"
+      let result = item.isMatch(s, p)
+      XCTAssertEqual(result, true)
+    } while false
+    
+    // "a", "ab*a", false);
+    repeat {
+      let s = "a"
+      let p = "ab*a"
+      let result = item.isMatch(s, p)
+      XCTAssertEqual(result, false)
+    } while false
+    
+    // "aa", "aa", true);
+    repeat {
+      let s = "aa"
+      let p = "aa"
+      let result = item.isMatch(s, p)
+      XCTAssertEqual(result, true)
+    } while false
+    
+    // "aa", "a*", true);
+    repeat {
+      let s = "aa"
+      let p = "a*"
+      let result = item.isMatch(s, p)
+      XCTAssertEqual(result, true)
+    } while false
+    
+    // "aa", ".*", true);
+    repeat {
+      let s = "aa"
+      let p = ".*"
+      let result = item.isMatch(s, p)
+      XCTAssertEqual(result, true)
+    } while false
+    
+//    "aa", ".", false);
+    repeat {
+      let s = "aa"
+      let p = "."
+      let result = item.isMatch(s, p)
+      XCTAssertEqual(result, false)
+    } while false
+    
+    // "ab", ".*", true);
+    repeat {
+      let s = "ab"
+      let p = ".*"
+      let result = item.isMatch(s, p)
+      XCTAssertEqual(result, true)
+    } while false
+    
+    // "aaa", "aa*", true);
+    repeat {
+      let s = "aaa"
+      let p = "aa*"
+      let result = item.isMatch(s, p)
+      XCTAssertEqual(result, true)
+    } while false
+    
+    // "aaa", "aa.a", false);
+    repeat {
+      let s = "aaa"
+      let p = "aa.a"
+      let result = item.isMatch(s, p)
+      XCTAssertEqual(result, false)
+    } while false
+    
+    // "aaa", ".a", false);
+    repeat {
+      let s = "aaa"
+      let p = ".a"
+      let result = item.isMatch(s, p)
+      XCTAssertEqual(result, false)
+    } while false
+    
+    // "aaa", "a*a", true);
+    repeat {
+      let s = "aaa"
+      let p = "a*a"
+      let result = item.isMatch(s, p)
+      XCTAssertEqual(result, true)
+    } while false
+    
+    // "aaa", "ab*a", false);
+    repeat {
+      let s = "aaa"
+      let p = "ab*a"
+      let result = item.isMatch(s, p)
+      XCTAssertEqual(result, false)
+    } while false
+    
+    // "aaa", "ab*ac*a", true);
+    repeat {
+      let s = "aaa"
+      let p = "ab*ac*a"
+      let result = item.isMatch(s, p)
+      XCTAssertEqual(result, true)
+    } while false
+
+    // "aab", "c*a*b", true);
+    repeat {
+      let s = "aab"
+      let p = "c*a*b"
+      let result = item.isMatch(s, p)
+      XCTAssertEqual(result, true)
+    } while false
+    
+//    "aaca", "ab*a*c*a", true);
+    repeat {
+      let s = "aaca"
+      let p = "ab*a*c*a"
+      let result = item.isMatch(s, p)
+      XCTAssertEqual(result, true)
+    } while false
+    
+//    Test("Test28", "aaba", "ab*a*c*a", false);
+    repeat {
+      let s = "aaba"
+      let p = "ab*a*c*a"
+      let result = item.isMatch(s, p)
+      XCTAssertEqual(result, false)
+    } while false
+    
+//    Test("Test29", "bbbba", ".*a*a", true);
+    repeat {
+      let s = "bbbba"
+      let p = ".*a*a"
+      let result = item.isMatch(s, p)
+      XCTAssertEqual(result, true)
+    } while false
+    
+//    Test("Test30", "bcbbabab", ".*a*a", false);
+    repeat {
+      let s = "bcbbabab"
+      let p = ".*a*a"
+      let result = item.isMatch(s, p)
+      XCTAssertEqual(result, false)
+    } while false
+    
+    
+  }
+  
   func teststride() {
     // [from, to)
     // [0, -1) -1
