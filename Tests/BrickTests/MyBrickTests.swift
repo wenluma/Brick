@@ -852,6 +852,14 @@ final class MyBrickTests: XCTestCase {
     
   }
  
+  
+  func testPermutations() {
+    let item =  Permutations()
+    repeat {
+      let res = item.permute([1,2,3])
+    } while false
+  }
+  
   func teststride() {
     // [from, to)
     // [0, -1) -1
