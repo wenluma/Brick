@@ -261,11 +261,15 @@ public class LKNode {
   }
 }
 
-extension LKNode: Equatable {
+extension LKNode: Equatable, Hashable {
   public static func == (lhs: LKNode, rhs: LKNode) -> Bool {
     return lhs.uuid == rhs.uuid
   }
 
+  public func hash(into hasher: inout Hasher) {
+    hasher.combine(uuid.hashValue)
+  }
+  
 }
 
 // 链表逆序输出
@@ -1086,3 +1090,76 @@ public class TailKthNode {
     return kNode!.value
   }
 }
+
+// 面试题23：链表中环的入口结点
+// 题目：一个链表中包含环，如何找出环的入口结点？例如，在图3.8的链表中，
+// 环的入口结点是结点3。
+public class LinkCircleLoop {
+  public func entryNodeFor(_ node: LKNode?) -> LKNode? {
+    let meetingNode: LKNode? = findMeetingNode(node)
+    if meetingNode == nil {
+      return nil
+    }
+    
+    // count in loop
+    var i = 1
+    var current = meetingNode
+    while current?.next != meetingNode  {
+      current = current?.next
+      i += 1
+    }
+    
+    // 移动环的内节点次数
+    var p1 = node
+    for _ in 0 ..< i {
+      p1 = p1?.next
+    }
+    
+    // 从头开始移动，与p1 相交点，就是入口点
+    var p2 = node
+    while p1 != nil, p2 != nil, p1 != p2 {
+      p1 = p1?.next
+      p2 = p2?.next
+    }
+    return p1
+  }
+  
+  private func findMeetingNode(_ node: LKNode?) -> LKNode? {
+    if node == nil {
+      return nil
+    }
+    var slow = node
+    var fast = node?.next
+    while slow != nil, fast != nil {
+      if slow == fast {
+        return slow
+      }
+      slow = slow?.next
+      fast = fast?.next
+      if fast != nil {
+        fast = fast?.next
+      }
+    }
+    return nil
+  }
+}
+
+// 通过set 来实现，第一次出现重复的，就是入口点
+public class LinkCircleLoop2 {
+  public func entryNodeFor(_ node: LKNode?) -> LKNode? {
+    var set: Set<LKNode?> = Set()
+    var current = node
+    var meetingNode: LKNode? = nil
+    while current != nil {
+      if set.contains(current) {
+        meetingNode = current
+        break
+      } else {
+        set.insert(current)
+      }
+      current = current?.next
+    }
+    return meetingNode
+  }
+}
+

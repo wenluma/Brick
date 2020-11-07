@@ -1107,6 +1107,88 @@ final class MyBrickTests: XCTestCase {
     
   }
   
+  func testLinkCircleLoop() {
+    let item = LinkCircleLoop()
+    repeat {
+      let list = [1,2,3,4]
+      let node = LKNode.makeLKNode(items: list)
+      let r = item.entryNodeFor(node)
+      XCTAssertNil(r)
+    } while false
+    
+    repeat {
+      let list = [1,2,3,4]
+      let node = LKNode.makeLKNode(items: list)
+      let n4 = LKNode.get(node: node, index: 3)
+      let n2 = LKNode.get(node: node, index: 1)
+      n4?.next = n2
+      let r = item.entryNodeFor(node)
+      XCTAssertEqual(r, n2)
+    } while false
+
+    repeat {
+      let list = [1,2,3,4]
+      let node = LKNode.makeLKNode(items: list)
+      let n4 = LKNode.get(node: node, index: 3)
+      let n1 = LKNode.get(node: node, index: 0)
+      n4?.next = n1
+      let r = item.entryNodeFor(node)
+      XCTAssertEqual(r, n1)
+    } while false
+    
+    repeat {
+      let list = [1,2,3,4]
+      let node = LKNode.makeLKNode(items: list)
+      let n4 = LKNode.get(node: node, index: 3)
+      n4?.next = n4
+      let r = item.entryNodeFor(node)
+      XCTAssertEqual(r, n4)
+    } while false
+
+    
+  }
+  
+  func testLinkCircleLoop2() {
+    let item = LinkCircleLoop2()
+    repeat {
+      let list = [1,2,3,4]
+      let node = LKNode.makeLKNode(items: list)
+      let r = item.entryNodeFor(node)
+      XCTAssertNil(r)
+    } while false
+    
+    repeat {
+      let list = [1,2,3,4]
+      let node = LKNode.makeLKNode(items: list)
+      let n4 = LKNode.get(node: node, index: 3)
+      let n2 = LKNode.get(node: node, index: 1)
+      n4?.next = n2
+      let r = item.entryNodeFor(node)
+      XCTAssertEqual(r, n2)
+    } while false
+
+    repeat {
+      let list = [1,2,3,4]
+      let node = LKNode.makeLKNode(items: list)
+      let n4 = LKNode.get(node: node, index: 3)
+      let n1 = LKNode.get(node: node, index: 0)
+      n4?.next = n1
+      let r = item.entryNodeFor(node)
+      XCTAssertEqual(r, n1)
+    } while false
+    
+    repeat {
+      let list = [1,2,3,4]
+      let node = LKNode.makeLKNode(items: list)
+      let n4 = LKNode.get(node: node, index: 3)
+      n4?.next = n4
+      let r = item.entryNodeFor(node)
+      XCTAssertEqual(r, n4)
+    } while false
+
+    
+  }
+  
   func teststride() {
     // [from, to)
     // [0, -1) -1
