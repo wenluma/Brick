@@ -1194,3 +1194,40 @@ public class MergeLink {
     return dumy.next
   }
 }
+
+// 面试题26：树的子结构
+// 题目：输入两棵二叉树A和B，判断B是不是A的子结构。
+public class MySubTree {
+  public func hasSub(_ r1: BTTree?, _ r2: BTTree?) -> Bool {
+    var result = false
+    if r1 != nil, r2 != nil {
+      if r1?.value == r2?.value {
+        result = tree1HasTree2(r1, r2)
+      }
+      if !result {
+        result = hasSub(r1?.left, r2)
+      }
+      
+      if !result {
+        result = hasSub(r1?.right, r2)
+      }
+    }
+    return result
+  }
+  
+  private func tree1HasTree2(_ r1: BTTree?, _ r2: BTTree?) -> Bool {
+    if r2 == nil {
+      return true
+    }
+    if r1 == nil {
+      return false
+    }
+    
+    if r1?.value != r2?.value {
+      return false
+    }
+    
+    return tree1HasTree2(r1?.left, r2?.left) &&  tree1HasTree2(r1?.right, r2?.right)
+  }
+  
+}

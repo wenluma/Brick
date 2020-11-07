@@ -1257,6 +1257,219 @@ final class MyBrickTests: XCTestCase {
     } while false
   }
   
+  
+  func testMySubTree() {
+    let item = MySubTree()
+    repeat {
+      // 树中结点含有分叉，树B是树A的子结构
+      //                  8                8
+      //              /       \           / \
+      //             8         7         9   2
+      //           /   \
+      //          9     2
+      //               / \
+      //              4   7
+      
+      let pNodeA1 = BTTree(value: 8)
+      let pNodeA2 = BTTree(value: 8)
+      let pNodeA3 = BTTree(value: 7)
+      let pNodeA4 = BTTree(value: 9)
+      let pNodeA5 = BTTree(value: 2)
+      let pNodeA6 = BTTree(value: 4)
+      let pNodeA7 = BTTree(value: 7)
+      BTTree.connect(parent: pNodeA1, left: pNodeA2, right: pNodeA3)
+      BTTree.connect(parent: pNodeA2, left: pNodeA4, right: pNodeA5)
+      BTTree.connect(parent: pNodeA5, left: pNodeA6, right: pNodeA7)
+      let pNodeB1 = BTTree(value: 8)
+      let pNodeB2 = BTTree(value: 9)
+      let pNodeB3 = BTTree(value: 2)
+      BTTree.connect(parent: pNodeB1, left: pNodeB2, right: pNodeB3)
+      let result: Bool = item.hasSub(pNodeA1, pNodeB1)
+      XCTAssert(result ==  true)
+
+    } while false
+    
+    repeat {
+      // 树中结点含有分叉，树B不是树A的子结构
+      //                  8                8
+      //              /       \           / \
+      //             8         7         9   2
+      //           /   \
+      //          9     3
+      //               / \
+      //              4   7
+      
+      let pNodeA1 = BTTree(value: 8)
+      let pNodeA2 = BTTree(value: 8)
+      let pNodeA3 = BTTree(value: 7)
+      let pNodeA4 = BTTree(value: 9)
+      let pNodeA5 = BTTree(value: 3)
+      let pNodeA6 = BTTree(value: 4)
+      let pNodeA7 = BTTree(value: 7)
+      BTTree.connect(parent: pNodeA1, left: pNodeA2, right: pNodeA3)
+      BTTree.connect(parent: pNodeA2, left: pNodeA4, right: pNodeA5)
+      BTTree.connect(parent: pNodeA5, left: pNodeA6, right: pNodeA7)
+      let pNodeB1 = BTTree(value: 8)
+      let pNodeB2 = BTTree(value: 9)
+      let pNodeB3 = BTTree(value: 2)
+      BTTree.connect(parent: pNodeB1, left: pNodeB2, right: pNodeB3)
+      let result: Bool = item.hasSub(pNodeA1, pNodeB1)
+      XCTAssert(result ==  false)
+    } while false
+    
+    repeat {
+      // 树中结点只有左子结点，树B是树A的子结构
+      //                8                  8
+      //              /                   /
+      //             8                   9
+      //           /                    /
+      //          9                    2
+      //         /
+      //        2
+      //       /
+      //      5
+      let pNodeA1 = BTTree(value: 8)
+      let pNodeA2 = BTTree(value: 8)
+      let pNodeA3 = BTTree(value: 9)
+      let pNodeA4 = BTTree(value: 2)
+      let pNodeA5 = BTTree(value: 5)
+      BTTree.connect(parent: pNodeA1, left: pNodeA2, right: nil)
+      BTTree.connect(parent: pNodeA2, left: pNodeA3, right: nil)
+      BTTree.connect(parent: pNodeA3, left: pNodeA4, right: nil)
+      BTTree.connect(parent: pNodeA4, left: pNodeA5, right: nil)
+      let pNodeB1 = BTTree(value: 8)
+      let pNodeB2 = BTTree(value: 9)
+      let pNodeB3 = BTTree(value: 2)
+      BTTree.connect(parent: pNodeB1, left: pNodeB2, right: nil)
+      BTTree.connect(parent: pNodeB2, left: pNodeB3, right: nil)
+      let result: Bool = item.hasSub(pNodeA1, pNodeB1)
+      XCTAssert(result ==  true)
+      
+    } while false
+    
+    repeat {
+      // 树中结点只有左子结点，树B不是树A的子结构
+      //                8                  8
+      //              /                   /
+      //             8                   9
+      //           /                    /
+      //          9                    3
+      //         /
+      //        2
+      //       /
+      //      5
+      let pNodeA1 = BTTree(value: 8)
+      let pNodeA2 = BTTree(value: 8)
+      let pNodeA3 = BTTree(value: 9)
+      let pNodeA4 = BTTree(value: 2)
+      let pNodeA5 = BTTree(value: 5)
+      BTTree.connect(parent: pNodeA1, left: pNodeA2, right: nil)
+      BTTree.connect(parent: pNodeA2, left: pNodeA3, right: nil)
+      BTTree.connect(parent: pNodeA3, left: pNodeA4, right: nil)
+      BTTree.connect(parent: pNodeA4, left: pNodeA5, right: nil)
+      let pNodeB1 = BTTree(value: 8)
+      let pNodeB2 = BTTree(value: 9)
+      let pNodeB3 = BTTree(value: 3)
+      BTTree.connect(parent: pNodeB1, left: pNodeB2, right: nil)
+      BTTree.connect(parent: pNodeB2, left: pNodeB3, right: nil)
+      let result: Bool = item.hasSub(pNodeA1, pNodeB1)
+      XCTAssert(result ==  false)
+    } while false
+    
+    repeat {
+      // 树中结点只有右子结点，树B是树A的子结构
+      //       8                   8
+      //        \                   \
+      //         8                   9
+      //          \                   \
+      //           9                   2
+      //            \
+      //             2
+      //              \
+      //               5
+      let pNodeA1 = BTTree(value: 8)
+      let pNodeA2 = BTTree(value: 8)
+      let pNodeA3 = BTTree(value: 9)
+      let pNodeA4 = BTTree(value: 2)
+      let pNodeA5 = BTTree(value: 5)
+      BTTree.connect(parent: pNodeA1, left: nil, right: pNodeA2)
+      BTTree.connect(parent: pNodeA2, left: nil, right: pNodeA3)
+      BTTree.connect(parent: pNodeA3, left: nil, right: pNodeA4)
+      BTTree.connect(parent: pNodeA4, left: nil, right: pNodeA5)
+      let pNodeB1 = BTTree(value: 8)
+      let pNodeB2 = BTTree(value: 9)
+      let pNodeB3 = BTTree(value: 2)
+      BTTree.connect(parent: pNodeB1, left: nil, right: pNodeB2)
+      BTTree.connect(parent: pNodeB2, left: nil, right: pNodeB3)
+      let result: Bool = item.hasSub(pNodeA1, pNodeB1)
+      XCTAssert(result ==  true)
+
+    } while false
+    
+    repeat {
+      // 树A中结点只有右子结点，树B不是树A的子结构
+      //       8                   8
+      //        \                   \
+      //         8                   9
+      //          \                 / \
+      //           9               3   2
+      //            \
+      //             2
+      //              \
+      //               5
+      let pNodeA1 = BTTree(value: 8)
+      let pNodeA2 = BTTree(value: 8)
+      let pNodeA3 = BTTree(value: 9)
+      let pNodeA4 = BTTree(value: 2)
+      let pNodeA5 = BTTree(value: 5)
+      BTTree.connect(parent: pNodeA1, left: nil, right: pNodeA2)
+      BTTree.connect(parent: pNodeA2, left: nil, right: pNodeA3)
+      BTTree.connect(parent: pNodeA3, left: nil, right: pNodeA4)
+      BTTree.connect(parent: pNodeA4, left: nil, right: pNodeA5)
+      let pNodeB1 = BTTree(value: 8)
+      let pNodeB2 = BTTree(value: 9)
+      let pNodeB3 = BTTree(value: 2)
+      BTTree.connect(parent: pNodeB1, left: nil, right: pNodeB2)
+      BTTree.connect(parent: pNodeB2, left: nil, right: pNodeB3)
+      let result: Bool = item.hasSub(pNodeA1, pNodeB1)
+      XCTAssert(result ==  true)
+    } while false
+    
+    repeat {
+      // 树A为空树
+
+      let pNodeB1 = BTTree(value: 8)
+      let pNodeB2 = BTTree(value: 9)
+      let pNodeB3 = BTTree(value: 3)
+      let pNodeB4 = BTTree(value: 2)
+      BTTree.connect(parent: pNodeB1, left: nil, right: pNodeB2)
+      BTTree.connect(parent: pNodeB2, left: pNodeB3, right: pNodeB4)
+      let result: Bool = item.hasSub(nil, pNodeB1)
+      XCTAssert(result ==  false)
+    } while false
+    
+    repeat {
+      // 树B为空树
+      let pNodeA1 = BTTree(value: 8)
+      let pNodeA2 = BTTree(value: 9)
+      let pNodeA3 = BTTree(value: 3)
+      let pNodeA4 = BTTree(value: 2)
+      BTTree.connect(parent: pNodeA1, left: nil, right: pNodeA2)
+      BTTree.connect(parent: pNodeA2, left: pNodeA3, right: pNodeA4)
+      let result: Bool = item.hasSub(pNodeA1, nil)
+      XCTAssert(result ==  false)
+
+    } while false
+    
+    repeat {
+      // 树A, B为空树
+      let result: Bool = item.hasSub(nil, nil)
+      XCTAssert(result ==  false)
+    } while false
+    
+  }
+  
+  
   func teststride() {
     // [from, to)
     // [0, -1) -1
