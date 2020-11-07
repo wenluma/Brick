@@ -977,7 +977,50 @@ public class MDeleteDupNode {
   }
 }
 
+// 面试题20：表示数值的字符串
+// 题目：请实现一个函数用来判断字符串是否表示数值（包括整数和小数）。例如，
+// 字符串“+100”、“5e2”、“-123”、“3.1416”及“-1E-16”都表示数值，但“12e”、
+// “1a3.14”、“1.2.3”、“+-5”及“12e+5.4”都不是
 
+public class MyNumeric {
+  public func isNumberic(_ s: String) -> Bool {
+    if s.isEmpty {
+      return false
+    }
+    let sc = Array(s)
+    var i = 0
+    var numeric: Bool = scanInteger(sc, &i)
+    if i < sc.count,  sc[i] == "." {
+      i += 1
+      numeric = scanUnsignedInteger(sc, &i) || numeric
+    }
+    
+    if i < sc.count, sc[i] == "e" || sc[i] == "E" {
+      i += 1
+      numeric = numeric && scanInteger(sc, &i)
+    }
+    
+    return numeric && i == sc.count
+  }
+  
+  
+  private func scanInteger(_ s: [Character], _ i: inout Int) -> Bool {
+    
+    if i < s.count,  s[i] == "+" || s[i] == "-" {
+      i += 1
+    }
+    return scanUnsignedInteger(s, &i)
+  }
+  
+  private func scanUnsignedInteger(_ s: [Character], _ i: inout Int) -> Bool {
+    let start = i
+    while i < s.count, s[i] <= "9" && s[i] >= "0" {
+      i += 1
+    }
+    return i > start
+  }
+
+}
 
 
 

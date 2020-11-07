@@ -937,6 +937,105 @@ final class MyBrickTests: XCTestCase {
     
   }
   
+  func testMyNumeric() {
+    let item = MyNumeric()
+    repeat {
+      let r = item.isNumberic("100")
+      XCTAssert(r == true)
+    } while false
+
+    repeat {
+      let r = item.isNumberic("123.45e+6")
+      XCTAssert(r == true)
+    } while false
+
+    repeat {
+      let r = item.isNumberic("+500")
+      XCTAssert(r == true)
+    } while false
+
+    repeat {
+      let r = item.isNumberic("5e2")
+      XCTAssert(r == true)
+    } while false
+
+    repeat {
+      let r = item.isNumberic("3.1416")
+      XCTAssert(r == true)
+    } while false
+
+    repeat {
+      let r = item.isNumberic("600.")
+      XCTAssert(r == true)
+    } while false
+
+    repeat {
+      let r = item.isNumberic("-.123")
+      XCTAssert(r == true)
+    } while false
+
+    repeat {
+      let r = item.isNumberic("-1E-16")
+      XCTAssert(r == true)
+    } while false
+
+    repeat {
+      let r = item.isNumberic("1.79769313486232E+308")
+      XCTAssert(r == true)
+    } while false
+
+    repeat {
+      let r = item.isNumberic("12e")
+      XCTAssert(r == false)
+    } while false
+
+    repeat {
+      let r = item.isNumberic("1a3.14")
+      XCTAssert(r == false)
+    } while false
+
+    repeat {
+      let r = item.isNumberic("1+23")
+      XCTAssert(r == false)
+    } while false
+
+    repeat {
+      let r = item.isNumberic("1.2.3")
+      XCTAssert(r == false)
+    } while false
+
+    repeat {
+      let r = item.isNumberic("+-5")
+      XCTAssert(r == false)
+    } while false
+
+    repeat {
+      let r = item.isNumberic("12e+5.4")
+      XCTAssert(r == false)
+    } while false
+
+    repeat {
+      let r = item.isNumberic(".")
+      XCTAssert(r == false)
+    } while false
+
+    repeat {
+      let r = item.isNumberic(".e1")
+      XCTAssert(r == false)
+    } while false
+
+    repeat {
+      let r = item.isNumberic("e1")
+      XCTAssert(r == false)
+    } while false
+
+    repeat {
+      let r = item.isNumberic("+.")
+      XCTAssert(r == false)
+    } while false
+
+  }
+  
   func teststride() {
     // [from, to)
     // [0, -1) -1
