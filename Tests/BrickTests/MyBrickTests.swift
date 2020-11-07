@@ -1189,6 +1189,74 @@ final class MyBrickTests: XCTestCase {
     
   }
   
+  func testMergeLink() {
+    let item = MergeLink()
+    repeat {
+      let l1 = [1,3,5]
+      let l2 = [2,4,6]
+      let n1 = LKNode.makeLKNode(items: l1)
+      let n2 = LKNode.makeLKNode(items: l2)
+      
+      let node: LKNode? = item.merge(n1, n2)
+      let result = LKNode.node2Array(node: node)
+      XCTAssertEqual(result, [1,2,3,4,5,6])
+    } while false
+    
+    repeat {
+      let l1 = [1,3,5]
+      let l2 = [1,3,5]
+      let n1 = LKNode.makeLKNode(items: l1)
+      let n2 = LKNode.makeLKNode(items: l2)
+      
+      let node: LKNode? = item.merge(n1, n2)
+      let result = LKNode.node2Array(node: node)
+      XCTAssertEqual(result, [1,1,3,3,5,5])
+    } while false
+    
+    repeat {
+      let l1 = [1]
+      let l2 = [2]
+      let n1 = LKNode.makeLKNode(items: l1)
+      let n2 = LKNode.makeLKNode(items: l2)
+      
+      let node: LKNode? = item.merge(n1, n2)
+      let result = LKNode.node2Array(node: node)
+      XCTAssertEqual(result, [1,2])
+    } while false
+    
+    repeat {
+      let l1 = [Int]()
+      let l2 = [1,2,3]
+      let n1 = LKNode.makeLKNode(items: l1)
+      let n2 = LKNode.makeLKNode(items: l2)
+      
+      let node: LKNode? = item.merge(n1, n2)
+      let result = LKNode.node2Array(node: node)
+      XCTAssertEqual(result, [1,2,3])
+    } while false
+    
+    repeat {
+      let l1 = [1,2,3]
+      let l2 = [Int]()
+      let n1 = LKNode.makeLKNode(items: l1)
+      let n2 = LKNode.makeLKNode(items: l2)
+      
+      let node: LKNode? = item.merge(n1, n2)
+      let result = LKNode.node2Array(node: node)
+      XCTAssertEqual(result, [1,2,3])
+    } while false
+    
+    repeat {
+      let l1 = [Int]()
+      let l2 = [Int]()
+      let n1 = LKNode.makeLKNode(items: l1)
+      let n2 = LKNode.makeLKNode(items: l2)
+      
+      let node: LKNode? = item.merge(n1, n2)
+      XCTAssertNil(node)
+    } while false
+  }
+  
   func teststride() {
     // [from, to)
     // [0, -1) -1
