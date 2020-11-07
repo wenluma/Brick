@@ -1064,6 +1064,49 @@ final class MyBrickTests: XCTestCase {
     
   }
   
+  func testTailKthNode() {
+    let item = TailKthNode()
+    repeat {
+      let list = [1,2,3,4]
+      let node = LKNode.makeLKNode(items: list)
+      let r = try? item.find(node, 1)
+      XCTAssertEqual(r, 4)
+    } while false
+    
+    repeat {
+      let list = [1,2,3,4]
+      let node = LKNode.makeLKNode(items: list)
+      XCTAssertThrowsError(try item.find(node, 10))
+    } while false
+    
+    repeat {
+      let list = [1,2,3,4]
+      let node = LKNode.makeLKNode(items: list)
+      XCTAssertThrowsError(try item.find(node, 0))
+    } while false
+    
+    repeat {
+      let list = [1,2,3,4]
+      let node = LKNode.makeLKNode(items: list)
+      let r = try? item.find(node, 4)
+      XCTAssertEqual(r, 1)
+    } while false
+    
+    repeat {
+      let list = [1,2,3,4]
+      let node = LKNode.makeLKNode(items: list)
+      XCTAssertThrowsError(try item.find(node, 5))
+    } while false
+    
+    repeat {
+      let list = [Int]()
+      let node = LKNode.makeLKNode(items: list)
+      XCTAssertThrowsError(try item.find(node, 0))
+    } while false
+
+    
+  }
+  
   func teststride() {
     // [from, to)
     // [0, -1) -1

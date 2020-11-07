@@ -767,7 +767,12 @@ public class MyPower {
 // 题目：输入数字n，按顺序打印出从1最大的n位十进制数。比如输入3，则
 // 打印出1、2、3一直到最大的3位数即999。
 enum BrickError: Error {
+  // 无效输入
   case invaildInput(Int)
+  // 无效节点 nil
+  case invaildNode
+  // 超限制
+  case rangeOut(Int)
 }
 
 public class MaxNDigit {
@@ -1048,4 +1053,36 @@ public class RecordOddEven {
   }
 }
 
+// 面试题22：链表中倒数第k个结点
+// 题目：输入一个链表，输出该链表中倒数第k个结点。为了符合大多数人的习惯，
+// 本题从1开始计数，即链表的尾结点是倒数第1个结点。例如一个链表有6个结点，
+// 从头结点开始它们的值依次是1、2、3、4、5、6。这个链表的倒数第3个结点是
+// 值为4的结点。
 
+public class TailKthNode {
+  public func find(_ node: LKNode?, _ kth: Int) throws -> Int {
+    if node == nil {
+      throw BrickError.invaildInput(kth)
+    }
+    if kth <= 0 {
+      throw BrickError.invaildInput(kth)
+    }
+    var current = node
+    var kNode: LKNode? = node
+    var i = kth - 1
+    while i >= 0, current != nil {
+      current = current?.next
+      i -= 1
+    }
+    if i >= 0 {
+      throw BrickError.rangeOut(kth)
+    }
+    
+    while current != nil {
+      current = current?.next
+      kNode = kNode?.next
+    }
+    
+    return kNode!.value
+  }
+}
