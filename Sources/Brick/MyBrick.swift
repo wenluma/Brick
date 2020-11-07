@@ -1022,5 +1022,30 @@ public class MyNumeric {
 
 }
 
+// 面试题21：调整数组顺序使奇数位于偶数前面
+// 题目：输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有
+// 奇数位于数组的前半部分，所有偶数位于数组的后半部分。
+public class RecordOddEven {
+  public func record(_ items: inout [Int]) {
+    var start = 0
+    var end = items.count - 1
+    while start < end {
+      while start < end, items[start] & 0x1 == 0x1 {
+        start += 1
+      }
+      
+      while start < end, items[end] & 0x1 == 0 {
+        end -= 1
+      }
+      
+      if start < end {
+//        items.swapAt(start, end)
+        let tmp = items[start]
+        items[start] = items[end]
+        items[end] = tmp
+      }
+    }
+  }
+}
 
 

@@ -1036,6 +1036,34 @@ final class MyBrickTests: XCTestCase {
 
   }
   
+  func testRecordOddEven() {
+    let item = RecordOddEven()
+    repeat {
+      var list = [1, 2, 3, 4, 5, 6, 7]
+      item.record(&list)
+      XCTAssert(list == [1,7,3,5,4,6,2])
+    } while false
+    
+    repeat {
+      var list = [2, 4, 6, 1, 3, 5, 7]
+      item.record(&list)
+      XCTAssert(list == [7,5,3,1,6,4,2])
+    } while false
+    
+    repeat {
+      var list = [1, 3, 5, 7, 2, 4, 6]
+      item.record(&list)
+      XCTAssert(list == [1, 3, 5, 7, 2, 4, 6])
+    } while false
+    
+    repeat {
+      var list = [1]
+      item.record(&list)
+      XCTAssert(list == [1])
+    } while false
+    
+  }
+  
   func teststride() {
     // [from, to)
     // [0, -1) -1
