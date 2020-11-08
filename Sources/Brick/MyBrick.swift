@@ -1333,3 +1333,83 @@ public class MySymmetricalTree {
     return isSymmetricalTree(l?.left, r?.right) && isSymmetricalTree(l?.right, r?.left)
   }
 }
+
+public class MatrixInt {
+  static func make(rows: Int, cols: Int, start: Int) -> [[Int]] {
+    var res = [[Int]]()
+    var k = start
+    for _ in 0 ..< rows {
+      var path = [Int]()
+      for _ in 0 ..< cols {
+        path.append(k)
+        k += 1
+      }
+      res.append(path)
+    }
+    return res
+  }
+}
+
+// 面试题29：顺时针打印矩阵
+// 题目：输入一个矩阵，按照从外向里以顺时针的顺序依次打印出每一个数字。
+public class MyMatrixClockwisely {
+  public func logMatrixClockwisely(_ items: [[Int]]) -> [Int] {
+    var path = [Int]()
+
+    if items.isEmpty {
+      return path
+    }
+    let rows = items.count
+    let cols = items[0].count
+    var start = 0
+    while rows > (start << 1) , cols > (start << 1) {
+      clockwisely(items, rows, cols, start, &path)
+      start += 1
+    }
+    
+    return path
+  }
+  
+  private func clockwisely(_ items: [[Int]],
+                           _ rows: Int,
+                           _ cols: Int,
+                           _ start: Int,
+                           _ path: inout [Int]) {
+    let x = cols - 1 - start
+    let y = rows - 1 - start
+    
+    // 左 -》 右
+    var i = start
+    while i <= x {
+      let e = items[start][i]
+      path.append(e)
+      i += 1
+    }
+    
+    // 上 -》 下
+    i = start + 1
+    while i <= y {
+      let e = items[i][x]
+      path.append(e)
+
+      i += 1
+    }
+    
+    // 右 - 左
+    i = x - 1
+    while y > start, i >= start {
+      let e = items[y][i]
+      path.append(e)
+      i -= 1
+    }
+    
+    // 下 - 上
+    i = y - 1
+    while x > start, i >= start + 1 {
+      let e = items[i][start]
+      path.append(e)
+      i -= 1
+    }
+  }
+  
+}

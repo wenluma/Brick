@@ -1852,6 +1852,82 @@ final class MyBrickTests: XCTestCase {
     } while false
   }
   
+  func testMyMatrixClockwisely(){
+    let item = MyMatrixClockwisely()
+    
+    repeat {
+      let res = MatrixInt.make(rows: 1, cols: 1, start: 1)
+      let list = item.logMatrixClockwisely(res)
+      XCTAssertEqual(list, [1])
+    } while false
+    
+    repeat {
+      let res = MatrixInt.make(rows: 2, cols: 2, start: 1)
+      let list = item.logMatrixClockwisely(res)
+      XCTAssertEqual(list, [1,2,4,3])
+    } while false
+    
+    repeat {
+      // 1,2,3
+      // 4,5,6
+      // 7,8,9
+      let res = MatrixInt.make(rows: 3, cols: 3, start: 1)
+      let list = item.logMatrixClockwisely(res)
+      XCTAssertEqual(list, [1, 2, 3, 6,9, 8, 7,4,5])
+    } while false
+    
+    repeat {
+      let res = MatrixInt.make(rows: 4, cols: 4, start: 1)
+      let list = item.logMatrixClockwisely(res)
+      XCTAssertEqual(list, [1, 2, 3, 4, 8, 12, 16, 15,14,13, 9 , 5, 6,7,11, 10])
+      print("===")
+    } while false
+    
+    repeat {
+      let res = MatrixInt.make(rows: 1, cols: 5, start: 1)
+      let list = item.logMatrixClockwisely(res)
+      XCTAssertEqual(list, [1, 2, 3, 4,5])
+    } while false
+    
+    repeat {
+      let res = MatrixInt.make(rows: 2, cols: 5, start: 1)
+      let list = item.logMatrixClockwisely(res)
+      XCTAssertEqual(list, [1, 2, 3, 4, 5, 10, 9, 8, 7, 6])
+    } while false
+    
+    repeat {
+      let res = MatrixInt.make(rows: 3, cols: 5, start: 1)
+      let list = item.logMatrixClockwisely(res)
+      XCTAssertEqual(list, [1, 2, 3, 4, 5, 10, 15, 14, 13, 12, 11, 6, 7, 8, 9])
+    } while false
+    
+    
+    repeat {
+      let res = MatrixInt.make(rows: 5, cols: 1, start: 1)
+      let list = item.logMatrixClockwisely(res)
+      XCTAssertEqual(list, [1, 2,3,4,5])
+    } while false
+    
+    repeat {
+      let res = MatrixInt.make(rows: 5, cols: 2, start: 1)
+      let list = item.logMatrixClockwisely(res)
+      XCTAssertEqual(list, [1, 2, 4, 6, 8, 10, 9, 7, 5, 3])
+    } while false
+    
+    repeat {
+      let res = MatrixInt.make(rows: 5, cols: 3, start: 1)
+      let list = item.logMatrixClockwisely(res)
+      XCTAssertEqual(list, [1, 2, 3, 6, 9, 12, 15, 14, 13, 10, 7, 4, 5, 8, 11])
+    } while false
+    
+    repeat {
+      let res = MatrixInt.make(rows: 5, cols: 4, start: 1)
+      let list = item.logMatrixClockwisely(res)
+      XCTAssertEqual(list, [1, 2, 3, 4, 8, 12, 16, 20, 19, 18, 17, 13, 9, 5, 6, 7, 11, 15, 14, 10])
+
+    } while false
+  }
+  
   func teststride() {
     // [from, to)
     // [0, -1) -1
@@ -1860,4 +1936,39 @@ final class MyBrickTests: XCTestCase {
       print(i)
     }
   }
+  
+  func testCharacter() {
+    let c0: Character = "0"
+    let c1: Character = "1"
+    if let i0 = c0.asciiValue, let i1 = c1.asciiValue {
+      let r = i1 - i0
+      XCTAssertEqual(r, 1)
+    } else {
+      XCTFail()
+    }
+  }
+  
+  func testMatrixInt() {
+    repeat {
+      let res = MatrixInt.make(rows: 1, cols: 1, start: 0)
+      XCTAssertEqual(res, [[0]])
+    } while false
+    
+    repeat {
+      let res = MatrixInt.make(rows: 2, cols: 1, start: 0)
+      XCTAssertEqual(res, [[0], [1]])
+    } while false
+    
+    repeat {
+      let res = MatrixInt.make(rows: 2, cols: 3, start: 0)
+      XCTAssertEqual(res, [[0, 1, 2], [3, 4, 5]])
+    } while false
+    
+    repeat {
+      let res = MatrixInt.make(rows: 3, cols: 2, start: 0)
+      XCTAssertEqual(res, [[0, 1], [2,3], [4, 5]])
+    } while false
+
+  }
+  
 }
