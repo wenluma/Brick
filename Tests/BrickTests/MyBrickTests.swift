@@ -1928,6 +1928,30 @@ final class MyBrickTests: XCTestCase {
     } while false
   }
   
+  func testMyStackMinInt() {
+    let item: MyStackMinInt  = MyStackMinInt()
+    repeat {
+      item.push(3)
+      XCTAssert(try item.min() ==  3)
+      item.push(4)
+      XCTAssert(try item.min() ==  3)
+      item.push(2)
+      XCTAssert(try item.min() ==  2)
+      item.push(3)
+      XCTAssert(try item.min() ==  2)
+      try? item.pop()
+      XCTAssert(try item.min() ==  2)
+      try? item.pop()
+      XCTAssert(try item.min() ==  3)
+      try? item.pop()
+      XCTAssert(try item.min() ==  3)
+      item.push(0)
+      XCTAssert(try item.min() ==  0)
+    } while false
+    
+    
+  }
+  
   func teststride() {
     // [from, to)
     // [0, -1) -1

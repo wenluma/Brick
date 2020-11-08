@@ -803,6 +803,8 @@ public class MyPower {
 // 题目：输入数字n，按顺序打印出从1最大的n位十进制数。比如输入3，则
 // 打印出1、2、3一直到最大的3位数即999。
 enum BrickError: Error {
+  // 内容空
+  case empty
   // 无效输入
   case invaildInput(Int)
   // 无效节点 nil
@@ -1412,4 +1414,50 @@ public class MyMatrixClockwisely {
     }
   }
   
+}
+
+// 面试题30：包含min函数的栈
+// 题目：定义栈的数据结构，请在该类型中实现一个能够得到栈的最小元素的min
+// 函数。在该栈中，调用min、push及pop的时间复杂度都是O(1)。
+public class MyStackMinInt {
+  private var stack = [Int]()
+  private var minStack = [Int]()
+  
+  public func push(_ e: Int ) {
+    if empty() {
+      minStack.append(e)
+    } else {
+      if top() > e {
+        minStack.append(e)
+      } else {
+        minStack.append(top())
+      }
+    }
+    stack.append(e)
+  }
+  
+  private func empty() -> Bool {
+    stack.isEmpty
+  }
+  
+  
+  private func top() -> Int {
+     stack.last!
+  }
+  
+  @discardableResult
+  public func pop() throws -> Int {
+    if empty() {
+      throw BrickError.empty
+    }
+    minStack.removeLast()
+    return stack.removeLast()
+  }
+  
+  public func min() throws -> Int {
+    if empty() {
+      throw BrickError.empty
+    }
+    return minStack.last!
+  }
 }
