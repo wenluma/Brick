@@ -1994,7 +1994,94 @@ final class MyBrickTests: XCTestCase {
     } while false
   }
   
+  func testMyLevelTree() {
+    let item = MyLevelTree()
+    repeat {
+      //            10
+      //         /      \
+      //        6        14
+      //       /\        /\
+      //      4  8     12  16
+      let pNode10 = BTTree(value: 10)
+      let pNode6 = BTTree(value: 6)
+      let pNode14 = BTTree(value: 14)
+      let pNode4 = BTTree(value: 4)
+      let pNode8 = BTTree(value: 8)
+      let pNode12 = BTTree(value: 12)
+      let pNode16 = BTTree(value: 16)
+      BTTree.connect(parent: pNode10, left: pNode6, right: pNode14)
+      BTTree.connect(parent: pNode6, left: pNode4, right: pNode8)
+      BTTree.connect(parent: pNode14, left: pNode12, right: pNode16)
+      let list = item.level(pNode10)
+      
+      XCTAssertEqual(list, [10, 6, 14, 4, 8, 12, 16])
+
+    } while false
+    
+    repeat {
+      //               5
+      //              /
+      //             4
+      //            /
+      //           3
+      //          /
+      //         2
+      //        /
+      //       1
+      let pNode5 = BTTree(value: 5)
+      let pNode4 = BTTree(value: 4)
+      let pNode3 = BTTree(value: 3)
+      let pNode2 = BTTree(value: 2)
+      let pNode1 = BTTree(value: 1)
+      BTTree.connect(parent: pNode5, left: pNode4, right: nil)
+      BTTree.connect(parent: pNode4, left: pNode3, right: nil)
+      BTTree.connect(parent: pNode3, left: pNode2, right: nil)
+      BTTree.connect(parent: pNode2, left: pNode1, right: nil)
+       XCTAssert(item.level(pNode5) == [5,4,3,2,1])
+
+      
+    } while false
+    
+    repeat {
+      // 1
+      //  \
+      //   2
+      //    \
+      //     3
+      //      \
+      //       4
+      //        \
+      //         5
+      let pNode1 = BTTree(value: 1)
+      let pNode2 = BTTree(value: 2)
+      let pNode3 = BTTree(value: 3)
+      let pNode4 = BTTree(value: 4)
+      let pNode5 = BTTree(value: 5)
+      BTTree.connect(parent: pNode1, left: nil, right: pNode2)
+      BTTree.connect(parent: pNode2, left: nil, right: pNode3)
+      BTTree.connect(parent: pNode3, left: nil, right: pNode4)
+      BTTree.connect(parent: pNode4, left: nil, right: pNode5)
+      XCTAssert(item.level(pNode1) == [1,2,3,4,5])
+      
+    } while false
+
+    
+    repeat {
+      // 树中只有1个结点
+      let pNode1 = BTTree(value: 1)
+      XCTAssert(item.level(pNode1) == [1])
+      
+    } while false
+    
+    repeat {
+      // 树中没有结点
+      XCTAssert(item.level(nil) == [Int]())
+      
+    } while false
+    
+  }
   
+//  MARK: - 辅助
   func teststride() {
     // [from, to)
     // [0, -1) -1

@@ -1336,6 +1336,8 @@ public class MySymmetricalTree {
   }
 }
 
+
+// MARK: - 二维数组
 public class MatrixInt {
   static func make(rows: Int, cols: Int, start: Int) -> [[Int]] {
     var res = [[Int]]()
@@ -1480,6 +1482,36 @@ public class MyPopOrder {
       }
     }
     return stack.isEmpty
+  }
+  
+}
+
+// 面试题32（一）：不分行从上往下打印二叉树
+// 题目：从上往下打印出二叉树的每个结点，同一层的结点按照从左到右的顺序打印。
+public class MyLevelTree {
+  
+  public func level(_ root: BTTree?) -> [Int] {
+    var result = [Int]()
+
+    if root == nil {
+      return result
+    }
+    var queue = [BTTree]()
+    queue.append(root!)
+    
+    while !queue.isEmpty {
+      let top = queue.remove(at: 0)
+      result.append(top.value)
+      
+      if top.left != nil {
+        queue.append(top.left!)
+      }
+      
+      if top.right != nil {
+        queue.append(top.right!)
+      }
+    }
+    return result
   }
   
 }
