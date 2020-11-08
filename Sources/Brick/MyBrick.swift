@@ -1309,3 +1309,27 @@ public class MyMirrorTree2 {
   }
   
 }
+
+// 面试题28：对称的二叉树
+// 题目：请实现一个函数，用来判断一棵二叉树是不是对称的。如果一棵二叉树和
+// 它的镜像一样，那么它是对称的。
+
+public class MySymmetricalTree {
+  public func isSymmetrical(_ root: BTTree?) -> Bool {
+    return isSymmetricalTree(root, root)
+  }
+  
+  private func isSymmetricalTree(_ l: BTTree?, _ r: BTTree?) -> Bool {
+    if l == nil , r == nil {
+      return true
+    }
+    if l == nil || r == nil {
+      return false
+    }
+    if l?.value != r?.value {
+      return false
+    }
+    
+    return isSymmetricalTree(l?.left, r?.right) && isSymmetricalTree(l?.right, r?.left)
+  }
+}

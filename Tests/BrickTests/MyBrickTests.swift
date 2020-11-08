@@ -1696,6 +1696,162 @@ final class MyBrickTests: XCTestCase {
   }
 
   
+  func testMySymmetricalTree() {
+    let item = MySymmetricalTree()
+    repeat {
+      //            8
+      //        6      6
+      //       5 7    7 5
+      let pNode8 = BTTree(value: 8)
+      let pNode61 = BTTree(value: 6)
+      let pNode62 = BTTree(value: 6)
+      let pNode51 = BTTree(value: 5)
+      let pNode71 = BTTree(value: 7)
+      let pNode72 = BTTree(value: 7)
+      let pNode52 = BTTree(value: 5)
+      BTTree.connect(parent: pNode8, left: pNode61, right: pNode62)
+      BTTree.connect(parent: pNode61, left: pNode51, right: pNode71)
+      BTTree.connect(parent: pNode62, left: pNode72, right: pNode52)
+      let result: Bool = item.isSymmetrical(pNode8)
+      XCTAssert(result ==  true)
+    } while false
+    
+    repeat {
+      //            8
+      //        6      9
+      //       5 7    7 5
+      let pNode8 = BTTree(value: 8)
+      let pNode61 = BTTree(value: 6)
+      let pNode9 = BTTree(value: 9)
+      let pNode51 = BTTree(value: 5)
+      let pNode71 = BTTree(value: 7)
+      let pNode72 = BTTree(value: 7)
+      let pNode52 = BTTree(value: 5)
+      BTTree.connect(parent: pNode8, left: pNode61, right: pNode9)
+      BTTree.connect(parent: pNode61, left: pNode51, right: pNode71)
+      BTTree.connect(parent: pNode9, left: pNode72, right: pNode52)
+      let result: Bool = item.isSymmetrical(pNode8)
+      XCTAssert(result ==  false)
+    } while false
+    
+    repeat {
+      //            8
+      //        6      6
+      //       5 7    7
+      let pNode8 = BTTree(value: 8)
+      let pNode61 = BTTree(value: 6)
+      let pNode62 = BTTree(value: 6)
+      let pNode51 = BTTree(value: 5)
+      let pNode71 = BTTree(value: 7)
+      let pNode72 = BTTree(value: 7)
+      BTTree.connect(parent: pNode8, left: pNode61, right: pNode62)
+      BTTree.connect(parent: pNode61, left: pNode51, right: pNode71)
+      BTTree.connect(parent: pNode62, left: pNode72, right: nil)
+      let result: Bool = item.isSymmetrical(pNode8)
+      XCTAssert(result ==  false)
+
+    } while false
+    
+    repeat {
+      //               5
+      //              / \
+      //             3   3
+      //            /     \
+      //           4       4
+      //          /         \
+      //         2           2
+      //        /             \
+      //       1               1
+      let pNode5 = BTTree(value: 5)
+      let pNode31 = BTTree(value: 3)
+      let pNode32 = BTTree(value: 3)
+      let pNode41 = BTTree(value: 4)
+      let pNode42 = BTTree(value: 4)
+      let pNode21 = BTTree(value: 2)
+      let pNode22 = BTTree(value: 2)
+      let pNode11 = BTTree(value: 1)
+      let pNode12 = BTTree(value: 1)
+      BTTree.connect(parent: pNode5, left: pNode31, right: pNode32)
+      BTTree.connect(parent: pNode31, left: pNode41, right: nil)
+      BTTree.connect(parent: pNode32, left: nil, right: pNode42)
+      BTTree.connect(parent: pNode41, left: pNode21, right: nil)
+      BTTree.connect(parent: pNode42, left: nil, right: pNode22)
+      BTTree.connect(parent: pNode21, left: pNode11, right: nil)
+      BTTree.connect(parent: pNode22, left: nil, right: pNode12)
+      let result: Bool = item.isSymmetrical(pNode5)
+      XCTAssert(result ==  true)
+    } while false
+    
+    repeat {
+
+      //               5
+      //              / \
+      //             3   3
+      //            /     \
+      //           4       4
+      //          /         \
+      //         6           2
+      //        /             \
+      //       1               1
+      let pNode5 = BTTree(value: 5)
+      let pNode31 = BTTree(value: 3)
+      let pNode32 = BTTree(value: 3)
+      let pNode41 = BTTree(value: 4)
+      let pNode42 = BTTree(value: 4)
+      let pNode6 = BTTree(value: 6)
+      let pNode22 = BTTree(value: 2)
+      let pNode11 = BTTree(value: 1)
+      let pNode12 = BTTree(value: 1)
+      BTTree.connect(parent: pNode5, left: pNode31, right: pNode32)
+      BTTree.connect(parent: pNode31, left: pNode41, right: nil)
+      BTTree.connect(parent: pNode32, left: nil, right: pNode42)
+      BTTree.connect(parent: pNode41, left: pNode6, right: nil)
+      BTTree.connect(parent: pNode42, left: nil, right: pNode22)
+      BTTree.connect(parent: pNode6, left: pNode11, right: nil)
+      BTTree.connect(parent: pNode22, left: nil, right: pNode12)
+      let result: Bool = item.isSymmetrical(pNode5)
+      XCTAssert(result ==  false)
+    } while false
+    
+
+    repeat {
+      //               5
+      //              / \
+      //             3   3
+      //            /     \
+      //           4       4
+      //          /         \
+      //         2           2
+      //                      \
+      //                       1
+      let pNode5 = BTTree(value: 5)
+      let pNode31 = BTTree(value: 3)
+      let pNode32 = BTTree(value: 3)
+      let pNode41 = BTTree(value: 4)
+      let pNode42 = BTTree(value: 4)
+      let pNode21 = BTTree(value: 2)
+      let pNode22 = BTTree(value: 2)
+      let pNode12 = BTTree(value: 1)
+      BTTree.connect(parent: pNode5, left: pNode31, right: pNode32)
+      BTTree.connect(parent: pNode31, left: pNode41, right: nil)
+      BTTree.connect(parent: pNode32, left: nil, right: pNode42)
+      BTTree.connect(parent: pNode41, left: pNode21, right: nil)
+      BTTree.connect(parent: pNode42, left: nil, right: pNode22)
+      BTTree.connect(parent: pNode21, left: nil, right: nil)
+      BTTree.connect(parent: pNode22, left: nil, right: pNode12)
+      let result: Bool = item.isSymmetrical(pNode5)
+      XCTAssert(result ==  false)
+    } while false
+    
+    repeat {
+      // 只有一个结点
+      let pNode1 = BTTree(value: 1)
+      let result: Bool = item.isSymmetrical(pNode1)
+      XCTAssert(result ==  true)
+
+    } while false
+  }
+  
   func teststride() {
     // [from, to)
     // [0, -1) -1
