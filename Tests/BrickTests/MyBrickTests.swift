@@ -1952,6 +1952,49 @@ final class MyBrickTests: XCTestCase {
     
   }
   
+  func testMyPopOrder() {
+    let item: MyPopOrder  = MyPopOrder()
+    repeat {
+      let push = [1, 2, 3, 4, 5]
+      let pop = [4, 5, 3, 2, 1]
+      XCTAssert(item.isPopOrder(push, pop) == true)
+      
+    } while false
+    
+    repeat {
+      let push = [1, 2, 3, 4, 5]
+      let pop = [4, 3, 5, 1, 2]
+      XCTAssert(item.isPopOrder(push, pop) == false)
+    } while false
+    
+    repeat {
+      let push = [1, 2, 3, 4, 5]
+      let pop = [3, 5, 4, 1, 2]
+      XCTAssert(item.isPopOrder(push, pop) == false)
+      
+    } while false
+    
+    repeat {
+      let push = [1]
+      let pop = [2]
+      XCTAssert(item.isPopOrder(push, pop) == false)
+    } while false
+    repeat {
+      
+      let push = [1]
+      let pop = [1]
+      XCTAssert(item.isPopOrder(push, pop) == true)
+    } while false
+
+    repeat {
+      
+      let push = [Int]()
+      let pop = [Int]()
+      XCTAssert(item.isPopOrder(push, pop) == true)
+    } while false
+  }
+  
+  
   func teststride() {
     // [from, to)
     // [0, -1) -1
