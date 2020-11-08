@@ -1469,6 +1469,232 @@ final class MyBrickTests: XCTestCase {
     
   }
   
+  func testMyMirrorTree() {
+    let item = MyMirrorTree()
+    repeat {
+      // 测试完全二叉树：除了叶子节点，其他节点都有两个子节点
+      //            8
+      //        6      10
+      //       5 7    9  11
+      let pNode8 = BTTree(value: 8)
+      let pNode6 = BTTree(value: 6)
+      let pNode10 = BTTree(value: 10)
+      let pNode5 = BTTree(value: 5)
+      let pNode7 = BTTree(value: 7)
+      let pNode9 = BTTree(value: 9)
+      let pNode11 = BTTree(value: 11)
+      BTTree.connect(parent: pNode8, left: pNode6, right: pNode10)
+      BTTree.connect(parent: pNode6, left: pNode5, right: pNode7)
+      BTTree.connect(parent: pNode10, left: pNode9, right: pNode11)
+
+      let root = item.mirror(pNode8)
+      
+      let res = BTTree.levelOrder(root)
+      for e in res {
+        print(e)
+      }
+      print("----")
+      XCTAssert(res.count == 3)
+      XCTAssert(res[0] == [8])
+      XCTAssert(res[1] == [10, 6])
+      XCTAssert(res[2] == [11, 9, 7, 5])
+      
+    } while false
+    
+    repeat {
+      // 测试二叉树：出叶子结点之外，左右的结点都有且只有一个左子结点
+      //            8
+      //          7
+      //        6
+      //      5
+      //    4
+      let pNode8 = BTTree(value: 8)
+      let pNode7 = BTTree(value: 7)
+      let pNode6 = BTTree(value: 6)
+      let pNode5 = BTTree(value: 5)
+      let pNode4 = BTTree(value: 4)
+      BTTree.connect(parent: pNode8, left: pNode7, right: nil)
+      BTTree.connect(parent: pNode7, left: pNode6, right: nil)
+      BTTree.connect(parent: pNode6, left: pNode5, right: nil)
+      BTTree.connect(parent: pNode5, left: pNode4, right: nil)
+      
+      let root = item.mirror(pNode8)
+      
+      let res = BTTree.levelOrder(root)
+      for e in res {
+        print(e)
+      }
+
+      print("----")
+
+    } while false
+    
+    repeat {
+      // 测试二叉树：出叶子结点之外，左右的结点都有且只有一个左子结点
+      //            8
+    } while false
+    
+    repeat {
+      // 测试二叉树：出叶子结点之外，左右的结点都有且只有一个右子结点
+      //            8
+      //             7
+      //              6
+      //               5
+      //                4
+      let pNode8 = BTTree(value: 8)
+      let pNode7 = BTTree(value: 7)
+      let pNode6 = BTTree(value: 6)
+      let pNode5 = BTTree(value: 5)
+      let pNode4 = BTTree(value: 4)
+      BTTree.connect(parent: pNode8, left: nil, right: pNode7)
+      BTTree.connect(parent: pNode7, left: nil, right: pNode6)
+      BTTree.connect(parent: pNode6, left: nil, right: pNode5)
+      BTTree.connect(parent: pNode5, left: nil, right: pNode4)
+
+      let root = item.mirror(pNode8)
+      
+      let res = BTTree.levelOrder(root)
+      for e in res {
+        print(e)
+      }
+
+      print("----")
+    } while false
+    
+    repeat {
+      let root = item.mirror(nil)
+      
+      let res = BTTree.levelOrder(root)
+      for e in res {
+        print(e)
+      }
+    } while false
+    
+    repeat {
+      let pNode8 = BTTree(value: 8)
+      let root = item.mirror(pNode8)
+      
+      let res = BTTree.levelOrder(root)
+      for e in res {
+        print(e)
+      }
+      print("----")
+    } while false
+  }
+  
+    func testMyMirrorTree2() {
+    let item = MyMirrorTree2()
+    repeat {
+      // 测试完全二叉树：除了叶子节点，其他节点都有两个子节点
+      //            8
+      //        6      10
+      //       5 7    9  11
+      let pNode8 = BTTree(value: 8)
+      let pNode6 = BTTree(value: 6)
+      let pNode10 = BTTree(value: 10)
+      let pNode5 = BTTree(value: 5)
+      let pNode7 = BTTree(value: 7)
+      let pNode9 = BTTree(value: 9)
+      let pNode11 = BTTree(value: 11)
+      BTTree.connect(parent: pNode8, left: pNode6, right: pNode10)
+      BTTree.connect(parent: pNode6, left: pNode5, right: pNode7)
+      BTTree.connect(parent: pNode10, left: pNode9, right: pNode11)
+
+      let root = item.mirror(pNode8)
+      
+      let res = BTTree.levelOrder(root)
+      for e in res {
+        print(e)
+      }
+      print("----")
+      XCTAssert(res.count == 3)
+      XCTAssert(res[0] == [8])
+      XCTAssert(res[1] == [10, 6])
+      XCTAssert(res[2] == [11, 9, 7, 5])
+      
+    } while false
+    
+    repeat {
+      // 测试二叉树：出叶子结点之外，左右的结点都有且只有一个左子结点
+      //            8
+      //          7
+      //        6
+      //      5
+      //    4
+      let pNode8 = BTTree(value: 8)
+      let pNode7 = BTTree(value: 7)
+      let pNode6 = BTTree(value: 6)
+      let pNode5 = BTTree(value: 5)
+      let pNode4 = BTTree(value: 4)
+      BTTree.connect(parent: pNode8, left: pNode7, right: nil)
+      BTTree.connect(parent: pNode7, left: pNode6, right: nil)
+      BTTree.connect(parent: pNode6, left: pNode5, right: nil)
+      BTTree.connect(parent: pNode5, left: pNode4, right: nil)
+      
+      let root = item.mirror(pNode8)
+      
+      let res = BTTree.levelOrder(root)
+      for e in res {
+        print(e)
+      }
+
+      print("----")
+
+    } while false
+    
+    repeat {
+      // 测试二叉树：出叶子结点之外，左右的结点都有且只有一个左子结点
+      //            8
+    } while false
+    
+    repeat {
+      // 测试二叉树：出叶子结点之外，左右的结点都有且只有一个右子结点
+      //            8
+      //             7
+      //              6
+      //               5
+      //                4
+      let pNode8 = BTTree(value: 8)
+      let pNode7 = BTTree(value: 7)
+      let pNode6 = BTTree(value: 6)
+      let pNode5 = BTTree(value: 5)
+      let pNode4 = BTTree(value: 4)
+      BTTree.connect(parent: pNode8, left: nil, right: pNode7)
+      BTTree.connect(parent: pNode7, left: nil, right: pNode6)
+      BTTree.connect(parent: pNode6, left: nil, right: pNode5)
+      BTTree.connect(parent: pNode5, left: nil, right: pNode4)
+
+      let root = item.mirror(pNode8)
+      
+      let res = BTTree.levelOrder(root)
+      for e in res {
+        print(e)
+      }
+
+      print("----")
+    } while false
+    
+    repeat {
+      let root = item.mirror(nil)
+      
+      let res = BTTree.levelOrder(root)
+      for e in res {
+        print(e)
+      }
+    } while false
+    
+    repeat {
+      let pNode8 = BTTree(value: 8)
+      let root = item.mirror(pNode8)
+      
+      let res = BTTree.levelOrder(root)
+      for e in res {
+        print(e)
+      }
+      print("----")
+    } while false
+  }
+
   
   func teststride() {
     // [from, to)

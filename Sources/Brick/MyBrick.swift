@@ -343,7 +343,7 @@ public class BTTree {
   let value: Int
   var left: BTTree?
   var right: BTTree?
-  var parent: BTTree?
+  weak var parent: BTTree?
   init(value: Int, left: BTTree? = nil, right: BTTree? = nil, parent: BTTree? = nil) {
     self.value = value
     self.left = left
@@ -382,6 +382,38 @@ public class BTTree {
       current = top.right
     }
     return items
+  }
+  
+  static func levelOrder(_ tree: BTTree?) -> [[Int]] {
+    var result = [[Int]]()
+    if tree == nil {
+      return result
+    }
+    var queue: [BTTree] = [BTTree]()
+    var levelQueue = [BTTree]()
+    var path = [Int]()
+    queue.append(tree!)
+    while !queue.isEmpty {
+      let top = queue.remove(at: 0)
+      if top.left != nil {
+        levelQueue.append(top.left!)
+      }
+      path.append(top.value)
+      
+      if top.right != nil {
+        levelQueue.append(top.right!)
+      }
+      
+      if queue.isEmpty {
+        queue.append(contentsOf: levelQueue)
+        levelQueue.removeAll()
+        result.append(path)
+        path.removeAll()
+      }
+    }
+    
+    return result
+    
   }
 //  // 后续遍历定义 根左右
 //  static func postOrder(tree: BTTree?) -> [Int] {
@@ -1228,6 +1260,52 @@ public class MySubTree {
     }
     
     return tree1HasTree2(r1?.left, r2?.left) &&  tree1HasTree2(r1?.right, r2?.right)
+  }
+  
+}
+
+// 面试题27：二叉树的镜像
+// 题目：请完成一个函数，输入一个二叉树，该函数输出它的镜像。
+public class MyMirrorTree {
+  
+  public func mirror(_ root: BTTree?) -> BTTree? {
+    if root == nil {
+      return nil
+    }
+    let left = root?.left
+    let right = root?.right
+    root?.left = mirror(right)
+    root?.right = mirror(left)
+    return root
+  }
+  
+}
+
+public class MyMirrorTree2 {
+  
+  public func mirror(_ root: BTTree?) -> BTTree? {
+    if root == nil {
+      return nil
+    }
+    var stack = [BTTree]()
+    stack.append(root!)
+    
+    while !stack.isEmpty {
+      let top = stack.removeLast()
+      
+      let tmp = top.left
+      top.left = top.right
+      top.right = tmp
+      
+      if top.left != nil {
+        stack.append(top.left!)
+      }
+      
+      if top.right != nil {
+        stack.append(top.right!)
+      }
+    }
+    return root
   }
   
 }
