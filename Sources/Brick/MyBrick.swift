@@ -1515,3 +1515,34 @@ public class MyLevelTree {
   }
   
 }
+
+// 面试题32（二）：分行从上到下打印二叉树
+// 题目：从上到下按层打印二叉树，同一层的结点按从左到右的顺序打印，每一层
+// 打印到一行。
+public class MyLevelTree2 {
+  
+  public func level(_ root: BTTree?) -> [[Int]] {
+    var result = [[Int]]()
+    if root == nil {
+      return result
+    }
+    var queue = [BTTree]()
+    queue.append(root!)
+    var path = [Int]()
+    var levelQueue = [BTTree]()
+    while !queue.isEmpty {
+      let top = queue.remove(at: 0)
+      path.append(top.value)
+      top.left.map({ levelQueue.append($0) })
+      top.right.map({ levelQueue.append($0) })
+      if queue.isEmpty {
+        queue.append(contentsOf: levelQueue)
+        levelQueue.removeAll()
+        result.append(path)
+        path.removeAll()
+      }
+    }
+    return result
+  }
+  
+}

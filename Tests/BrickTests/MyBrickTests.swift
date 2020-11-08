@@ -2081,6 +2081,81 @@ final class MyBrickTests: XCTestCase {
     
   }
   
+  
+  func testMyLevelTree2() {
+    let item = MyLevelTree2()
+    repeat {
+      //            8
+      //        6      10
+      //       5 7    9  11
+      let pNode8 = BTTree(value: 8)
+      let pNode6 = BTTree(value: 6)
+      let pNode10 = BTTree(value: 10)
+      let pNode5 = BTTree(value: 5)
+      let pNode7 = BTTree(value: 7)
+      let pNode9 = BTTree(value: 9)
+      let pNode11 = BTTree(value: 11)
+      BTTree.connect(parent: pNode8, left: pNode6, right: pNode10)
+      BTTree.connect(parent: pNode6, left: pNode5, right: pNode7)
+      BTTree.connect(parent: pNode10, left: pNode9, right: pNode11)
+      let list = item.level(pNode8)
+      
+      XCTAssertEqual(list, [[8], [6, 10], [5, 7, 9, 11]]
+      )
+      
+    } while false
+    
+    repeat {
+      //               5
+      //              /
+      //             4
+      //            /
+      //           3
+      //          /
+      //         2
+      let pNode5 = BTTree(value: 5)
+      let pNode4 = BTTree(value: 4)
+      let pNode3 = BTTree(value: 3)
+      let pNode2 = BTTree(value: 2)
+      BTTree.connect(parent: pNode5, left: pNode4, right: nil)
+      BTTree.connect(parent: pNode4, left: pNode3, right: nil)
+      BTTree.connect(parent: pNode3, left: pNode2, right: nil)
+      XCTAssert(item.level(pNode5) == [[5], [4], [3], [2]])
+    } while false
+    
+    repeat {
+      //        5
+      //         4
+      //          3
+      //           2
+      let pNode5 = BTTree(value: 5)
+      let pNode4 = BTTree(value: 4)
+      let pNode3 = BTTree(value: 3)
+      let pNode2 = BTTree(value: 2)
+      BTTree.connect(parent: pNode5, left: nil, right: pNode4)
+      BTTree.connect(parent: pNode4, left: nil, right: pNode3)
+      BTTree.connect(parent: pNode3, left: nil, right: pNode2)
+      XCTAssert(item.level(pNode5) == [[5], [4], [3], [2]])
+      
+    } while false
+    
+    
+    repeat {
+      // 树中只有1个结点
+      let pNode1 = BTTree(value: 1)
+      XCTAssert(item.level(pNode1) == [[1]])
+      
+    } while false
+    
+    repeat {
+      // 树中没有结点
+      let empty = [[Int]]()
+      XCTAssert(item.level(nil) == empty)
+      
+    } while false
+    
+  }
+  
 //  MARK: - 辅助
   func teststride() {
     // [from, to)
