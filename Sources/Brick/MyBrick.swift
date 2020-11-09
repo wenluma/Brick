@@ -1624,3 +1624,32 @@ public class MyLevelTree3 {
     return res
   }
 }
+
+// 面试题33：二叉搜索树的后序遍历序列
+// 题目：输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历的结果。
+// 如果是则返回true，否则返回false。假设输入的数组的任意两个数字都互不相同。
+public class MyVerifySquenceOfBST {
+  public func verify(_ list: [Int], _ i: Int, _ j: Int) -> Bool {
+    if list.isEmpty {
+      return false
+    }
+    return recur(list, i, j)
+  }
+  
+  private func recur(_ list: [Int], _ i: Int, _ j: Int) -> Bool {
+    if i >= j {
+      return true
+    }
+    var p = i
+    while list[p] < list[j] {
+      p += 1
+    }
+    let m = p
+    while list[p] > list[j] {
+      p += 1
+    }
+    return p == j && recur(list, i, m - 1) && recur(list, m, j - 1)
+  }
+  
+  
+}

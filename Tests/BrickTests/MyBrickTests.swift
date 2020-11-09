@@ -2267,6 +2267,90 @@ final class MyBrickTests: XCTestCase {
   }
   
 
+  func testMyVerifySquenceOfBST() {
+    let item = MyVerifySquenceOfBST()
+    repeat {
+
+      //            10
+      //         /      \
+      //        6        14
+      //       /\        /\
+      //      4  8     12  16
+      let list = [4, 8, 6, 12, 16, 14, 10]
+      let result = item.verify(list, 0, list.count - 1)
+      XCTAssert(result == true)
+    } while false
+    
+    repeat {
+
+      //           5
+      //          / \
+      //         4   7
+      //            /
+      //           6
+      let list = [4, 6, 7, 5]
+      let result = item.verify(list, 0, list.count - 1)
+      XCTAssert(result == true)
+    } while false
+    
+    repeat {
+      //               5
+      //              /
+      //             4
+      //            /
+      //           3
+      //          /
+      //         2
+      //        /
+      //       1
+      let list = [1, 2, 3, 4, 5]
+      let result = item.verify(list, 0, list.count - 1)
+      XCTAssert(result == true)
+    } while false
+    
+    repeat {
+      // 1
+      //  \
+      //   2
+      //    \
+      //     3
+      //      \
+      //       4
+      //        \
+      //         5
+      let list = [5, 4, 3, 2, 1]
+      let result = item.verify(list, 0, list.count - 1)
+      XCTAssert(result == true)
+    } while false
+    
+    repeat {
+      // 1
+      let list = [1]
+      let result = item.verify(list, 0, list.count - 1)
+      XCTAssert(result == true)
+    } while false
+    
+    repeat {
+         // 1
+         let list = [7, 4, 6, 5]
+         let result = item.verify(list, 0, list.count - 1)
+         XCTAssert(result == false)
+       } while false
+    
+    repeat {
+      // 1
+      let list = [4, 6, 12, 8, 16, 14, 10]
+      let result = item.verify(list, 0, list.count - 1)
+      XCTAssert(result == false)
+    } while false
+    
+    repeat {
+      // 1
+      let list = [Int]()
+      let result = item.verify(list, 0, list.count - 1)
+      XCTAssert(result == false)
+    } while false
+  }
 //  MARK: - 辅助
   func teststride() {
     // [from, to)
@@ -2309,6 +2393,82 @@ final class MyBrickTests: XCTestCase {
       XCTAssertEqual(res, [[0, 1], [2,3], [4, 5]])
     } while false
 
+  }
+  
+  
+  // MARK: - 多线程测试
+  func testCustomSerialQueue() {
+    let exp = expectation(description: "custom serial queue")
+    print("1...\(Thread.current)")
+    let sq = DispatchQueue(label: "hello")
+    sq.async {
+      print("2...\(Thread.current)")
+
+      sq.sync {
+        print("3...\(Thread.current)")
+      }
+
+      print("4...\(Thread.current)")
+      exp.fulfill()
+    }
+    print("5...\(Thread.current)")
+    
+    waitForExpectations(timeout: 1) { (error) in
+      print(error)
+    }
+    
+    
+  }
+  
+  func testGlobalQueue() {
+    print("1...\(Thread.current)")
+    let sq = DispatchQueue.global()
+    sq.async {
+    print("2...\(Thread.current)")
+
+      sq.sync {
+        print("3...\(Thread.current)")
+      }
+    print("4...\(Thread.current)")
+
+    }
+    print("5...\(Thread.current)")
+  }
+  
+  func testMyWorkQueue() {
+    let exp = expectation(description: "workqueue")
+    
+    let queue = DispatchQueue(label: "workqueue")
+    print("A...\(Thread.current)")
+    queue.async {
+      print("B..\(Thread.current)")
+      queue.async {
+        print("B1..\(Thread.current)")
+      }
+    }
+    print("A1...\(Thread.current)")
+
+    queue.asyncAfter(deadline: .now() + .milliseconds(200)) {
+      queue.sync {
+        print("c..\(Thread.current)")
+        exp.fulfill()
+      }
+    }
+    
+    queue.asyncAfter(deadline: .now() + .milliseconds(100)) {
+      queue.async {
+        print("d..\(Thread.current)")
+      }
+    }
+    
+    queue.sync {
+      print("e..\(Thread.current)")
+    }
+    
+    waitForExpectations(timeout: 3) { (error) in
+      print(error)
+    }
+    
   }
   
 }
