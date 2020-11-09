@@ -2437,6 +2437,117 @@ final class MyBrickTests: XCTestCase {
     } while false
   }
 
+  func testFindTreePath() {
+    let item = FindTreePath()
+    repeat {
+      //            10
+      //         /      \
+      //        5        12
+      //       /\
+      //      4  7
+      let pNode10 = BTTree(value: 10)
+      let pNode5 = BTTree(value: 5)
+      let pNode12 = BTTree(value: 12)
+      let pNode4 = BTTree(value: 4)
+      let pNode7 = BTTree(value: 7)
+      BTTree.connect(parent: pNode10, left: pNode5, right: pNode12)
+      BTTree.connect(parent: pNode5, left: pNode4, right: pNode7)
+
+      let result = item.find(pNode10, 22)
+      XCTAssert(result == [[10,5,7],
+                           [10, 12]
+        ])
+      
+    } while false
+    
+    repeat {
+      //            10
+      //         /      \
+      //        5        12
+      //       /\
+      //      4  7
+      let pNode10 = BTTree(value: 10)
+      let pNode5 = BTTree(value: 5)
+      let pNode12 = BTTree(value: 12)
+      let pNode4 = BTTree(value: 4)
+      let pNode7 = BTTree(value: 7)
+      BTTree.connect(parent: pNode10, left: pNode5, right: pNode12)
+      BTTree.connect(parent: pNode5, left: pNode4, right: pNode7)
+
+      let empty = [[Int]]()
+      let result = item.find(pNode10, 15)
+      XCTAssert(result == empty)
+      
+    } while false
+    
+    repeat {
+      //               5
+      //              /
+      //             4
+      //            /
+      //           3
+      //          /
+      //         2
+      //        /
+      //       1
+      // 有一条路径上面的结点和为15
+      let pNode5 = BTTree(value: 5)
+      let pNode4 = BTTree(value: 4)
+      let pNode3 = BTTree(value: 3)
+      let pNode2 = BTTree(value: 2)
+      let pNode1 = BTTree(value: 1)
+      BTTree.connect(parent: pNode5, left: pNode4, right: nil)
+      BTTree.connect(parent: pNode4, left: pNode3, right: nil)
+      BTTree.connect(parent: pNode3, left: pNode2, right: nil)
+      BTTree.connect(parent: pNode2, left: pNode1, right: nil)
+
+      let result = item.find(pNode5, 15)
+      XCTAssert(result == [[5,4,3,2,1]])
+      
+    } while false
+    
+    repeat {
+      // 1
+      //  \
+      //   2
+      //    \
+      //     3
+      //      \
+      //       4
+      //        \
+      //         5
+      // 没有路径上面的结点和为16
+      let pNode1 = BTTree(value: 1)
+      let pNode2 = BTTree(value: 2)
+      let pNode3 = BTTree(value: 3)
+      let pNode4 = BTTree(value: 4)
+      let pNode5 = BTTree(value: 5)
+      BTTree.connect(parent: pNode1, left: nil, right: pNode2)
+      BTTree.connect(parent: pNode2, left: nil, right: pNode3)
+      BTTree.connect(parent: pNode3, left: nil, right: pNode4)
+      BTTree.connect(parent: pNode4, left: nil, right: pNode5)
+
+      let empty = [[Int]]()
+      let result = item.find(pNode1, 16)
+      XCTAssert(result == empty)
+      
+    } while false
+    
+    
+    repeat {
+      // 1
+      let pNode1 = BTTree(value: 1)
+      let result = item.find(pNode1, 1)
+      XCTAssert(result ==  [[1]])
+    } while false
+    
+    repeat {
+      // 1
+      let empty = [[Int]]()
+      let result = item.find(nil, 0)
+      XCTAssert(result == empty)
+    } while false
+  }
 //  MARK: - 辅助
   func teststride() {
     // [from, to)
