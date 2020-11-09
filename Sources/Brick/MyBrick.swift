@@ -1546,3 +1546,81 @@ public class MyLevelTree2 {
   }
   
 }
+
+// 面试题32（三）：之字形打印二叉树
+// 题目：请实现一个函数按照之字形顺序打印二叉树，即第一行按照从左到右的顺
+// 序打印，第二层按照从右到左的顺序打印，第三行再按照从左到右的顺序打印，
+// 其他行以此类推。
+public class MyLevelTree3 {
+  public func level(_ root: BTTree?) -> [[Int]] {
+    return level1(root)
+  }
+  
+  // 方式1， 根据奇偶在加入前修改
+  private func level1(_ root: BTTree?) -> [[Int]] {
+    var res = [[Int]]()
+    if root == nil {
+      return res
+    }
+    var path = [Int]()
+    var queue = [BTTree]()
+    var levelQueue = [BTTree]()
+    queue.append(root!)
+    var odd = true
+    
+    while !queue.isEmpty {
+      
+      while !queue.isEmpty {
+        let top = queue.remove(at: 0)
+        path.append(top.value)
+        top.left.map( { levelQueue.append($0) })
+        top.right.map( { levelQueue.append($0) })
+      }
+      
+      queue.append(contentsOf: levelQueue)
+      levelQueue.removeAll()
+      if odd {
+        res.append(path)
+      } else {
+        res.append(path.reversed())
+      }
+      path.removeAll()
+      odd = !odd
+    }
+    return res
+  }
+  
+  // 根据奇偶，存数据时，修改
+  private func level2(_ root: BTTree?) -> [[Int]] {
+    var res = [[Int]]()
+    if root == nil {
+      return res
+    }
+    var path = [Int]()
+    var queue = [BTTree]()
+    var levelQueue = [BTTree]()
+    queue.append(root!)
+    var odd = true
+    
+    while !queue.isEmpty {
+      let top = queue.remove(at: 0)
+      if odd {
+        path.append(top.value)
+      } else {
+        path.insert(top.value, at: 0)
+      }
+      
+      top.left.map({ levelQueue.append($0) })
+      top.right.map({ levelQueue.append($0) })
+      
+      if queue.isEmpty {
+        queue.append(contentsOf: levelQueue)
+        levelQueue.removeAll()
+        res.append(path)
+        path.removeAll()
+        odd = !odd
+      }
+    }
+    return res
+  }
+}
