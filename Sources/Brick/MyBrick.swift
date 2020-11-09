@@ -1630,13 +1630,13 @@ public class MyLevelTree3 {
 // 如果是则返回true，否则返回false。假设输入的数组的任意两个数字都互不相同。
 public class MyVerifySquenceOfBST {
   public func verify(_ list: [Int], _ i: Int, _ j: Int) -> Bool {
-    if list.isEmpty {
+    if i > j {
       return false
     }
-    return recur(list, i, j)
+    return rec(list, i, j)
   }
   
-  private func recur(_ list: [Int], _ i: Int, _ j: Int) -> Bool {
+  private func rec(_ list: [Int], _ i: Int, _ j: Int) -> Bool {
     if i >= j {
       return true
     }
@@ -1644,12 +1644,36 @@ public class MyVerifySquenceOfBST {
     while list[p] < list[j] {
       p += 1
     }
-    let m = p
+    
+    let n = p
     while list[p] > list[j] {
       p += 1
     }
-    return p == j && recur(list, i, m - 1) && recur(list, m, j - 1)
+    
+    return p == j && rec(list, i, n - 1) && rec(list, n, j - 1)
   }
   
   
+}
+
+public class MyVerifySquenceOfBST2 {
+  public func verify(_ list: [Int], _ i: Int, _ j: Int) -> Bool {
+    if list.isEmpty {
+      return false
+    }
+    var stack = [Int]()
+    var root = Int.max
+    // 左右根
+    // 根 | 右 | 左
+    for item in list.reversed() {
+      if item > root {
+        return false
+      }
+      while !stack.isEmpty, stack.last! > item {
+        root = stack.removeLast()
+      }
+      stack.append(item)
+    }
+    return true
+  }
 }

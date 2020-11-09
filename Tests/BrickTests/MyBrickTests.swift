@@ -2351,6 +2351,92 @@ final class MyBrickTests: XCTestCase {
       XCTAssert(result == false)
     } while false
   }
+  
+  func testMyVerifySquenceOfBST2() {
+    let item = MyVerifySquenceOfBST2()
+    repeat {
+
+      //            10
+      //         /      \
+      //        6        14
+      //       /\        /\
+      //      4  8     12  16
+      let list = [4, 8, 6, 12, 16, 14, 10]
+      let result = item.verify(list, 0, list.count - 1)
+      XCTAssert(result == true)
+    } while false
+    
+    repeat {
+
+      //           5
+      //          / \
+      //         4   7
+      //            /
+      //           6
+      let list = [4, 6, 7, 5]
+      let result = item.verify(list, 0, list.count - 1)
+      XCTAssert(result == true)
+    } while false
+    
+    repeat {
+      //               5
+      //              /
+      //             4
+      //            /
+      //           3
+      //          /
+      //         2
+      //        /
+      //       1
+      let list = [1, 2, 3, 4, 5]
+      let result = item.verify(list, 0, list.count - 1)
+      XCTAssert(result == true)
+    } while false
+    
+    repeat {
+      // 1
+      //  \
+      //   2
+      //    \
+      //     3
+      //      \
+      //       4
+      //        \
+      //         5
+      let list = [5, 4, 3, 2, 1]
+      let result = item.verify(list, 0, list.count - 1)
+      XCTAssert(result == true)
+    } while false
+    
+    repeat {
+      // 1
+      let list = [1]
+      let result = item.verify(list, 0, list.count - 1)
+      XCTAssert(result == true)
+    } while false
+    
+    repeat {
+         // 1
+         let list = [7, 4, 6, 5]
+         let result = item.verify(list, 0, list.count - 1)
+         XCTAssert(result == false)
+       } while false
+    
+    repeat {
+      // 1
+      let list = [4, 6, 12, 8, 16, 14, 10]
+      let result = item.verify(list, 0, list.count - 1)
+      XCTAssert(result == false)
+    } while false
+    
+    repeat {
+      // 1
+      let list = [Int]()
+      let result = item.verify(list, 0, list.count - 1)
+      XCTAssert(result == false)
+    } while false
+  }
+
 //  MARK: - 辅助
   func teststride() {
     // [from, to)
