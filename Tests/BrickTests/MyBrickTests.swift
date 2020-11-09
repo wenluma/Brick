@@ -2548,6 +2548,92 @@ final class MyBrickTests: XCTestCase {
       XCTAssert(result == empty)
     } while false
   }
+  
+  func testMyComplexNodeCopy() {
+    let item = MyComplexNodeCopy()
+    repeat {
+      //          -----------------
+      //         \|/              |
+      //  1-------2-------3-------4-------5
+      //  |       |      /|\             /|\
+      //  --------+--------               |
+      //          -------------------------
+      let pNode1 = ComplexLKNode(value: 1)
+      let pNode2 = ComplexLKNode(value: 2)
+      let pNode3 = ComplexLKNode(value: 3)
+      let pNode4 = ComplexLKNode(value: 4)
+      let pNode5 = ComplexLKNode(value: 5)
+      ComplexLKNode.connect(pNode1, next: pNode2, slibing: pNode3)
+      ComplexLKNode.connect(pNode2, next: pNode3, slibing: pNode5)
+      ComplexLKNode.connect(pNode3, next: pNode4, slibing: nil)
+      ComplexLKNode.connect(pNode4, next: pNode5, slibing: pNode2)
+      
+      let r = item.copy(pNode1)
+      let rinfo = ComplexLKNode.info(r)
+      let pinfo = ComplexLKNode.info(pNode1)
+      XCTAssertEqual(rinfo, pinfo)
+    } while false
+    
+    
+    repeat {
+      // m_pSibling指向结点自身
+      //          -----------------
+      //         \|/              |
+      //  1-------2-------3-------4-------5
+      //         |       | /|\           /|\
+      //         |       | --             |
+      //         |------------------------|
+      let pNode1 = ComplexLKNode(value: 1)
+      let pNode2 = ComplexLKNode(value: 2)
+      let pNode3 = ComplexLKNode(value: 3)
+      let pNode4 = ComplexLKNode(value: 4)
+      let pNode5 = ComplexLKNode(value: 5)
+      ComplexLKNode.connect(pNode1, next: pNode2, slibing: nil)
+      ComplexLKNode.connect(pNode2, next: pNode3, slibing: pNode5)
+      ComplexLKNode.connect(pNode3, next: pNode4, slibing: pNode3)
+      ComplexLKNode.connect(pNode4, next: pNode5, slibing: pNode2)
+      
+      let r = item.copy(pNode1)
+      let rinfo = ComplexLKNode.info(r)
+      let pinfo = ComplexLKNode.info(pNode1)
+      XCTAssertEqual(rinfo, pinfo)
+    } while false
+    
+    repeat {
+      // m_pSibling形成环
+      //          -----------------
+      //         \|/              |
+      //  1-------2-------3-------4-------5
+      //          |              /|\
+      //          |               |
+      //          |---------------|
+      let pNode1 = ComplexLKNode(value: 1)
+      let pNode2 = ComplexLKNode(value: 2)
+      let pNode3 = ComplexLKNode(value: 3)
+      let pNode4 = ComplexLKNode(value: 4)
+      let pNode5 = ComplexLKNode(value: 5)
+      ComplexLKNode.connect(pNode1, next: pNode2, slibing: nil)
+      ComplexLKNode.connect(pNode2, next: pNode3, slibing: pNode4)
+      ComplexLKNode.connect(pNode3, next: pNode4, slibing: nil)
+      ComplexLKNode.connect(pNode4, next: pNode5, slibing: pNode2)
+      
+      let r = item.copy(pNode1)
+      let rinfo = ComplexLKNode.info(r)
+      let pinfo = ComplexLKNode.info(pNode1)
+      XCTAssertEqual(rinfo, pinfo)
+    } while false
+    
+    repeat {
+      // 只有一个结点
+      let pNode1 = ComplexLKNode(value: 1)
+      ComplexLKNode.connect(pNode1, next: nil, slibing: pNode1)
+      
+      let r = item.copy(pNode1)
+      let rinfo = ComplexLKNode.info(r)
+      let pinfo = ComplexLKNode.info(pNode1)
+      XCTAssertEqual(rinfo, pinfo)
+    } while false
+  }
 //  MARK: - 辅助
   func teststride() {
     // [from, to)

@@ -272,6 +272,45 @@ extension LKNode: Equatable, Hashable {
   
 }
 
+public class ComplexLKNode {
+  private let uuid = UUID()
+  var value: Int!
+  var next: ComplexLKNode?
+  var slibing: ComplexLKNode?
+  init(value: Int, _ next: ComplexLKNode? = nil, _ slibing: ComplexLKNode? = nil) {
+    self.value = value
+    self.next = next
+    self.slibing = slibing
+  }
+  
+  static func connect(_ current: ComplexLKNode?,  next: ComplexLKNode?, slibing: ComplexLKNode? ) {
+    if current != nil {
+      current?.next = next
+      current?.slibing = slibing
+    }
+  }
+  
+  static func info(_ head: ComplexLKNode?) -> [String] {
+    var node = head
+    var res = [String]()
+    while node != nil {
+      var info = "value: \(node!.value)" + "| slibing: "
+      if node?.slibing != nil {
+        info += "\(node?.slibing?.value)"
+      }
+      
+      info += "| next: "
+      if node?.next != nil {
+        info += "\(node?.next?.value)"
+      }
+      res.append(info)
+
+      node = node?.next
+    }
+    return res
+  }
+}
+
 // 链表逆序输出
 public class LinkRev {
   // 1. 栈存储，push， pop 来完成
@@ -1702,5 +1741,60 @@ public class FindTreePath {
     dfs(root?.left, next, &res, &path)
     dfs(root?.right, next, &res, &path)
     path.removeLast()
+  }
+}
+
+// 面试题35：复杂链表的复制
+// 题目：请实现函数ComplexListNode* Clone(ComplexListNode* pHead)，复
+// 制一个复杂链表。在复杂链表中，每个结点除了有一个m_pNext指针指向下一个
+// 结点外，还有一个m_pSibling 指向链表中的任意结点或者nullptr。
+public class MyComplexNodeCopy {
+  public func copy(_ node: ComplexLKNode?) -> ComplexLKNode? {
+    cloneNode(node)
+    connectSiblingNode(node)
+    let cloned = reconnectNode(node)
+    return cloned
+  }
+  
+  private func cloneNode(_ head: ComplexLKNode?) {
+    var node = head
+    while node != nil {
+      let tmp: ComplexLKNode = ComplexLKNode(value: node!.value, node?.next)
+      node?.next = tmp
+      node = tmp.next
+    }
+  }
+  
+  private func connectSiblingNode(_ head: ComplexLKNode?) {
+    var node = head
+    while node != nil {
+      let cloned = node?.next
+      if node?.slibing != nil {
+        cloned?.slibing = node?.slibing?.next
+      }
+      node = cloned?.next
+    }
+  }
+  
+  private func reconnectNode(_ head: ComplexLKNode?) -> ComplexLKNode? {
+    var node = head
+    var clonedHead: ComplexLKNode? = nil
+    var clonedNode: ComplexLKNode? = nil
+    
+    if node != nil {
+      clonedHead = node?.next
+      clonedNode = node?.next
+      node?.next = clonedNode?.next
+      node = node?.next
+    }
+    
+    while node != nil {
+      clonedNode?.next = node?.next
+      clonedNode = clonedNode?.next
+      
+      node?.next = clonedNode?.next
+      node = node?.next
+    }
+    return clonedHead
   }
 }
