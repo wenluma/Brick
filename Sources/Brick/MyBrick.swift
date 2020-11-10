@@ -473,6 +473,34 @@ public class BTTree {
       right?.parent = p
     }
   }
+  // 转双向链表
+  static func toDoubleLink(_ root: BTTree?) -> [[Int]] {
+    var res = [[Int]]()
+    if root == nil {
+      return res
+    }
+    // left 2 right
+
+    var path = [Int]()
+    var node = root
+    while node != nil {
+      path.append(node!.value)
+      if node?.right == nil {
+        break
+      }
+      node = node?.right
+    }
+    res.append(path)
+    
+    // right 2 left
+    path.removeAll()
+    while node != nil {
+      path.append(node!.value)
+      node = node?.left
+    }
+    res.append(path)
+    return res
+  }
 }
 
 // 面试题7：重建二叉树
@@ -1798,3 +1826,43 @@ public class MyComplexNodeCopy {
     return clonedHead
   }
 }
+
+// 面试题36：二叉搜索树与双向链表
+// 题目：输入一棵二叉搜索树，将该二叉搜索树转换成一个排序的双向链表。要求
+// 不能创建任何新的结点，只能调整树中结点指针的指向。
+public class MyConvertTree2Link {
+  // 双向链表
+  public func convert(_ pNode: BTTree?) -> BTTree? {
+    var link: BTTree? = nil
+    
+    dfs(pNode, &link)
+
+    var head = link
+    while head != nil, head?.left != nil {
+      head = head?.left
+    }
+    return head
+  }
+  
+  private func dfs(_ pNode: BTTree?, _ link: inout BTTree?) {
+    if pNode == nil {
+      return
+    }
+    
+    var current = pNode
+    if current?.left != nil {
+      dfs(current?.left, &link)
+    }
+    
+    current?.left = link
+    if link != nil {
+      link?.right = current
+    }
+    link = current
+    
+    if current?.right != nil {
+      dfs(current?.right, &link)
+    }
+  }
+}
+
