@@ -1907,3 +1907,43 @@ public class MyCodableTree {
   }
   
 }
+
+// 面试题38：字符串的排列
+// 题目：输入一个字符串，打印出该字符串中字符的所有排列。例如输入字符串abc，
+// 则打印出由字符a、b、c所能排列出来的所有字符串abc、acb、bac、bca、cab和cba。
+
+public class MyPermutation {
+  public func excute(_ s: String) -> [String] {
+
+    let list = s.map { $0 }
+    var used = Array(repeating: false, count: list.count)
+    var res = [String]()
+    var path = [Character]()
+    
+    dfs(list, &path, &used, 0, &res)
+
+    return res
+    
+  }
+  
+  private func dfs(_ list: [Character],
+                   _ path: inout [Character],
+                   _ used: inout [Bool],
+                   _ idx : Int,
+                   _ res: inout [String]) {
+    if idx == list.count {
+      res.append(String(path))
+      return
+    }
+    
+    for i in 0 ..< list.count {
+      if !used[i] {
+        path.append(list[i])
+        used[i] = true
+        dfs(list, &path, &used, idx + 1, &res)
+        path.removeLast()
+        used[i] = false
+      }
+    }
+  }
+}

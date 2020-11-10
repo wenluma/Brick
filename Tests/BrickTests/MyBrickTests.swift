@@ -2758,6 +2758,30 @@ final class MyBrickTests: XCTestCase {
       ])
     } while false
   }
+  
+  func testMyPermutation() {
+    let item = MyPermutation()
+    repeat {
+      let res = item.excute("")
+      XCTAssertEqual(res, [""])
+    } while false
+    
+    repeat {
+      let res = item.excute("a")
+      XCTAssertEqual(res, ["a"])
+    } while false
+    
+    repeat {
+      let res = item.excute("ab")
+      XCTAssertEqual(res, ["ab", "ba"])
+    } while false
+    
+    repeat {
+      let res = item.excute("abc")
+      XCTAssertEqual(res, ["abc", "acb", "bac", "bca", "cab", "cba"])
+    } while false
+  }
+  
 //  MARK: - 辅助
   func teststride() {
     // [from, to)
@@ -2777,6 +2801,12 @@ final class MyBrickTests: XCTestCase {
     } else {
       XCTFail()
     }
+  }
+  
+  func testString2Char() {
+    let a = "abc"
+    let list = a.map({$0 })
+    XCTAssertEqual(list, ["a", "b", "c"])
   }
   
   func testMatrixInt() {
