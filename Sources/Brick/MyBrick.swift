@@ -1865,4 +1865,45 @@ public class MyConvertTree2Link {
     }
   }
 }
+// 面试题37：序列化二叉树
+// 题目：请实现两个函数，分别用来序列化和反序列化二叉树。
+public class MyCodableTree {
+  public func serialize(_ node: BTTree?) -> String {
+    let res = mySerialize(node)
+    return res
+  }
+  
+  private func mySerialize(_ node: BTTree?) -> String {
+    if node == nil {
+      return "$"
+    }
+    let left = mySerialize(node?.left)
+    let right = mySerialize(node?.right)
+    return "\(node!.value),\(left),\(right)"
+  }
+  
+  public func deserialize(_ str: String) -> BTTree?  {
+    
+    var list: [String] = str.components(separatedBy: ",")
+    if list.isEmpty {
+      return nil
+    }
+    
+    let node = myDeserialize(&list)
+    return node
+  }
 
+  private func myDeserialize(_ list: inout [String]) -> BTTree? {
+    let s = list.remove(at: 0)
+    if s == "$" {
+      return nil
+    }
+    
+    let iv = Int(s)!
+    let node: BTTree? = BTTree(value: iv)
+    node?.left = myDeserialize(&list)
+    node?.right = myDeserialize(&list)
+    return node
+  }
+  
+}

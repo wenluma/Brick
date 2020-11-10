@@ -2729,6 +2729,35 @@ final class MyBrickTests: XCTestCase {
     
   }
   
+  func testMyCodableTree() {
+    let item = MyCodableTree()
+    repeat {
+      //            8
+      //        6      10
+      //       5 7    9  11
+      let pNode8 = BTTree(value: 8)
+      let pNode6 = BTTree(value: 6)
+      let pNode10 = BTTree(value: 10)
+      let pNode5 = BTTree(value: 5)
+      let pNode7 = BTTree(value: 7)
+      let pNode9 = BTTree(value: 9)
+      let pNode11 = BTTree(value: 11)
+      BTTree.connect(parent: pNode8, left: pNode6, right: pNode10)
+      BTTree.connect(parent: pNode6, left: pNode5, right: pNode7)
+      BTTree.connect(parent: pNode10, left: pNode9, right: pNode11)
+      
+      let rs = item.serialize(pNode8)
+      XCTAssertEqual(rs, "8,6,5,$,$,7,$,$,10,9,$,$,11,$,$")
+      
+      let rt = item.deserialize(rs)
+      let lrt = BTTree.levelOrder(rt)
+      XCTAssertEqual(lrt,[
+        [8],
+        [6, 10],
+        [5, 7, 9, 11]
+      ])
+    } while false
+  }
 //  MARK: - 辅助
   func teststride() {
     // [from, to)
