@@ -1947,3 +1947,95 @@ public class MyPermutation {
     }
   }
 }
+
+// 面试题39：数组中出现次数超过一半的数字
+// 题目：数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。例
+// 如输入一个长度为9的数组{1, 2, 3, 2, 2, 2, 5, 4, 2}。由于数字2在数组中
+// 出现了5次，超过数组长度的一半，因此输出2。
+public class MyMoreThanHalf {
+  // 技巧，不想等就抵消一次
+  public func find(_ list: [Int]) -> Int {
+    if list.count <= 1 {
+      return 0
+    }
+    var last: Int = list[0]
+    var count: Int = 0
+    for i in 1 ..< list.count {
+      if count == 0 {
+        last = list[i]
+        count += 1
+      } else if list[i] == last {
+        count += 1
+      } else {
+        count -= 1
+      }
+    }
+    return last
+  }
+}
+
+// 采用排序，之后，取值; 快速排序
+public class MyMoreThanHalf2 {
+  
+  public func find(_ source: [Int]) -> Int {
+    var list = source
+
+    if source.count <= 1 {
+      return 0
+    }
+    
+    // check
+    let middle = list.count >> 1
+    var start = 0
+    var end = list.count - 1
+    
+    var index = partition(&list, start, end)
+    while index != middle  {
+      if index > middle {
+        end = index - 1
+        index = partition(&list, start, end)
+      } else {
+        start = index + 1
+        index = partition(&list, start, end)
+      }
+    }
+    let result = list[middle]
+    if checkMoreThanHalf(list, result) {
+      return result
+    }
+    return 0
+  }
+  
+  private func partition(_ list: inout [Int],
+                         _ start: Int,
+                         _ end: Int) -> Int {
+
+    var povit = (start ... end).randomElement()!
+    list.swapAt(povit, end)
+    
+    var small = start - 1
+    for idx in start ..< end {
+      if list[idx] < list[end] {
+        small += 1
+        if small != idx {
+          list.swapAt(small, idx)
+        }
+      }
+    }
+    
+    small += 1
+    list.swapAt(small, end)
+    
+    return small
+  }
+  
+  private func checkMoreThanHalf(_ list: [Int], _ number: Int) -> Bool {
+    let times = list.filter({ $0 == number })
+    if list.count - times.count - times.count < 0 {
+      return true
+    }
+    return false
+  }
+}
+
+

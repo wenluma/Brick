@@ -2782,6 +2782,48 @@ final class MyBrickTests: XCTestCase {
     } while false
   }
   
+  func testMyMoreThanHalf() {
+    let item = MyMoreThanHalf()
+    repeat {
+      let list = [1, 2, 3, 2, 2, 2, 5, 4, 2]
+      let r = item.find(list)
+      XCTAssertEqual(r, 2)
+    } while false
+    
+    repeat {
+      let list = [1]
+      let r = item.find(list)
+      XCTAssertEqual(r, 0)
+    } while false
+    
+    repeat {
+      let list = [Int]()
+      let r = item.find(list)
+      XCTAssertEqual(r, 0)
+    } while false
+  }
+  
+  func testMyMoreThanHalf2() {
+    let item = MyMoreThanHalf2()
+    repeat {
+      let list = [1, 2, 3, 2, 2, 2, 5, 4, 2]
+      let r = item.find(list)
+      XCTAssertEqual(r, 2)
+    } while false
+    
+    repeat {
+      let list = [1]
+      let r = item.find(list)
+      XCTAssertEqual(r, 0)
+    } while false
+    
+    repeat {
+      let list = [Int]()
+      let r = item.find(list)
+      XCTAssertEqual(r, 0)
+    } while false
+  }
+  
 //  MARK: - 辅助
   func teststride() {
     // [from, to)
@@ -2789,6 +2831,14 @@ final class MyBrickTests: XCTestCase {
     // [0, 1) +1
     for i in stride(from: 0, to: -1, by: -1) {
       print(i)
+    }
+  }
+  
+  func testRandom() {
+    let range = 0 ... 2
+    for _ in 0 ..< 100 {
+      let r1 = range.randomElement()
+      print(r1)
     }
   }
   
