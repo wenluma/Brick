@@ -2824,6 +2824,44 @@ final class MyBrickTests: XCTestCase {
     } while false
   }
   
+  func testMyLowestKth() {
+    let item = MyLowestKth()
+    repeat {
+      // k < list.count
+      let list = [4, 5, 1, 6, 2, 7, 3, 8]
+      let result = item.find(list, 4)
+      XCTAssertEqual(result.sorted(), [1, 2, 3, 4])
+    } while false
+    
+    repeat {
+      // k = list.count - 1
+      let list = [4, 5, 1, 6, 2, 7, 3, 8]
+      let result = item.find(list, 8)
+      XCTAssertEqual(result.sorted(), [1, 2, 3, 4, 5, 6, 7, 8])
+    } while false
+    
+    repeat {
+      // k > list.count - 1
+      let list = [4, 5, 1, 6, 2, 7, 3, 8]
+      let result = item.find(list, 10)
+      XCTAssertEqual(result, Array<Int>())
+    } while false
+    
+    repeat {
+      // k > list.count - 1
+      let list = [4, 5, 1, 6, 2, 7, 3, 8]
+      let result = item.find(list, 0)
+      XCTAssertEqual(result, Array<Int>())
+    } while false
+    
+    repeat {
+      // k > list.count - 1
+      let list = [4, 5, 1, 6, 2, 7, 3, 8]
+      let result = item.find(list, 1)
+      XCTAssertEqual(result, [1])
+    } while false
+    
+  }
 //  MARK: - 辅助
   func teststride() {
     // [from, to)

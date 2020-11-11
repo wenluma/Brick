@@ -2038,4 +2038,61 @@ public class MyMoreThanHalf2 {
   }
 }
 
+// 面试题40：最小的k个数
+// 题目：输入n个整数，找出其中最小的k个数。例如输入4、5、1、6、2、7、3、8
+// 这8个数字，则最小的4个数字是1、2、3、4。
+// 法一：快排，返回 前k个值
+// 法二：k个的集合，遍历后续的与集合比较，大的移除并更新， 堆的方式
+public class MyLowestKth {
+  
+  func find(_ source: [Int], _ k: Int) -> [Int] {
+    if k > source.count || k <= 0 {
+      return [Int]()
+    }
+    var list = source
+    var l = 0
+    var r = source.count - 1
+    var idx = partition(&list, l, r)
+    while idx != k - 1 {
+      if idx > k - 1 {
+        r = idx - 1
+        idx = partition(&list, l, r)
+      } else {
+        l = idx + 1
+        idx = partition(&list, l, r)
+      }
+    }
+    
+    let result = Array(list.prefix(k))
+    return result
+  }
+    
+  private func randomPivotIndex(_ l: Int, _ r: Int) -> Int {
+    let range = l ... r
+    let idx = range.randomElement()
+    return idx!
+  }
+  
+  private func partition(_ list: inout [Int],
+                         _ l: Int,
+                         _ r: Int) -> Int {
+    if l == r {
+      return l
+    }
+    let pivot = randomPivotIndex(l, r)
+    list.swapAt(r, pivot)
+    var i = l - 1
+    for j in l ... r - 1 {
+      if list[j] < list[r] {
+        i += 1
+        list.swapAt(i, j)
+      }
+    }
+    i += 1
+    list.swapAt(i, r)
+    return i
+  }
+  
+}
+
 
