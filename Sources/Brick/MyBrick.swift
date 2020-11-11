@@ -2096,93 +2096,16 @@ public class MyLowestKth {
 }
 
 
+fileprivate extension Int {
+  var leftChildIndex: Int { return 2 * self + 1 }
+  var rightChildIndex: Int { return 2 * self + 2 }
+  var parentIndex: Int { return (self - 1)/2 }
+  var isRoot: Bool { return self == 0 }
+}
 // swift 中实现 堆结构
 public struct MyHeap<T> {
-  private var elements: [T]
-  let priorityFunction: (T, T) -> Bool
-  
-  var isEmpty: Bool {
-    elements.isEmpty
-  }
-  
-  var count: Int {
-    elements.count
-  }
-  
-  func peek() -> T? {
-    elements.first
-  }
-  
-  func isRoot(_ index: Int) -> Bool {
-    return index == 0
-  }
-  
-  func leftChildIndex(of index: Int) -> Int {
-    return (index << 1) + 1
-  }
-  
-  func rightChildIndex(of index: Int) -> Int {
-    return (index << 1) + 2
-  }
-  
-  func parentIndex(of index: Int) -> Int {
-    return (index - 1) / 2
-  }
-  
-  func isHighestPriority(at first: Int, than second: Int) -> Bool {
-    priorityFunction(elements[first], elements[second])
-  }
-  
-  func highestPriority(of parentIndex: Int, and childIndex: Int) -> Int {
-    guard childIndex < count && isHighestPriority(at: childIndex, than: parentIndex) else {
-      return parentIndex
-    }
-    return childIndex
-  }
-  
-  func highestPriority(for parent: Int) -> Int {
-    let first = highestPriority(of: parent, and: leftChildIndex(of: parent))
-    return highestPriority(of: first, and: rightChildIndex(of: parent))
-  }
-  
-  mutating func swapElement(at first: Int, with second: Int) {
-    elements.swapAt(first, second)
-  }
-  
-  mutating func enqueue(_ e: T) {
-    elements.append(e)
-    siftUp(elementAt: count - 1)
-  }
-  
-  mutating func siftUp(elementAt index: Int) {
-    let parent = parentIndex(of: index)
-    guard !isRoot(index), isHighestPriority(at: index, than: parent) else {
-      return
-    }
-    swapElement(at: parent, with: index)
-    siftUp(elementAt: parent)
-  }
-  
-  mutating func dequeue() -> T? {
-    guard !isEmpty else {
-      return nil
-    }
-    swapElement(at: 0, with: count - 1)
-    let last = elements.removeLast()
-    if !isEmpty {
-      siftDown(elementAt: 0)
-    }
-    return last
-  }
-  
-  mutating func siftDown(elementAt index: Int) {
-    let childIndex = highestPriority(for: index)
-    if childIndex == index {
-      return
-    }
-    swapElement(at: index, with: childIndex)
-    siftDown(elementAt: childIndex)
-  }
+  var elements: [T]
+  var priorityFunction: (T, T) -> Bool
   
   init(elements: [T], priorityFunction: @escaping (T, T) -> Bool) {
     self.elements = elements
@@ -2190,9 +2113,122 @@ public struct MyHeap<T> {
     buildHeap()
   }
   
-  mutating  func buildHeap() {
-    for index in (0 ..< count/2).reversed() {
-      siftDown(elementAt: index)
+  init(priorityFunction: @escaping (T, T) -> Bool) {
+    elements = [T]()
+    self.priorityFunction = priorityFunction
+  }
+  
+  var count: Int { return elements.count }
+  var isEmpty: Bool { return elements.isEmpty }
+  
+  var peek: T? {
+    return elements.first
+  }
+  
+  private mutating func buildHeap() {
+    for i in (0 ..< count).reversed() {
+      siftDown(for: i)
+    }
+    
+  }
+  
+  mutating func enqueue(_ e: T) {
+    elements.append(e)
+    siftUp(for: count - 1)
+  }
+  
+  @discardableResult
+  mutating func dequeue() -> T? {
+    if isEmpty {return nil}
+    swapElement(elementAt: 0, with: count - 1)
+    let last = elements.removeLast()
+    if !isEmpty {
+      siftDown(for: 0)
+    }
+    return last
+  }
+  
+  mutating func siftUp(for index: Int) {
+    let parent = index.parentIndex
+    guard !index.isRoot, isHighestPriority(at: index, than: parent) else {
+      return
+    }
+    swapElement(elementAt: index, with: parent)
+    siftUp(for: parent)
+  }
+  
+  mutating func siftDown(for index: Int) {
+    let highestIndex = highestPriority(for: index)
+    if highestIndex == index {
+      return
+    }
+    swapElement(elementAt: highestIndex, with: index)
+    siftDown(for: highestIndex)
+  }
+  
+  private func isHighestPriority(at lhf: Int, than rhf: Int) -> Bool {
+    priorityFunction(elements[lhf], elements[rhf])
+  }
+  
+  private func highestPriority(at parentIndex: Int, with childIndex: Int) -> Int {
+    guard childIndex < count, isHighestPriority(at: childIndex, than: parentIndex) else {
+      return parentIndex
+    }
+    return childIndex
+  }
+  
+  private func highestPriority(for parent: Int) -> Int {
+    let f = highestPriority(at: parent, with: parent.leftChildIndex)
+    return highestPriority(at: f, with: parent.rightChildIndex)
+  }
+  
+  mutating func swapElement(elementAt index: Int, with rhf: Int) {
+    elements.swapAt(index, rhf)
+  }
+  
+}
+
+// 面试题41：数据流中的中位数
+// 题目：如何得到一个数据流中的中位数？如果从数据流中读出奇数个数值，那么
+// 中位数就是所有数值排序之后位于中间的数值。如果从数据流中读出偶数个数值，
+// 那么中位数就是所有数值排序之后中间两个数的平均值。
+//解决思路：构建一个大顶堆存小的一半数，构建一个小顶堆，存大的一半数
+
+public class MyMiddleFind {
+  // 小顶堆， 后半部分，大数据
+  var minHeap = MyHeap<Int>(priorityFunction: <)
+  // 大顶堆, 前半部分小数据
+  var maxHeap = MyHeap<Int>(priorityFunction: >)
+  
+  public func append(_ e: Int) {
+    maxHeap.enqueue(e)
+    if let top = maxHeap.peek {
+      minHeap.enqueue(top)
+      maxHeap.dequeue()
+    }
+    
+    if maxHeap.count < minHeap.count {
+      if let top = minHeap.peek {
+        maxHeap.enqueue(top)
+        minHeap.dequeue()
+      }
     }
   }
+  
+  public func getMedian() -> Double? {
+    guard !maxHeap.isEmpty else {
+      return nil
+    }
+    
+    if maxHeap.count > minHeap.count {
+      return Double(maxHeap.peek!)
+    }
+    
+    if let top1 = maxHeap.peek,
+      let top2 = minHeap.peek {
+      return Double((top1 + top2)) / 2.0
+    }
+    return nil
+  }
+  
 }

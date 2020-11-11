@@ -2862,6 +2862,70 @@ final class MyBrickTests: XCTestCase {
     } while false
     
   }
+  
+  func testMedianFind() {
+    let item = MyMiddleFind()
+
+    repeat {
+      let r1: Double? = item.getMedian()
+      XCTAssertEqual(r1, nil)
+    } while false
+    
+    repeat {
+      item.append(5)
+      let r1: Double? = item.getMedian()
+      XCTAssertEqual(r1, 5.0)
+    } while false
+    
+    repeat {
+      item.append(2)
+      let r1: Double? = item.getMedian()
+      XCTAssertEqual(r1, 3.5)
+    } while false
+    
+    repeat {
+      item.append(3)
+      let r1: Double? = item.getMedian()
+      XCTAssertEqual(r1, 3)
+    } while false
+
+    repeat {
+      item.append(4)
+      let r1: Double? = item.getMedian()
+      XCTAssertEqual(r1, 3.5)
+    } while false
+
+    repeat {
+      item.append(1)
+      let r1: Double? = item.getMedian()
+      XCTAssertEqual(r1, 3)
+    } while false
+    
+    repeat {
+      item.append(6)
+      let r1: Double? = item.getMedian()
+      XCTAssertEqual(r1, 3.5)
+    } while false
+    
+    repeat {
+      item.append(7)
+      let r1: Double? = item.getMedian()
+      XCTAssertEqual(r1, 4)
+    } while false
+    
+    repeat {
+      item.append(0)
+      let r1: Double? = item.getMedian()
+      XCTAssertEqual(r1, 3.5)
+    } while false
+    
+    repeat {
+      item.append(8)
+      let r1: Double? = item.getMedian()
+      XCTAssertEqual(r1, 4)
+    } while false
+  }
+  
 //  MARK: - 辅助
   func testMyHeap() {
     repeat {
@@ -2963,6 +3027,20 @@ final class MyBrickTests: XCTestCase {
       XCTAssertEqual(res, [[0, 1], [2,3], [4, 5]])
     } while false
 
+  }
+  
+  func testRange() {
+    // r = 0 ..< 0 不走for 循环
+    // r = 0 ..< 1 输出1
+    // r = 0 ..< 2 输出 0，1； r.reversed 输出 1， 0
+    let r = 0 ..< 2
+    for i in r.reversed() {
+      print(i)
+    }
+    
+    var list = [1,2]
+    list.swapAt(0, 0)
+    
   }
   
   
