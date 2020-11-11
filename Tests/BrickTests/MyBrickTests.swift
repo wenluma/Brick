@@ -2863,6 +2863,51 @@ final class MyBrickTests: XCTestCase {
     
   }
 //  MARK: - 辅助
+  func testMyHeap() {
+    repeat {
+      let list = [3, 2, 8, 5, 0]
+      // 小顶堆
+      var item = MyHeap(elements: list, priorityFunction: <)
+      
+      let r1 = item.dequeue()
+      let r2 = item.dequeue()
+
+      XCTAssert(r1 == 0)
+      XCTAssert(r2 == 2)
+
+    } while false
+
+    repeat {
+      let list = [3, 2, 8, 5, 0]
+      // 大顶堆
+      var item = MyHeap(elements: list, priorityFunction: >)
+      
+      let r1 = item.dequeue()
+      let r2 = item.dequeue()
+
+      XCTAssert(r1 == 8)
+      XCTAssert(r2 == 5)
+
+    } while false
+
+    
+    repeat {
+      let list = [3]
+      // 大顶堆
+      var item = MyHeap(elements: list, priorityFunction: <)
+      let r1 = item.dequeue()
+      XCTAssert(r1 == 3)
+    } while false
+    
+    repeat {
+      let list = [2,0]
+      // 大顶堆
+      var item = MyHeap(elements: list, priorityFunction: <)
+      let r1 = item.dequeue()
+      XCTAssert(r1 == 0)
+    } while false
+    
+  }
   func teststride() {
     // [from, to)
     // [0, -1) -1
@@ -2996,4 +3041,12 @@ final class MyBrickTests: XCTestCase {
     
   }
   
+  class A {}
+  
+  struct B { weak var a: A? }
+  
+  func testAB() {
+    var b = B()
+    b.a = A()
+  }
 }

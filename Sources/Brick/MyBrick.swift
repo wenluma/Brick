@@ -2096,3 +2096,103 @@ public class MyLowestKth {
 }
 
 
+// swift 中实现 堆结构
+public struct MyHeap<T> {
+  private var elements: [T]
+  let priorityFunction: (T, T) -> Bool
+  
+  var isEmpty: Bool {
+    elements.isEmpty
+  }
+  
+  var count: Int {
+    elements.count
+  }
+  
+  func peek() -> T? {
+    elements.first
+  }
+  
+  func isRoot(_ index: Int) -> Bool {
+    return index == 0
+  }
+  
+  func leftChildIndex(of index: Int) -> Int {
+    return (index << 1) + 1
+  }
+  
+  func rightChildIndex(of index: Int) -> Int {
+    return (index << 1) + 2
+  }
+  
+  func parentIndex(of index: Int) -> Int {
+    return (index - 1) / 2
+  }
+  
+  func isHighestPriority(at first: Int, than second: Int) -> Bool {
+    priorityFunction(elements[first], elements[second])
+  }
+  
+  func highestPriority(of parentIndex: Int, and childIndex: Int) -> Int {
+    guard childIndex < count && isHighestPriority(at: childIndex, than: parentIndex) else {
+      return parentIndex
+    }
+    return childIndex
+  }
+  
+  func highestPriority(for parent: Int) -> Int {
+    let first = highestPriority(of: parent, and: leftChildIndex(of: parent))
+    return highestPriority(of: first, and: rightChildIndex(of: parent))
+  }
+  
+  mutating func swapElement(at first: Int, with second: Int) {
+    elements.swapAt(first, second)
+  }
+  
+  mutating func enqueue(_ e: T) {
+    elements.append(e)
+    siftUp(elementAt: count - 1)
+  }
+  
+  mutating func siftUp(elementAt index: Int) {
+    let parent = parentIndex(of: index)
+    guard !isRoot(index), isHighestPriority(at: index, than: parent) else {
+      return
+    }
+    swapElement(at: parent, with: index)
+    siftUp(elementAt: parent)
+  }
+  
+  mutating func dequeue() -> T? {
+    guard !isEmpty else {
+      return nil
+    }
+    swapElement(at: 0, with: count - 1)
+    let last = elements.removeLast()
+    if !isEmpty {
+      siftDown(elementAt: 0)
+    }
+    return last
+  }
+  
+  mutating func siftDown(elementAt index: Int) {
+    let childIndex = highestPriority(for: index)
+    if childIndex == index {
+      return
+    }
+    swapElement(at: index, with: childIndex)
+    siftDown(elementAt: childIndex)
+  }
+  
+  init(elements: [T], priorityFunction: @escaping (T, T) -> Bool) {
+    self.elements = elements
+    self.priorityFunction = priorityFunction
+    buildHeap()
+  }
+  
+  mutating  func buildHeap() {
+    for index in (0 ..< count/2).reversed() {
+      siftDown(elementAt: index)
+    }
+  }
+}
