@@ -2514,3 +2514,31 @@ public class NthUglyNumber {
     return dp[n - 1]
   }
 }
+
+// 面试题50（一）：字符串中第一个只出现一次的字符
+// 题目：在字符串中找出第一个只出现一次的字符。如输入"abaccdeff"，则输出
+// 'b'。
+public class FirstNotRepeatChar {
+  public func only1thCharacter(_ s: String) -> Character {
+    if s.isEmpty {
+      return "\0"
+    }
+    var counter = Array<Int>(repeating: 0, count: 256)
+    var order = Array<Int>(repeating: -1, count: 256)
+    var i = 0
+    for c in s {
+      let ascii = Int(c.asciiValue!)
+      counter[ascii] += 1
+      order[i] = ascii
+      i += 1
+    }
+
+    for i in 0 ..< s.count {
+      let ascii = order[i]
+      if counter[ascii] == 1 {
+        return Character(Unicode.Scalar.init(ascii)!)
+      }
+    }
+    return "\0"
+  }
+}

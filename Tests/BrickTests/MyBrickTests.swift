@@ -3364,6 +3364,32 @@ final class MyBrickTests: XCTestCase {
   }
   
   
+  func testFirstNotRepeatChar() {
+    let item = FirstNotRepeatChar()
+    repeat {
+      let s = "google"
+      let c = item.only1thCharacter(s)
+      XCTAssertEqual(c, "l")
+    } while false
+    
+    repeat {
+      let s = "abcdefg"
+      let c = item.only1thCharacter(s)
+      XCTAssertEqual(c, "a")
+    } while false
+    
+    repeat {
+      let s = "aabccdbd"
+      let c = item.only1thCharacter(s)
+      XCTAssertEqual(c, "\0")
+    } while false
+    
+    repeat {
+      let s = ""
+      let c = item.only1thCharacter(s)
+      XCTAssertEqual(c, "\0")
+    } while false
+  }
   
 //  MARK: - 辅助
   func testMyHeap() {
@@ -3438,6 +3464,10 @@ final class MyBrickTests: XCTestCase {
     } else {
       XCTFail()
     }
+    
+    // int -> char
+    let c = Character(Unicode.Scalar.init(49))
+    XCTAssertEqual(c, "1")
   }
   
   func testString2Char() {
