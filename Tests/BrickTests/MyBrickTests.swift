@@ -3229,6 +3229,70 @@ final class MyBrickTests: XCTestCase {
       XCTAssertEqual(r, 0)
     } while false
   }
+  
+  func testMyMaxDuplicationSubString() {
+    let item = MyMaxDuplicationSubString()
+    repeat {
+      let s = "abcacfrar"
+      let r = item.getDuplicateSubLength(s)
+      XCTAssertEqual(r, 4)
+    } while false
+    
+    repeat {
+      let s = "acfrarabc"
+      let r = item.getDuplicateSubLength(s)
+      XCTAssertEqual(r, 4)
+    } while false
+    
+    repeat {
+      let s = "arabcacfr"
+      let r = item.getDuplicateSubLength(s)
+      XCTAssertEqual(r, 4)
+    } while false
+   
+    repeat {
+      let s = "aaaa"
+      let r = item.getDuplicateSubLength(s)
+      XCTAssertEqual(r, 1)
+    } while false
+    
+    repeat {
+      let s = "abcdefg"
+      let r = item.getDuplicateSubLength(s)
+      XCTAssertEqual(r, 7)
+    } while false
+    
+    repeat {
+      let s = "aaabbbccc"
+      let r = item.getDuplicateSubLength(s)
+      XCTAssertEqual(r, 2)
+    } while false
+    
+    repeat {
+      let s = "abcdcba"
+      let r = item.getDuplicateSubLength(s)
+      XCTAssertEqual(r, 4)
+    } while false
+    
+    repeat {
+      let s = "abcdaef"
+      let r = item.getDuplicateSubLength(s)
+      XCTAssertEqual(r, 6)
+    } while false
+    
+    repeat {
+      let s = "a"
+      let r = item.getDuplicateSubLength(s)
+      XCTAssertEqual(r, 1)
+    } while false
+    
+    repeat {
+      let s = ""
+      let r = item.getDuplicateSubLength(s)
+      XCTAssertEqual(r, 0)
+    } while false
+  }
+  
 //  MARK: - 辅助
   func testMyHeap() {
     repeat {
@@ -3358,6 +3422,13 @@ final class MyBrickTests: XCTestCase {
     var list = [1,2]
     list.swapAt(0, 0)
     
+  }
+  
+  func testString() {
+    let a = "abc"
+    for i in Array(a).indices {
+      print(i)
+    }
   }
   
   

@@ -2450,3 +2450,42 @@ public class MyMaxGiftValue {
     return gird[rows - 1][cols - 1]
   }
 }
+
+// 面试题48：最长不含重复字符的子字符串
+// 题目：请从字符串中找出一个最长的不包含重复字符的子字符串，计算该最长子
+// 字符串的长度。假设字符串中只包含从'a'到'z'的字符。
+public class MyMaxDuplicationSubString {
+  func getDuplicateSubLength(_ s: String) -> Int {
+
+    var current = 0
+    var maxLength = 0
+    var position = Array<Int>(repeating: -1, count: 26)
+    var start: UInt8!  = Character("a").asciiValue
+    var i = 0
+    while i < s.count {
+      let value: UInt8 = s[i].asciiValue!
+      let index = Int(value - start)
+      let pre: Int = position[index]
+      let distance = i - pre
+      if pre < 0 || distance > current {
+        current += 1
+      } else {
+        if current > maxLength {
+          maxLength = current
+        }
+        current = distance
+      }
+      position[index] = i
+      
+      i += 1
+    }
+
+    if current > maxLength {
+      maxLength = current
+    }
+    
+    return maxLength
+  }
+  
+
+}
