@@ -3055,6 +3055,46 @@ final class MyBrickTests: XCTestCase {
     } while false
   }
   
+  
+  func testMySortedList() {
+    let item = MySortedList()
+    repeat {
+      let list = [3, 5, 1, 4, 2]
+      let r = item.min(list)
+      XCTAssertEqual(r, "12345")
+    } while false
+    
+    repeat {
+      let list = [3, 32, 321]
+      let r = item.min(list)
+      XCTAssertEqual(r, "321323")
+    } while false
+    
+    repeat {
+      let list = [3, 323, 32123]
+      let r = item.min(list)
+      XCTAssertEqual(r, "321233233")
+    } while false
+    
+    repeat {
+      let list = [1, 11, 111]
+      let r = item.min(list)
+      XCTAssertEqual(r, "111111")
+    } while false
+    
+    repeat {
+      let list = [321]
+      let r = item.min(list)
+      XCTAssertEqual(r, "321")
+    } while false
+    
+    repeat {
+      let list = [Int]()
+      let r = item.min(list)
+      XCTAssertEqual(r, "")
+    } while false
+  }
+  
 //  MARK: - 辅助
   func testMyHeap() {
     repeat {
@@ -3118,6 +3158,7 @@ final class MyBrickTests: XCTestCase {
     }
   }
   
+  // 字符转数字
   func testCharacter() {
     let c0: Character = "0"
     let c1: Character = "1"
@@ -3134,6 +3175,19 @@ final class MyBrickTests: XCTestCase {
     let list = a.map({$0 })
     XCTAssertEqual(list, ["a", "b", "c"])
   }
+  
+  // 数字转 string
+  func testInt2String() {
+    let a = 5
+    let b = String(a)
+    XCTAssertEqual(b, "5")
+    
+    let c = Int(b)
+    if c != nil {
+      XCTAssertEqual(c!, a)
+    }
+  }
+  
   
   func testMatrixInt() {
     repeat {
