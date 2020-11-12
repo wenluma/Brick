@@ -2952,6 +2952,109 @@ final class MyBrickTests: XCTestCase {
       XCTAssertEqual(r, Int.min)
     } while false
   }
+  
+  func testNumberOf1My() {
+    let item = NumberOf1My()
+    repeat {
+      let n = 0
+      let r = item.count(n)
+      XCTAssertEqual(r, 0)
+    } while false
+    
+    repeat {
+      let n = 1
+      let r = item.count(n)
+      XCTAssertEqual(r, 1)
+    } while false
+    
+    repeat {
+      let n = 5
+      let r = item.count(n)
+      XCTAssertEqual(r, 1)
+    } while false
+    
+    repeat {
+      let n = 10
+      let r = item.count(n)
+      XCTAssertEqual(r, 2)
+    } while false
+    
+    repeat {
+      let n = 55
+      let r = item.count(n)
+      XCTAssertEqual(r, 16)
+    } while false
+    
+    repeat {
+      let n = 99
+      let r = item.count(n)
+      XCTAssertEqual(r, 20)
+    } while false
+    
+    repeat {
+      let n = 10000
+      let r = item.count(n)
+      XCTAssertEqual(r, 4001)
+    } while false
+    
+    repeat {
+      let n = 21345
+      let r = item.count(n)
+      XCTAssertEqual(r, 18821)
+    } while false
+  }
+  
+  func testNumberOf1My2() {
+    let item = NumberOf1My2()
+    repeat {
+      let n = 0
+      let r = item.count(n)
+      XCTAssertEqual(r, 0)
+    } while false
+    
+    repeat {
+      let n = 1
+      let r = item.count(n)
+      XCTAssertEqual(r, 1)
+    } while false
+    
+    repeat {
+      let n = 5
+      let r = item.count(n)
+      XCTAssertEqual(r, 1)
+    } while false
+    
+    repeat {
+      let n = 10
+      let r = item.count(n)
+      XCTAssertEqual(r, 2)
+    } while false
+    
+    repeat {
+      let n = 55
+      let r = item.count(n)
+      XCTAssertEqual(r, 16)
+    } while false
+    
+    repeat {
+      let n = 99
+      let r = item.count(n)
+      XCTAssertEqual(r, 20)
+    } while false
+    
+    repeat {
+      let n = 10000
+      let r = item.count(n)
+      XCTAssertEqual(r, 4001)
+    } while false
+    
+    repeat {
+      let n = 21345
+      let r = item.count(n)
+      XCTAssertEqual(r, 18821)
+    } while false
+  }
+  
 //  MARK: - 辅助
   func testMyHeap() {
     repeat {

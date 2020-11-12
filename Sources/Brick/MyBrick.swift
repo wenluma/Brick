@@ -2258,3 +2258,52 @@ public class MyMaxSubSum {
     return greatest
   }
 }
+
+// 面试题43：从1到n整数中1出现的次数
+// 题目：输入一个整数n，求从1到n这n个整数的十进制表示中1出现的次数。例如
+// 输入12，从1到12这些整数中包含1 的数字有1，10，11和12，1一共出现了5次。
+public class NumberOf1My {
+  public func count(_ n: Int) -> Int {
+    if n <= 0 { return 0 }
+    var sum = 0
+    for i in 0 ... n {
+      sum += oneTimes(i)
+    }
+    return sum
+  }
+  
+  func oneTimes(_ i: Int) -> Int {
+    var n = i
+    var times = 0
+    while n > 0 {
+      if n % 10 == 1 {
+        times += 1
+      }
+      n /= 10
+    }
+    return times
+  }
+}
+
+public class NumberOf1My2 {
+  public func count(_ n: Int) -> Int {
+    if n <= 0 { return 0 }
+    var count = 0
+    var base = 1 // 从各位开始
+    var round = n //
+    while round > 0 {
+      let weight = round % 10 // 当前位
+      round /= 10 // 多少轮， 前一位决定多少轮
+      count += base * round // 当前位经理多少次
+      
+      if weight == 1 {
+        count += (n % base) + 1
+      } else if weight > 1 {
+        count += base // 当前base的次数
+      }
+      base *= 10
+    }
+    
+    return count
+  }
+}
