@@ -3190,6 +3190,45 @@ final class MyBrickTests: XCTestCase {
       XCTAssertEqual(r, 0)
     } while false
   }
+  
+  func testMyMaxGiftValue() {
+    let item = MyMaxGiftValue()
+    repeat {
+      let list = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+      let r = item.getGiftMaxValue(list)
+      XCTAssertEqual(r, 29)
+    } while false
+    
+    repeat {
+      let list = [[1, 10, 3, 8], [12, 2, 9, 6], [5, 7, 4, 11], [3, 7, 16, 5]]
+      let r = item.getGiftMaxValue(list)
+      XCTAssertEqual(r, 53)
+    } while false
+    
+    repeat {
+      let list = [[1, 10, 3, 8]]
+      let r = item.getGiftMaxValue(list)
+      XCTAssertEqual(r, 22)
+    } while false
+    
+    repeat {
+      let list = [[1], [12], [5], [3]]
+      let r = item.getGiftMaxValue(list)
+      XCTAssertEqual(r, 21)
+    } while false
+    
+    repeat {
+      let list = [[1]]
+      let r = item.getGiftMaxValue(list)
+      XCTAssertEqual(r, 1)
+    } while false
+    
+    repeat {
+      let list = [[Int]]()
+      let r = item.getGiftMaxValue(list)
+      XCTAssertEqual(r, 0)
+    } while false
+  }
 //  MARK: - 辅助
   func testMyHeap() {
     repeat {

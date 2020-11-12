@@ -2403,3 +2403,50 @@ public class MyTranslation {
     return a
   }
 }
+
+// 面试题47：礼物的最大价值
+// 题目：在一个m×n的棋盘的每一格都放有一个礼物，每个礼物都有一定的价值
+// （价值大于0）。你可以从棋盘的左上角开始拿格子里的礼物，并每次向左或
+// 者向下移动一格直到到达棋盘的右下角。给定一个棋盘及其上面的礼物，请计
+// 算你最多能拿到多少价值的礼物？
+public class MyMaxGiftValue {
+  func getGiftMaxValue(_ list: [[Int]]) -> Int {
+    var gird = list
+    if gird.isEmpty {
+      return 0
+    }
+    
+    let rows = gird.count
+    let cols = gird[0].count
+    
+    guard rows > 0, cols > 0 else {
+      return 0
+    }
+    
+    // first rows
+    var j = 1
+    while cols > j {
+      gird[0][j] = gird[0][j - 1] + gird[0][j]
+      j += 1
+    }
+    
+    // first cols
+    var i = 1
+    while rows > i {
+      gird[i][0] = gird[i - 1][0] + gird[i][0]
+      i += 1
+    }
+    
+    i = 1
+    while i < rows {
+      j = 1
+      while j < cols {
+        gird[i][j] = max(gird[i-1][j], gird[i][j - 1]) + gird[i][j]
+        j += 1
+      }
+      i += 1
+    }
+    
+    return gird[rows - 1][cols - 1]
+  }
+}
