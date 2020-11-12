@@ -3293,6 +3293,78 @@ final class MyBrickTests: XCTestCase {
     } while false
   }
   
+  func testNthUglyNumber() {
+    let item = NthUglyNumber()
+    repeat {
+      let n = 1
+      let r = item.ugly(n)
+      XCTAssertEqual(r, 1)
+    } while false
+    repeat {
+      let n = 2
+      let r = item.ugly(n)
+      XCTAssertEqual(r, 2)
+    } while false
+    repeat {
+      let n = 3
+      let r = item.ugly(n)
+      XCTAssertEqual(r, 3)
+    } while false
+    repeat {
+      let n = 4
+      let r = item.ugly(n)
+      XCTAssertEqual(r, 4)
+    } while false
+    repeat {
+      let n = 5
+      let r = item.ugly(n)
+      XCTAssertEqual(r, 5)
+    } while false
+    repeat {
+      let n = 6
+      let r = item.ugly(n)
+      XCTAssertEqual(r, 6)
+    } while false
+    repeat {
+      let n = 7
+      let r = item.ugly(n)
+      XCTAssertEqual(r, 8)
+    } while false
+    repeat {
+      let n = 8
+      let r = item.ugly(n)
+      XCTAssertEqual(r, 9)
+    } while false
+    repeat {
+      let n = 9
+      let r = item.ugly(n)
+      XCTAssertEqual(r, 10)
+    } while false
+    repeat {
+      let n = 10
+      let r = item.ugly(n)
+      XCTAssertEqual(r, 12)
+    } while false
+    repeat {
+      let n = 11
+      let r = item.ugly(n)
+      XCTAssertEqual(r, 15)
+    } while false
+    repeat {
+      let n = 1500
+      let r = item.ugly(n)
+      XCTAssertEqual(r, 859963392)
+    } while false
+    repeat {
+      let n = 0
+      let r = item.ugly(n)
+      XCTAssertEqual(r, 0)
+    } while false
+
+  }
+  
+  
+  
 //  MARK: - 辅助
   func testMyHeap() {
     repeat {

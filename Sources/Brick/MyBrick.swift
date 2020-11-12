@@ -2489,3 +2489,28 @@ public class MyMaxDuplicationSubString {
   
 
 }
+// 面试题49：丑数
+// 题目：我们把只包含因子2、3和5的数称作丑数（Ugly Number）。求按从小到
+// 大的顺序的第1500个丑数。例如6、8都是丑数，但14不是，因为它包含因子7。
+// 习惯上我们把1当做第一个丑数。
+public class NthUglyNumber {
+  public func ugly(_ n: Int) -> Int {
+    if n <= 0 {return 0}
+    if n == 1 {return 1}
+    var dp = Array<Int>(repeating: 1, count: n)
+    var a2 = 0, b3 = 0, c5 = 0
+    
+    for i in 1 ..< n {
+      let n2 = dp[a2] * 2
+      let n3 = dp[b3] * 3
+      let n5 = dp[c5] * 5
+      let m1 = min(n2, n3)
+      dp[i] = min(m1, n5)
+      
+      if dp[i] == n2 { a2 += 1}
+      if dp[i] == n3 { b3 += 1}
+      if dp[i] == n5 { c5 += 1}
+    }
+    return dp[n - 1]
+  }
+}
