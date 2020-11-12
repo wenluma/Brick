@@ -3134,6 +3134,62 @@ final class MyBrickTests: XCTestCase {
     } while false
   }
   
+  func testMyTranslation() {
+    let item = MyTranslation()
+    repeat {
+      let n = 0
+      let r = item.translation(n)
+      XCTAssertEqual(r, 1)
+    } while false
+    
+    repeat {
+      let n = 10
+      let r = item.translation(n)
+      XCTAssertEqual(r, 2)
+    } while false
+    
+    repeat {
+      let n = 125
+      let r = item.translation(n)
+      XCTAssertEqual(r, 3)
+    } while false
+    
+    repeat {
+      let n = 126
+      let r = item.translation(n)
+      XCTAssertEqual(r, 2)
+    } while false
+    
+    repeat {
+      let n = 426
+      let r = item.translation(n)
+      XCTAssertEqual(r, 1)
+    } while false
+    
+    repeat {
+      let n = 100
+      let r = item.translation(n)
+      XCTAssertEqual(r, 2)
+    } while false
+    
+    repeat {
+      let n = 101
+      let r = item.translation(n)
+      XCTAssertEqual(r, 2)
+    } while false
+    
+    repeat {
+      let n = 12258
+      let r = item.translation(n)
+      XCTAssertEqual(r, 5)
+    } while false
+    
+    repeat {
+      let n = -100
+      let r = item.translation(n)
+      XCTAssertEqual(r, 0)
+    } while false
+  }
 //  MARK: - 辅助
   func testMyHeap() {
     repeat {
