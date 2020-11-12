@@ -2524,21 +2524,21 @@ public class FirstNotRepeatChar {
       return "\0"
     }
     var counter = Array<Int>(repeating: 0, count: 256)
-    var order = Array<Int>(repeating: -1, count: 256)
-    var i = 0
+    var order = [Int]() // Character 的 asicc 码值
     for c in s {
       let ascii = Int(c.asciiValue!)
       counter[ascii] += 1
-      order[i] = ascii
-      i += 1
-    }
-
-    for i in 0 ..< s.count {
-      let ascii = order[i]
       if counter[ascii] == 1 {
-        return Character(Unicode.Scalar.init(ascii)!)
+        order.append(ascii)
       }
     }
+
+    for i in order {
+      if counter[i] == 1 {
+        return Character(Unicode.Scalar(i)!)
+      }
+    }
+    
     return "\0"
   }
 }
