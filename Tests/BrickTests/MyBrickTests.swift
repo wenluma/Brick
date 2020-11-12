@@ -2926,6 +2926,32 @@ final class MyBrickTests: XCTestCase {
     } while false
   }
   
+  func testMyMaxSubSum() {
+    let item = MyMaxSubSum()
+    repeat {
+      let list = [1, -2, 3, 10, -4, 7, 2, -5]
+      let r = item.get(list)
+      XCTAssertEqual(r, 18)
+    } while false
+    
+    repeat {
+      let list = [-2, -8, -1, -5, -9]
+      let r = item.get(list)
+      XCTAssertEqual(r, -1)
+    } while false
+    
+    repeat {
+      let list = [2, 8, 1, 5, 9]
+      let r = item.get(list)
+      XCTAssertEqual(r, 25)
+    } while false
+    
+    repeat {
+      let list = [Int]()
+      let r = item.get(list)
+      XCTAssertEqual(r, Int.min)
+    } while false
+  }
 //  MARK: - 辅助
   func testMyHeap() {
     repeat {
