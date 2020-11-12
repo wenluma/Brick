@@ -3095,6 +3095,45 @@ final class MyBrickTests: XCTestCase {
     } while false
   }
   
+  func testMySortedList2() {
+    let item = MySortedList2()
+    repeat {
+      let list = [3, 5, 1, 4, 2]
+      let r = item.min(list)
+      XCTAssertEqual(r, "12345")
+    } while false
+
+    repeat {
+      let list = [3, 32, 321]
+      let r = item.min(list)
+      XCTAssertEqual(r, "321323")
+    } while false
+
+    repeat {
+      let list = [3, 323, 32123]
+      let r = item.min(list)
+      XCTAssertEqual(r, "321233233")
+    } while false
+    
+    repeat {
+      let list = [1, 11, 111]
+      let r = item.min(list)
+      XCTAssertEqual(r, "111111")
+    } while false
+    
+    repeat {
+      let list = [321]
+      let r = item.min(list)
+      XCTAssertEqual(r, "321")
+    } while false
+    
+    repeat {
+      let list = [Int]()
+      let r = item.min(list)
+      XCTAssertEqual(r, "")
+    } while false
+  }
+  
 //  MARK: - 辅助
   func testMyHeap() {
     repeat {

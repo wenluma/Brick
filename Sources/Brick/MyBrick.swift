@@ -2330,3 +2330,44 @@ public class MySortedList {
     return res
   }
 }
+
+public class MySortedList2 {
+  func min(_ list: [Int]) -> String {
+    if list.isEmpty {
+      return ""
+    }
+    
+    var source = list.map({ String($0) })
+    quickSort(&source, 0, source.count - 1)
+    var res = ""
+    for i in source {
+      res += i
+    }
+    return res
+  }
+  
+  private func quickSort(_ list: inout [String], _ l: Int, _ r: Int) {
+    if l < r {
+      let pivot = partition(&list, l, r)
+      quickSort(&list, l, pivot - 1)
+      quickSort(&list, pivot+1, r)
+    }
+  }
+  
+  private func partition(_ list: inout [String],
+                         _ l: Int,
+                         _ r: Int) -> Int {
+    let p = (l ... r).randomElement()!
+    list.swapAt(p, r)
+    var i = l - 1
+    for j in l ..< r {
+      if list[j] + list[r] < list[r] + list[j] {
+        i += 1
+        list.swapAt(i, j)
+      }
+    }
+    i += 1
+    list.swapAt(i, r)
+    return i
+  }
+}
