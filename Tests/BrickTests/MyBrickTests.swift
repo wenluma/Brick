@@ -3444,6 +3444,7 @@ final class MyBrickTests: XCTestCase {
       let item = MergeSort()
       let r = item.sort(list)
       print(r)
+      XCTAssertEqual(r, list.sorted())
     } while false
     
     print("======")
@@ -3454,6 +3455,7 @@ final class MyBrickTests: XCTestCase {
       let item = MergeSort()
       let r = item.sort(list)
       print(r)
+      XCTAssertEqual(r, list.sorted())
     } while false
     
     print("======")
@@ -3464,6 +3466,7 @@ final class MyBrickTests: XCTestCase {
       let item = MergeSort()
       let r = item.sort(list)
       print(r)
+      XCTAssertEqual(r, list.sorted())
     } while false
     
     print("======")
@@ -3473,6 +3476,7 @@ final class MyBrickTests: XCTestCase {
       let item = MergeSort()
       let r = item.sort(list)
       print(r)
+      XCTAssertEqual(r, list.sorted())
     } while false
     
     print("======")
@@ -3484,6 +3488,18 @@ final class MyBrickTests: XCTestCase {
       let item = MergeSort()
       let r = item.sort(list)
       print(r)
+      XCTAssertEqual(r, list.sorted())
+    } while false
+    
+    print("======")
+    
+    repeat {
+      let list = makeRandomList(15)
+      print(list)
+      let item = MergeSort()
+      let r = item.sort(list)
+      print(r)
+      XCTAssertEqual(r, list.sorted())
     } while false
     
     print("======")

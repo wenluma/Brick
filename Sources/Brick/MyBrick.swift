@@ -2586,7 +2586,7 @@ public class FirstNotRepeatCharInStringStream {
   
 }
 
-// 归并排序
+// 归并排序 https://visualgo.net/en/sorting
 public class MergeSort {
   public func sort(_ list: [Int]) -> [Int] {
     /*
@@ -2614,47 +2614,38 @@ public class MergeSort {
                      _ l: Int,
                      _ q: Int,
                      _ r: Int) {
-    let L = q - l + 1
-    let R = r - q
+    var left = [Int]()
+    if l <= q {
+      left.append(contentsOf: list[l...q])
+    }
     
-    var LN = [Int]()
-    var RN = [Int]()
+    var right = [Int]()
+    if q + 1 <= r {
+      right.append(contentsOf: list[q+1 ... r])
+    }
     
     var i = 0
-    while i < L {
-      LN.append(list[l + i])
-      i += 1
-    }
-    
     var j = 0
-    while j < R {
-      RN.append(list[q + 1 + j])
-      j += 1
-    }
-    
-    i = 0
-    j = 0
-    
     var k = l
-    while i < L, j < R {
-      if LN[i] < RN[j] {
-        list[k] = LN[i]
+    while i < left.count, j < right.count {
+      if left[i] < right[j] {
+        list[k] = left[i]
         i += 1
       } else {
-        list[k] = RN[j]
+        list[k] = right[j]
         j += 1
       }
       k += 1
     }
-   
-    while i < L {
-      list[k] = LN[i]
+    
+    while i < left.count {
+      list[k] = left[i]
       i += 1
       k += 1
     }
     
-    while j < R {
-      list[k] = RN[j]
+    while j < right.count {
+      list[k] = right[j]
       j += 1
       k += 1
     }
