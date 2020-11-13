@@ -3435,6 +3435,60 @@ final class MyBrickTests: XCTestCase {
     } while false
   }
   
+  func testMergeSort() {
+    
+    
+    repeat {
+      let list = makeRandomList(1)
+      print(list)
+      let item = MergeSort()
+      let r = item.sort(list)
+      print(r)
+    } while false
+    
+    print("======")
+    
+    repeat {
+      let list = makeRandomList(2)
+      print(list)
+      let item = MergeSort()
+      let r = item.sort(list)
+      print(r)
+    } while false
+    
+    print("======")
+    
+    repeat {
+      let list = makeRandomList(3)
+      print(list)
+      let item = MergeSort()
+      let r = item.sort(list)
+      print(r)
+    } while false
+    
+    print("======")
+    repeat {
+      let list = makeRandomList(5)
+      print(list)
+      let item = MergeSort()
+      let r = item.sort(list)
+      print(r)
+    } while false
+    
+    print("======")
+    
+    
+    repeat {
+      let list = makeRandomList(8)
+      print(list)
+      let item = MergeSort()
+      let r = item.sort(list)
+      print(r)
+    } while false
+    
+    print("======")
+    
+  }
 //  MARK: - 辅助
   func testMyHeap() {
     repeat {

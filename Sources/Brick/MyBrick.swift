@@ -7,6 +7,19 @@
 
 import Foundation
 
+public func makeRandomList(_ count: Int,
+                           _ from: Int = 0,
+                           _ to: Int = 100) -> [Int] {
+  var list = [Int]()
+  var i = 0
+  while i < count {
+    let range = from ... to
+    list.append(range.randomElement()!)
+    i += 1
+  }
+  return list
+}
+
 /*
  寻找重复出现的数字,在给定的数组中，找出重复出现的数字
  0-n 个数字
@@ -2572,3 +2585,79 @@ public class FirstNotRepeatCharInStringStream {
   }
   
 }
+
+// 归并排序
+public class MergeSort {
+  public func sort(_ list: [Int]) -> [Int] {
+    /*
+     将数组分割 L,R, 持续分割到不可分割，L,R 仅一个元素,开始上升
+     合并 L， R， 递归网上合并
+     合并完毕之后，更新 list
+     */
+    var source = list
+    core(&source, 0, source.count - 1)
+    return source
+  }
+  
+  private func core(_ list: inout [Int],
+                    _ l: Int,
+                    _ r: Int) {
+    if l < r {
+      let q = (l + r) / 2
+      core(&list, l, q)
+      core(&list, q + 1, r)
+      merge(&list, l, q, r)
+    }
+  }
+  
+  private func merge(_ list: inout [Int],
+                     _ l: Int,
+                     _ q: Int,
+                     _ r: Int) {
+    let L = q - l + 1
+    let R = r - q
+    
+    var LN = [Int]()
+    var RN = [Int]()
+    
+    var i = 0
+    while i < L {
+      LN.append(list[l + i])
+      i += 1
+    }
+    
+    var j = 0
+    while j < R {
+      RN.append(list[q + 1 + j])
+      j += 1
+    }
+    
+    i = 0
+    j = 0
+    
+    var k = l
+    while i < L, j < R {
+      if LN[i] < RN[j] {
+        list[k] = LN[i]
+        i += 1
+      } else {
+        list[k] = RN[j]
+        j += 1
+      }
+      k += 1
+    }
+   
+    while i < L {
+      list[k] = LN[i]
+      i += 1
+      k += 1
+    }
+    
+    while j < R {
+      list[k] = RN[j]
+      j += 1
+      k += 1
+    }
+  }
+}
+
