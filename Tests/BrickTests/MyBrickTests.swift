@@ -3671,6 +3671,101 @@ final class MyBrickTests: XCTestCase {
     } while false
   }
   
+  
+  func testMyFindKInSortedListCount() {
+    let item = MyFindKInSortedListCount()
+    repeat {
+      // 查找的数字出现在数组的中间
+
+      let list = [1, 2, 3, 3, 3, 3, 4, 5]
+      let r =  item.find(list, 3)
+      XCTAssertEqual(r, 4)
+    } while false
+    
+    repeat {
+      // 查找的数组出现在数组的开头
+
+      let list = [1, 2, 3, 3, 3, 3, 4, 5]
+      let r =  item.find(list, 3)
+      XCTAssertEqual(r, 4)
+    } while false
+    
+    
+    repeat {
+      // 查找的数组出现在数组的结尾
+
+      let list = [1, 2, 3, 3, 3, 3]
+      let r =  item.find(list, 3)
+      XCTAssertEqual(r, 4)
+    } while false
+    
+    repeat {
+      // 查找的数字不存在
+
+      let list = [1, 3, 3, 3, 3, 4, 5]
+      let r =  item.find(list, 2)
+      XCTAssertEqual(r, -1)
+    } while false
+    
+    repeat {
+      // 查找的数字比第一个数字还小，不存在
+
+      let list = [1, 3, 3, 3, 3, 4, 5]
+      let r =  item.find(list, 0)
+      XCTAssertEqual(r, -1)
+    } while false
+    
+    repeat {
+      // 查找的数字比最后一个数字还大，不存在
+
+      let list = [1, 3, 3, 3, 3, 4, 5]
+      let r =  item.find(list, 6)
+      XCTAssertEqual(r, -1)
+    } while false
+    
+    repeat {
+      // 数组中的数字从头到尾都是查找的数字
+
+      let list = [3, 3, 3, 3]
+      let r =  item.find(list, 3)
+      XCTAssertEqual(r, 4)
+    } while false
+    
+    repeat {
+      // 数组中的数字从头到尾都是查找的数字
+
+      let list = [3, 3, 3, 3]
+      let r =  item.find(list, 4)
+      XCTAssertEqual(r, -1)
+    } while false
+    
+    repeat {
+      // 数组中只有一个数字，不是查找的数字
+
+      let list = [3]
+      let r =  item.find(list, 4)
+      XCTAssertEqual(r, -1)
+    } while false
+    
+    
+    repeat {
+      // 数组中只有一个数字，是查找的数字
+
+      let list = [3]
+      let r =  item.find(list, 3)
+      XCTAssertEqual(r, 1)
+    } while false
+    
+    
+    repeat {
+      // 数组中只有一个数字，是查找的数字
+
+      let list = [Int]()
+      let r =  item.find(list, 0)
+      XCTAssertEqual(r, -1)
+    } while false
+  }
+  
 //  MARK: - 辅助
   func testMyHeap() {
     repeat {

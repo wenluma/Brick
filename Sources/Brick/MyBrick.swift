@@ -2762,3 +2762,66 @@ public class FirstCommonNode {
     return count
   }
 }
+
+// 面试题53（一）：数字在排序数组中出现的次数
+// 题目：统计一个数字在排序数组中出现的次数。例如输入排序数组{1, 2, 3, 3,
+// 3, 3, 4, 5}和数字3，由于3在这个数组中出现了4次，因此输出4。
+public class MyFindKInSortedListCount {
+  
+  /// 获取列表中k出现的次数
+  /// - Parameters:
+  ///   - list: sorted list
+  ///   - k: number k
+  /// - Returns: k show times; NotFound = -1
+  public func find(_ list: [Int], _ k: Int) -> Int {
+
+    let first = findFirstKIndex(list, k)
+    if first < 0 {
+      return -1
+    }
+    let last = findLastKIndex(list, k)
+    return last - first + 1
+  }
+  
+  private func findFirstKIndex(_ list: [Int], _ k: Int) -> Int {
+    var low = 0
+    var high = list.count - 1
+    while low <= high {
+      let middle = low + (high - low) / 2
+      if list[middle] > k {
+        high = middle - 1
+      } else if list[middle] < k {
+        low = middle + 1
+      } else {
+        if middle == 0 || list[middle - 1] != k {
+          return middle
+        } else {
+          high = middle - 1
+        }
+      }
+    }
+    
+    return -1
+  }
+  
+  private func findLastKIndex(_ list: [Int], _ k: Int) -> Int {
+    var low = 0
+    var high = list.count - 1
+    while low <= high {
+      let middle = low + (high - low) / 2
+      if list[middle] < k {
+        low = middle + 1
+      } else if list[middle] > k {
+        high = middle - 1
+      } else {
+        if middle == list.count - 1 || list[middle + 1] != k {
+          return middle
+        } else {
+          low = middle + 1
+        }
+      }
+    }
+    return -1
+  }
+}
+
