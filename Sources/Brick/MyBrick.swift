@@ -2652,3 +2652,60 @@ public class MergeSort {
   }
 }
 
+// 面试题51：数组中的逆序对
+// 题目：在数组中的两个数字如果前面一个数字大于后面的数字，则这两个数字组
+// 成一个逆序对。输入一个数组，求出这个数组中的逆序对的总数。
+
+public class MyReversePairs {
+  func reversePairsCount(_ nums: [Int]) -> Int {
+    if nums.count < 2 {
+      return 0
+    }
+    var tmp = Array(nums)
+    var copy = Array(nums)
+    
+    return reversePairs(&copy, 0, nums.count - 1, &tmp)
+  }
+  
+  private func reversePairs(_ nums: inout [Int], _ l: Int, _ r: Int, _ tmp: inout [Int]) -> Int {
+    if l == r {
+      return 0
+    }
+    let middle = l + (r - l) / 2
+    let leftPairs = reversePairs(&nums, l, middle, &tmp)
+    let rightPairs = reversePairs(&nums, middle + 1, r, &tmp)
+    if nums[middle] < nums[middle + 1] {
+      return leftPairs + rightPairs
+    }
+    let crossPairs = mergeAndCount(&nums, l, r, middle, &tmp)
+    return leftPairs + crossPairs + rightPairs
+  }
+  
+  private func mergeAndCount(_ nums: inout [Int], _ l: Int, _ r: Int, _ mid: Int, _ tmp: inout [Int]) -> Int {
+    for i in l ... r {
+      tmp[i] = nums[i]
+    }
+    var i = l
+    var j = mid + 1
+    
+    var count = 0
+    for k in l ... r {
+      if i == mid + 1 {
+        nums[k] = tmp[j]
+        j += 1
+      } else if j == r + 1 {
+        nums[k] = tmp[i]
+        i += 1
+      } else if tmp[i] <= tmp[j] {
+        nums[k] = tmp[i]
+        i += 1
+      } else {
+        nums[k] = tmp[j]
+        j += 1
+        count += (mid - i + 1)
+      }
+    }
+    return count
+  }
+  
+}

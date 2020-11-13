@@ -3505,6 +3505,60 @@ final class MyBrickTests: XCTestCase {
     print("======")
     
   }
+  
+  func testMyReversePairs() {
+    let item = MyReversePairs()
+    
+    repeat {
+      let list = [1, 2, 1, 2, 1]
+      let r = item.reversePairsCount(list)
+      XCTAssertEqual(r, 3)
+    } while false
+    
+    repeat {
+      let list = [1, 2, 3, 4, 7, 6, 5]
+      let r = item.reversePairsCount(list)
+      XCTAssertEqual(r, 3)
+    } while false
+    
+    repeat {
+      let list = [6, 5, 4, 3, 2, 1]
+      let r = item.reversePairsCount(list)
+      XCTAssertEqual(r, 15)
+    } while false
+
+    repeat {
+      let list = [1, 2, 3, 4, 5, 6]
+      let r = item.reversePairsCount(list)
+      XCTAssertEqual(r, 0)
+    } while false
+
+    repeat {
+      let list = [1]
+      let r = item.reversePairsCount(list)
+      XCTAssertEqual(r, 0)
+    } while false
+    
+    repeat {
+      let list = [1, 2]
+      let r = item.reversePairsCount(list)
+      XCTAssertEqual(r, 0)
+    } while false
+
+    repeat {
+      let list = [2, 1]
+      let r = item.reversePairsCount(list)
+      XCTAssertEqual(r, 1)
+    } while false
+
+    repeat {
+      let list = [Int]()
+      let r = item.reversePairsCount(list)
+      XCTAssertEqual(r, 0)
+    } while false
+  }
+
+  
 //  MARK: - 辅助
   func testMyHeap() {
     repeat {
