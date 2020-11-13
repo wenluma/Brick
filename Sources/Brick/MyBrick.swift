@@ -227,7 +227,7 @@ public class LKNode {
     self.value = value
     self.next = next
   }
-  
+
   // 如果不设置 items
   
   static func makeLKNode(items: [Int]) -> LKNode? {
@@ -240,6 +240,11 @@ public class LKNode {
     return dumpy.next
   }
   
+  static func connect(_ current: LKNode?,  next: LKNode? ) {
+    if current != nil {
+      current?.next = next
+    }
+  }
   // index head 后的个数，index = 1, node 之后，第一个
   static func get(node: LKNode?, index: Int) -> LKNode? {
     var i = 0
@@ -2708,4 +2713,52 @@ public class MyReversePairs {
     return count
   }
   
+}
+
+// 面试题52：两个链表的第一个公共结点
+// 题目：输入两个链表，找出它们的第一个公共结点。
+public class FirstCommonNode {
+  public func solution(_ l1: LKNode?, _ l2: LKNode?) -> LKNode? {
+    // 思路： 统计2链表的长度，长的先走detal 步；
+    
+    let l1Count = linkCount(l1)
+    let l2Count = linkCount(l2)
+    var p1 = l1
+    var p2 = l2
+    if l1Count > l2Count {
+      p1 = linkKStep(p1, l1Count - l2Count)
+    } else {
+      p2 = linkKStep(p2, l2Count - l1Count)
+    }
+    
+    if p1 == nil || p2 == nil {
+      return nil
+    }
+    
+    while p1 != nil, p2 != nil, p1?.value != p2?.value {
+      p1 = p1?.next
+      p2 = p2?.next
+    }
+    return p1
+  }
+  
+  private func linkKStep(_ node: LKNode?, _ step: Int) -> LKNode? {
+    var k = step
+    var p = node
+    while k > 0 {
+      p = p?.next
+      k -= 1
+    }
+    return p
+  }
+  
+  private func linkCount(_ node: LKNode?) -> Int {
+    var n1 = node
+    var count = 0
+    while n1 != nil {
+      n1 = n1?.next
+      count += 1
+    }
+    return count
+  }
 }

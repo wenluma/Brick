@@ -3558,6 +3558,118 @@ final class MyBrickTests: XCTestCase {
     } while false
   }
 
+  func testFirstCommonNode() {
+    let item = FirstCommonNode()
+    repeat {
+      // 1 - 2 - 3 \
+      //            6 - 7
+      //     4 - 5 /
+      
+      let pNode1 = LKNode(1)
+      let pNode2 = LKNode(2)
+      let pNode3 = LKNode(3)
+      let pNode4 = LKNode(4)
+      let pNode5 = LKNode(5)
+      let pNode6 = LKNode(6)
+      let pNode7 = LKNode(7)
+      LKNode.connect(pNode1, next: pNode2)
+      LKNode.connect(pNode2, next: pNode3)
+      LKNode.connect(pNode3, next: pNode6)
+      LKNode.connect(pNode4, next: pNode5)
+      LKNode.connect(pNode5, next: pNode6)
+      LKNode.connect(pNode6, next: pNode7)
+      let r = item.solution(pNode1, pNode4)
+      XCTAssertEqual(r, pNode6)
+      
+    } while false
+    
+    repeat {
+      // 没有公共结点
+      // 1 - 2 - 3 - 4
+      //
+      // 5 - 6 - 7
+      let pNode1 = LKNode(1)
+      let pNode2 = LKNode(2)
+      let pNode3 = LKNode(3)
+      let pNode4 = LKNode(4)
+      let pNode5 = LKNode(5)
+      let pNode6 = LKNode(6)
+      let pNode7 = LKNode(7)
+      LKNode.connect(pNode1, next: pNode2)
+      LKNode.connect(pNode2, next: pNode3)
+      LKNode.connect(pNode3, next: pNode4)
+      LKNode.connect(pNode5, next: pNode6)
+      LKNode.connect(pNode6, next: pNode7)
+      let r = item.solution(pNode1, pNode5)
+      XCTAssertEqual(r, nil)
+      
+    } while false
+    
+    repeat {
+      // 公共结点是最后一个结点
+      // 1 - 2 - 3 - 4 \
+      //                7
+      //         5 - 6 /
+      let pNode1 = LKNode(1)
+      let pNode2 = LKNode(2)
+      let pNode3 = LKNode(3)
+      let pNode4 = LKNode(4)
+      let pNode5 = LKNode(5)
+      let pNode6 = LKNode(6)
+      let pNode7 = LKNode(7)
+      LKNode.connect(pNode1, next: pNode2)
+      LKNode.connect(pNode2, next: pNode3)
+      LKNode.connect(pNode3, next: pNode4)
+      LKNode.connect(pNode4, next: pNode7)
+      LKNode.connect(pNode5, next: pNode6)
+      LKNode.connect(pNode6, next: pNode7)
+      let r = item.solution(pNode1, pNode5)
+      XCTAssertEqual(r, pNode7)
+      
+    } while false
+    
+    repeat {
+      // 公共结点是第一个结点
+      // 1 - 2 - 3 - 4 - 5
+      // 两个链表完全重合
+
+      let pNode1 = LKNode(1)
+      let pNode2 = LKNode(2)
+      let pNode3 = LKNode(3)
+      let pNode4 = LKNode(4)
+      let pNode5 = LKNode(5)
+      LKNode.connect(pNode1, next: pNode2)
+      LKNode.connect(pNode2, next: pNode3)
+      LKNode.connect(pNode3, next: pNode4)
+      LKNode.connect(pNode4, next: pNode5)
+      let r = item.solution(pNode1, pNode1)
+      XCTAssertEqual(r, pNode1)
+      
+    } while false
+    
+    repeat {
+      // 输入的两个链表有一个空链表
+      let pNode1 = LKNode(1)
+      let pNode2 = LKNode(2)
+      let pNode3 = LKNode(3)
+      let pNode4 = LKNode(4)
+      let pNode5 = LKNode(5)
+      LKNode.connect(pNode1, next: pNode2)
+      LKNode.connect(pNode2, next: pNode3)
+      LKNode.connect(pNode3, next: pNode4)
+      LKNode.connect(pNode4, next: pNode5)
+      let r = item.solution(nil, pNode1)
+      XCTAssertEqual(r, nil)
+      
+    } while false
+    
+    repeat {
+      // 输入的两个链表有一个空链表
+      let r = item.solution(nil, nil)
+      XCTAssertEqual(r, nil)
+      
+    } while false
+  }
   
 //  MARK: - 辅助
   func testMyHeap() {
