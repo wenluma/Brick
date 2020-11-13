@@ -2825,3 +2825,31 @@ public class MyFindKInSortedListCount {
   }
 }
 
+// 面试题53（二）：0到n-1中缺失的数字
+// 题目：一个长度为n-1的递增排序数组中的所有数字都是唯一的，并且每个数字
+// 都在范围0到n-1之内。在范围0到n-1的n个数字中有且只有一个数字不在该数组
+// 中，请找出这个数字。
+
+public class FindMissNumber {
+  
+  public func find(_ list: [Int]) -> Int {
+    if list.isEmpty {return -1}
+    var low = 0
+    var high = list.count - 1
+    while low <= high {
+      let m = low + (high - low) / 2
+      if list[m] != m {
+        if m == 0 || list[m - 1] == m - 1 {
+          return m
+        }
+        high = m - 1
+      } else {
+        low = m + 1
+      }
+    }
+    if low == list.count {
+      return low
+    }
+    return -1
+  }
+}

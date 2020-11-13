@@ -3766,6 +3766,58 @@ final class MyBrickTests: XCTestCase {
     } while false
   }
   
+  func testFindMissNumber() {
+    let item = FindMissNumber()
+    repeat {
+      // 缺失的是第一个数字0
+
+      let numbers = [1, 2, 3, 4, 5]
+      let r = item.find(numbers)
+      XCTAssertEqual(r, 0)
+    } while false
+    
+    repeat {
+      // 缺失的是最后一个数字
+
+      let numbers = [0, 1, 2, 3, 4]
+      let r = item.find(numbers)
+      XCTAssertEqual(r, 5)
+    } while false
+    
+    repeat {
+      // 缺失的是中间某个数字0
+
+      let numbers = [0, 1, 2, 4, 5]
+      let r = item.find(numbers)
+      XCTAssertEqual(r, 3)
+    } while false
+    
+    
+    repeat {
+      // 数组中只有一个数字，缺失的是第一个数字0
+      let numbers = [1]
+      let r = item.find(numbers)
+      XCTAssertEqual(r, 0)
+      
+    } while false
+    
+    repeat {
+      // 数组中只有一个数字，缺失的是最后一个数字1
+      let numbers = [0]
+      let r = item.find(numbers)
+      XCTAssertEqual(r, 1)
+      
+    } while false
+    
+    repeat {
+      // 空数组
+      let numbers = [Int]()
+      let r = item.find(numbers)
+      XCTAssertEqual(r, -1)
+      
+    } while false
+  }
+  
 //  MARK: - 辅助
   func testMyHeap() {
     repeat {
