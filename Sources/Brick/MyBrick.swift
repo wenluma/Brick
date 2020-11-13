@@ -2542,3 +2542,38 @@ public class FirstNotRepeatChar {
     return "\0"
   }
 }
+// 面试题50（二）：字符流中第一个只出现一次的字符
+// 题目：请实现一个函数用来找出字符流中第一个只出现一次的字符。例如，当从
+// 字符流中只读出前两个字符"go"时，第一个只出现一次的字符是'g'。当从该字
+// 符流中读出前六个字符"google"时，第一个只出现一次的字符是'l'。
+public class FirstNotRepeatCharInStringStream {
+  static let invaidChar: Character = "\0"
+  var indexs: [Int] = Array(repeating: -1, count: 256)
+  var index: Int = 0
+  public func append(_ c: Character) {
+    if let ascii = c.asciiValue {
+      let v = Int(ascii)
+      if indexs[v] == -1 {
+        indexs[v] = index
+      } else if indexs[v] >= 0 {
+        indexs[v] = -2
+      }
+      index += 1
+    }
+  }
+  
+  public func getFirst() -> Character {
+    var minIndex = Int.max
+    var c : Character = FirstNotRepeatCharInStringStream.invaidChar
+    for i in 0 ..< indexs.count {
+      let v = indexs[i]
+      if v >= 0, v < minIndex {
+        if minIndex > v {
+          c = Character(Unicode.Scalar(i)!)
+          minIndex = v
+        }
+      }
+    }
+    return c
+  }
+}

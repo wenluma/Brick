@@ -3391,6 +3391,50 @@ final class MyBrickTests: XCTestCase {
     } while false
   }
   
+  func testFirstNotRepeatChar2() {
+    let item = FirstNotRepeatCharInStringStream()
+    repeat {
+      let r = item.getFirst()
+      XCTAssertEqual(r, "\0")
+    } while false
+    
+    repeat {
+      item.append("g")
+      let r = item.getFirst()
+      XCTAssertEqual(r, "g")
+    } while false
+    
+    repeat {
+      item.append("o")
+      let r = item.getFirst()
+      XCTAssertEqual(r, "g")
+    } while false
+    
+    repeat {
+      item.append("o")
+      let r = item.getFirst()
+      XCTAssertEqual(r, "g")
+    } while false
+    
+    repeat {
+      item.append("g")
+      let r = item.getFirst()
+      XCTAssertEqual(r, "\0")
+    } while false
+    
+    repeat {
+      item.append("l")
+      let r = item.getFirst()
+      XCTAssertEqual(r, "l")
+    } while false
+    
+    repeat {
+      item.append("e")
+      let r = item.getFirst()
+      XCTAssertEqual(r, "l")
+    } while false
+  }
+  
 //  MARK: - 辅助
   func testMyHeap() {
     repeat {
