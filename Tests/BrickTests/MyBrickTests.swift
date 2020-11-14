@@ -4641,6 +4641,73 @@ final class MyBrickTests: XCTestCase {
     } while false
   }
   
+  func testFindNumsAppearOnce2() {
+    let item = FindNumsAppearOnce2()
+    repeat {
+      let list = [1, 1, 2, 2, 2, 1, 3]
+      var result: [Int] = item.find(list)
+      result = result.sorted()
+      XCTAssertEqual(result, [3])
+    } while false
+    
+    repeat {
+      let list = [4, 3, 3, 2, 2, 2, 3]
+      var result: [Int] = item.find(list)
+      result = result.sorted()
+      XCTAssertEqual(result, [4])
+    } while false
+    
+    repeat {
+      let list = [4, 4, 1, 1, 1, 7, 4]
+      var result: [Int] = item.find(list)
+      result = result.sorted()
+      XCTAssertEqual(result, [7])
+    } while false
+    
+    
+    repeat {
+      let list = [-10, 214, 214, 214]
+      var result: [Int] = item.find(list)
+      result = result.sorted()
+      XCTAssertEqual(result, [-10])
+    } while false
+    
+    repeat {
+      let list = [-209, 3467, -209, -209]
+      var result: [Int] = item.find(list)
+      result = result.sorted()
+      XCTAssertEqual(result, [3467])
+    } while false
+    
+    repeat {
+      let list = [1024, -1025, 1024, -1025, 1024, -1025, 1023]
+      var result: [Int] = item.find(list)
+      result = result.sorted()
+      XCTAssertEqual(result, [1023])
+    } while false
+    
+    repeat {
+      let list = [ -1024, -1024, -1024, -1023]
+      var result: [Int] = item.find(list)
+      result = result.sorted()
+      XCTAssertEqual(result, [-1023])
+    } while false
+    
+    repeat {
+      let list = [ -23, 0, 214, -23, 214, -23, 214]
+      var result: [Int] = item.find(list)
+      result = result.sorted()
+      XCTAssertEqual(result, [0])
+    } while false
+    
+    repeat {
+      let list = [  0, 3467, 0, 0, 0, 0, 0, 0]
+      var result: [Int] = item.find(list)
+      result = result.sorted()
+      XCTAssertEqual(result, [3467])
+    } while false
+  }
+  
 //  MARK: - 辅助
   func testBitShift() {
     let item = [1,0,2,3]

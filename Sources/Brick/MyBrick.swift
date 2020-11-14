@@ -3110,3 +3110,20 @@ public class FindNumsAppearOnce1 {
     return [sum]
   }
 }
+
+public class FindNumsAppearOnce2 {
+  public func find(_ list: [Int]) -> [Int] {
+    if list.count < 4 {
+      return [Int]()
+    }
+  
+    var x = 0, y = 0
+    for num in list {
+      x = (x ^ num) & ~y
+      y = (y ^ num) & ~x
+    }
+    return [x]
+  }
+}
+
+
