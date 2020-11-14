@@ -2965,3 +2965,30 @@ public class DeepTree2 {
     return deep
   }
 }
+
+// 面试题55（二）：平衡二叉树
+// 题目：输入一棵二叉树的根结点，判断该树是不是平衡二叉树。如果某二叉树中
+// 任意结点的左右子树的深度相差不超过1，那么它就是一棵平衡二叉树。
+public class BalancedBTree1 {
+  public func isBalance(_ root: BTTree?) -> Bool {
+    if root == nil {
+      return true
+    }
+    let leftDeep = deep(root?.left)
+    let rightDeep = deep(root?.right)
+    let d = leftDeep - rightDeep
+    if d < -1 || d > 1 {
+      return false
+    }
+    return isBalance(root?.left) && isBalance(root?.right)
+  }
+  
+  private func deep(_ root: BTTree?) -> Int {
+    if root == nil {
+      return 0
+    }
+    let left = deep(root?.left)
+    let right = deep(root?.right)
+    return left > right ? (left + 1) : (right + 1)
+  }
+}

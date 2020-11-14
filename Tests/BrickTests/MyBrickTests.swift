@@ -4185,6 +4185,142 @@ final class MyBrickTests: XCTestCase {
     
     
   }
+  
+  func testBalancedBTree1() {
+    let item = BalancedBTree1()
+    repeat {
+      // 完全二叉树
+      //             1
+      //         /      \
+      //        2        3
+      //       /\       / \
+      //      4  5     6   7
+      let pNode1 = BTTree(value: 1)
+      let pNode2 = BTTree(value: 2)
+      let pNode3 = BTTree(value: 3)
+      let pNode4 = BTTree(value: 4)
+      let pNode5 = BTTree(value: 5)
+      let pNode6 = BTTree(value: 6)
+      let pNode7 = BTTree(value: 7)
+      BTTree.connect(parent: pNode1, left: pNode2, right: pNode3)
+      BTTree.connect(parent: pNode2, left: pNode4, right: pNode5)
+      BTTree.connect(parent: pNode3, left: pNode6, right: pNode7)
+      let result: Bool = item.isBalance(pNode1)
+      XCTAssertEqual(result, true)
+    } while false
+    
+    
+    repeat {
+      // 不是完全二叉树，但是平衡二叉树
+      //             1
+      //         /      \
+      //        2        3
+      //       /\         \
+      //      4  5         6
+      //        /
+      //       7
+      let pNode1 = BTTree(value: 1)
+      let pNode2 = BTTree(value: 2)
+      let pNode3 = BTTree(value: 3)
+      let pNode4 = BTTree(value: 4)
+      let pNode5 = BTTree(value: 5)
+      let pNode6 = BTTree(value: 6)
+      let pNode7 = BTTree(value: 7)
+      BTTree.connect(parent: pNode1, left: pNode2, right: pNode3)
+      BTTree.connect(parent: pNode2, left: pNode4, right: pNode5)
+      BTTree.connect(parent: pNode3, left: nil, right: pNode6)
+      BTTree.connect(parent: pNode5, left: pNode7, right: nil)
+      let result: Bool = item.isBalance(pNode1)
+      XCTAssertEqual(result, true)
+    } while false
+    
+    repeat {
+      // 不是平衡二叉树
+      //             1
+      //         /      \
+      //        2        3
+      //       /\
+      //      4  5
+      //        /
+      //       6
+      let pNode1 = BTTree(value: 1)
+      let pNode2 = BTTree(value: 2)
+      let pNode3 = BTTree(value: 3)
+      let pNode4 = BTTree(value: 4)
+      let pNode5 = BTTree(value: 5)
+      let pNode6 = BTTree(value: 6)
+      BTTree.connect(parent: pNode1, left: pNode2, right: pNode3)
+      BTTree.connect(parent: pNode2, left: pNode4, right: pNode5)
+      BTTree.connect(parent: pNode5, left: pNode6, right: nil)
+      let result: Bool = item.isBalance(pNode1)
+      XCTAssertEqual(result, false)
+
+    } while false
+    
+    repeat {
+      //               1
+      //              /
+      //             2
+      //            /
+      //           3
+      //          /
+      //         4
+      //        /
+      //       5
+      let pNode1 = BTTree(value: 1)
+      let pNode2 = BTTree(value: 2)
+      let pNode3 = BTTree(value: 3)
+      let pNode4 = BTTree(value: 4)
+      let pNode5 = BTTree(value: 5)
+      BTTree.connect(parent: pNode1, left: pNode2, right: nil)
+      BTTree.connect(parent: pNode2, left: pNode3, right: nil)
+      BTTree.connect(parent: pNode3, left: pNode4, right: nil)
+      BTTree.connect(parent: pNode4, left: pNode5, right: nil)
+      let result: Bool = item.isBalance(pNode1)
+      XCTAssertEqual(result, false)
+
+    } while false
+    
+    repeat {
+      // 1
+      //  \
+      //   2
+      //    \
+      //     3
+      //      \
+      //       4
+      //        \
+      //         5
+      let pNode1 = BTTree(value: 1)
+      let pNode2 = BTTree(value: 2)
+      let pNode3 = BTTree(value: 3)
+      let pNode4 = BTTree(value: 4)
+      let pNode5 = BTTree(value: 5)
+      BTTree.connect(parent: pNode1, left: nil, right: pNode2)
+      BTTree.connect(parent: pNode2, left: nil, right: pNode3)
+      BTTree.connect(parent: pNode3, left: nil, right: pNode4)
+      BTTree.connect(parent: pNode4, left: nil, right: pNode5)
+      let result: Bool = item.isBalance(pNode1)
+      XCTAssertEqual(result, false)
+
+    } while false
+    
+    repeat {
+      // 树中只有1个结点
+      let pNode1 = BTTree(value: 1)
+      let result: Bool = item.isBalance(pNode1)
+      XCTAssertEqual(result, true)
+      
+    } while false
+    
+    repeat {
+      // 树中没有结点
+      let result: Bool = item.isBalance(nil)
+      XCTAssertEqual(result, true)
+    } while false
+
+  }
+  
 //  MARK: - 辅助
   func testMyHeap() {
     repeat {
