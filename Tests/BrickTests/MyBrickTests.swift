@@ -3998,6 +3998,99 @@ final class MyBrickTests: XCTestCase {
     
   }
   
+  func testDeepTree1() {
+    let item = DeepTree1()
+    repeat {
+      //            1
+      //         /      \
+      //        2        3
+      //       /\         \
+      //      4  5         6
+      //        /
+      //       7
+      let pNode1 = BTTree(value: 1)
+      let pNode2 = BTTree(value: 2)
+      let pNode3 = BTTree(value: 3)
+      let pNode4 = BTTree(value: 4)
+      let pNode5 = BTTree(value: 5)
+      let pNode6 = BTTree(value: 6)
+      let pNode7 = BTTree(value: 7)
+      BTTree.connect(parent: pNode1, left: pNode2, right: pNode3)
+      BTTree.connect(parent: pNode2, left: pNode4, right: pNode5)
+      BTTree.connect(parent: pNode3, left: nil, right: pNode6)
+      BTTree.connect(parent: pNode5, left: pNode7, right: nil)
+      let result: Int = item.deep(pNode1)
+      XCTAssertEqual(result, 4)
+    } while false
+    
+    repeat {
+      //               1
+      //              /
+      //             2
+      //            /
+      //           3
+      //          /
+      //         4
+      //        /
+      //       5
+      let pNode1 = BTTree(value: 1)
+      let pNode2 = BTTree(value: 2)
+      let pNode3 = BTTree(value: 3)
+      let pNode4 = BTTree(value: 4)
+      let pNode5 = BTTree(value: 5)
+      BTTree.connect(parent: pNode1, left: pNode2, right: nil)
+      BTTree.connect(parent: pNode2, left: pNode3, right: nil)
+      BTTree.connect(parent: pNode3, left: pNode4, right: nil)
+      BTTree.connect(parent: pNode4, left: pNode5, right: nil)
+      let result: Int = item.deep(pNode1)
+      XCTAssertEqual(result, 5)
+      
+    } while false
+    
+    repeat {
+      // 1
+      //  \
+      //   2
+      //    \
+      //     3
+      //      \
+      //       4
+      //        \
+      //         5
+
+      let pNode1 = BTTree(value: 1)
+      let pNode2 = BTTree(value: 2)
+      let pNode3 = BTTree(value: 3)
+      let pNode4 = BTTree(value: 4)
+      let pNode5 = BTTree(value: 5)
+      BTTree.connect(parent: pNode1, left: nil, right: pNode2)
+      BTTree.connect(parent: pNode2, left: nil, right: pNode3)
+      BTTree.connect(parent: pNode3, left: nil, right: pNode4)
+      BTTree.connect(parent: pNode4, left: nil, right: pNode5)
+      let result: Int = item.deep(pNode1)
+      XCTAssertEqual(result, 5)
+
+    } while false
+    
+    repeat {
+      // 树中只有1个结点
+
+      let pNode1 = BTTree(value: 1)
+      let result: Int = item.deep(pNode1)
+      XCTAssertEqual(result, 1)
+
+    } while false
+    
+    repeat {
+      // 树中没有结点
+
+      let result: Int = item.deep(nil)
+      XCTAssertEqual(result, 0)
+
+    } while false
+    
+    
+  }
 //  MARK: - 辅助
   func testMyHeap() {
     repeat {
