@@ -3182,3 +3182,47 @@ public class FindContinuousSequence {
     return res
   }
 }
+
+// 面试题58（一）：翻转单词顺序
+// 题目：输入一个英文句子，翻转句子中单词的顺序，但单词内字符的顺序不变。
+// 为简单起见，标点符号和普通字母一样处理。例如输入字符串"I am a student. "，
+// 则输出"student. a am I"。
+public class ReverseSentence {
+  func reverse(_ s: String) -> String {
+    var cs: [Character] = Array(s)
+    coreReverse(&cs, 0, cs.count - 1)
+
+    var i = 0
+    var j = 0
+    while j < cs.count {
+      if cs[i] == " " {
+        i += 1
+        j += 1
+      } else if cs[j] == " " || j == cs.count {
+        coreReverse(&cs, i, j-1)
+        i = j
+      } else {
+        j += 1
+        if j == cs.count {
+          coreReverse(&cs, i, j-1)
+          i = j
+        }
+      }
+    }
+    
+    return String(cs)
+  }
+  
+  private func coreReverse(_ s: inout [Character], _ left: Int, _ right: Int) {
+    if s.isEmpty || s.count < 2 {
+      return
+    }
+    var l = left
+    var r = right
+    while l < r {
+      s.swapAt(l, r)
+      l += 1
+      r -= 1
+    }
+  }
+}

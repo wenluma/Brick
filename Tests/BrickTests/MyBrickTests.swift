@@ -4773,6 +4773,45 @@ final class MyBrickTests: XCTestCase {
     } while false
   }
   
+  func testReverseSentence() {
+    let item = ReverseSentence()
+    repeat {
+      // 功能测试，句子中有多个单词
+      let s = "I am a student."
+      let result = item.reverse(s)
+      XCTAssertEqual(result, "student. a am I")
+    } while false
+    
+    repeat {
+      // 功能测试，句子中只有一个单词
+      let s = "  Wonderful    "
+      let result = item.reverse(s)
+      XCTAssertEqual(result, "    Wonderful  ")
+    } while false
+    repeat {
+      // 功能测试，句子中只有一个单词
+      
+      let s = "Wonderful "
+      let result = item.reverse(s)
+      XCTAssertEqual(result, " Wonderful")
+    } while false
+    repeat {
+      // 功能测试，句子中只有一个单词
+
+      let s = "Wonderful"
+      let result = item.reverse(s)
+      XCTAssertEqual(result, "Wonderful")
+    } while false
+    
+    repeat {
+      // 鲁棒性测试
+      let s = ""
+      let result = item.reverse(s)
+      XCTAssertEqual(result, "")
+    } while false
+    
+    
+  }
 //  MARK: - 辅助
   func testBitShift() {
     let item = [1,0,2,3]
