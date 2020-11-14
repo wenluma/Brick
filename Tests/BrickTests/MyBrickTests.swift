@@ -3818,6 +3818,52 @@ final class MyBrickTests: XCTestCase {
     } while false
   }
   
+  func testMyNumberEqualIndex() {
+    let item = MyNumberEqualIndex()
+    repeat {
+      let list = [-3, -1, 1, 3, 5]
+      let r = item.find(list)
+      XCTAssertEqual(r, 3)
+    } while false
+    
+    repeat {
+      let list = [0, 1, 3, 5, 6]
+      let r = item.find(list)
+      XCTAssertEqual(r, 0)
+    } while false
+    
+    repeat {
+      let list = [-1, 0, 1, 2, 4]
+      let r = item.find(list)
+      XCTAssertEqual(r, 4)
+    } while false
+    
+    repeat {
+      let list = [-1, 0, 1, 2, 5 ]
+      let r = item.find(list)
+      XCTAssertEqual(r, -1)
+    } while false
+    
+    repeat {
+      let list = [0]
+      let r = item.find(list)
+      XCTAssertEqual(r, 0)
+    } while false
+    
+    repeat {
+      let list = [10]
+      let r = item.find(list)
+      XCTAssertEqual(r, -1)
+    } while false
+    
+    
+    repeat {
+      let list = [Int]()
+      let r = item.find(list)
+      XCTAssertEqual(r, -1)
+    } while false
+    
+  }
 //  MARK: - 辅助
   func testMyHeap() {
     repeat {

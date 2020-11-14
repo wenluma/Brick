@@ -2853,3 +2853,35 @@ public class FindMissNumber {
     return -1
   }
 }
+
+// 面试题53（三）：数组中数值和下标相等的元素
+// 题目：假设一个单调递增的数组里的每个元素都是整数并且是唯一的。请编程实
+// 现一个函数找出数组中任意一个数值等于其下标的元素。例如，在数组{-3, -1,
+// 1, 3, 5}中，数字3和它的下标相等。
+
+public class MyNumberEqualIndex {
+  
+  /// 列表中元素与索引相等的值
+  /// - Parameter list: 入参数列表
+  /// - Returns: 找到返回 > 0 , 未找到 -1
+  func find(_ list: [Int]) -> Int {
+    if list.isEmpty {
+      return -1
+    }
+    var low = 0
+    var high = list.count - 1
+    while low <= high {
+      let m = low + (high - low) / 2
+      if list[m] == m {
+        return m
+      } else if list[m] < m {
+        low = m + 1
+      } else {
+        high = m - 1
+      }
+    }
+    
+    return -1
+  }
+}
+
