@@ -4740,6 +4740,38 @@ final class MyBrickTests: XCTestCase {
     } while false
     
   }
+  func testFindContinuousSequence() {
+    let item = FindContinuousSequence()
+    repeat {
+      let result = item.find(1)
+      XCTAssertEqual(result, [[Int]]())
+      
+    } while false
+    repeat {
+      let result = item.find(3)
+      XCTAssertEqual(result, [[1,2]])
+      
+    } while false
+    repeat {
+      let result = item.find(4)
+      XCTAssertEqual(result, [[Int]]())
+      
+    } while false
+    repeat {
+      let result = item.find(9)
+      XCTAssertEqual(result, [[2,3,4],[4,5]])
+    } while false
+    
+    repeat {
+      let result = item.find(15)
+      XCTAssertEqual(result, [[1, 2, 3, 4, 5], [4, 5, 6], [7, 8]])
+    } while false
+    
+    repeat {
+      let result = item.find(100)
+      XCTAssertEqual(result, [[9, 10, 11, 12, 13, 14, 15, 16], [18, 19, 20, 21, 22]])
+    } while false
+  }
   
 //  MARK: - 辅助
   func testBitShift() {
@@ -4960,6 +4992,28 @@ final class MyBrickTests: XCTestCase {
     XCTAssert(number == 16)
   }
   
+  func testArray1() {
+    repeat {
+      let array = Array<Int>(1...3) // 1,2,3
+      XCTAssertEqual(array[0], 1)
+      XCTAssertEqual(array[1], 2)
+      XCTAssertEqual(array[2], 3)
+    } while false
+    repeat {
+      let array = Array<Int>(1...1) // 1,2,3
+      XCTAssertEqual(array.count, 1)
+      XCTAssertEqual(array[0], 1)
+    } while false
+    
+    repeat {
+      let array = Array<Int>(4...7) // 1,2,3
+      XCTAssertEqual(array.count, 7-4+1)
+      XCTAssertEqual(array[0], 4)
+      XCTAssertEqual(array[1], 5)
+      XCTAssertEqual(array[2], 6)
+      XCTAssertEqual(array[3], 7)
+    } while false
+  }
   
   // MARK: - 多线程测试
   func testCustomSerialQueue() {

@@ -3150,3 +3150,35 @@ public class MyNumberSum {
   }
 }
 
+// 面试题57（二）：为s的连续正数序列
+// 题目：输入一个正数s，打印出所有和为s的连续正数序列（至少含有两个数）。
+// 例如输入15，由于1+2+3+4+5=4+5+6=7+8=15，所以结果打印出3个连续序列1〜5、
+// 4〜6和7〜8。
+public class FindContinuousSequence {
+  func find(_ target: Int) -> [[Int]] {
+    if target < 3 {
+      return [[Int]]()
+    }
+    var low = 1
+    var high = 2
+    let end = 1 +  (target - 1) / 2
+    var sum = low + high
+    var res = [[Int]]()
+    while low < end {
+      if sum == target {
+        // 数组的连续集合生成
+        res.append(Array(low...high))
+        sum -= low
+        low += 1
+      }
+      else if sum > target {
+        sum -= low
+        low += 1
+      } else {
+        high += 1
+        sum += high
+      }
+    }
+    return res
+  }
+}
