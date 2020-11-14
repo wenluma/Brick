@@ -4812,6 +4812,58 @@ final class MyBrickTests: XCTestCase {
     
     
   }
+  
+  func testLeftRotateString() {
+    let item = LeftRotateString()
+    repeat {
+      // 功能测试
+
+      let s = "abcdefg"
+      let r = item.rotate(s, 2)
+      XCTAssertEqual(r, "cdefgab")
+    } while false
+    
+    repeat {
+      // 边界值测试
+
+      let s = "abcdefg"
+      let r = item.rotate(s, 1)
+      XCTAssertEqual(r, "bcdefga")
+    } while false
+    
+    repeat {
+      // 边界值测试
+
+      let s = "abcdefg"
+      let r = item.rotate(s, 6)
+      XCTAssertEqual(r, "gabcdef")
+    } while false
+    
+    repeat {
+      // 鲁棒性测试
+
+      let s = ""
+      let r = item.rotate(s, 6)
+      XCTAssertEqual(r, "")
+    } while false
+    
+    repeat {
+      // 鲁棒性测试
+
+      let s = "abcdefg"
+      let r = item.rotate(s, 0)
+      XCTAssertEqual(r, "abcdefg")
+    } while false
+    
+    repeat {
+      // 鲁棒性测试
+
+      let s = "abcdefg"
+      let r = item.rotate(s, 7)
+      XCTAssertEqual(r, "abcdefg")
+    } while false
+    
+  }
 //  MARK: - 辅助
   func testBitShift() {
     let item = [1,0,2,3]

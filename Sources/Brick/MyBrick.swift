@@ -3226,3 +3226,37 @@ public class ReverseSentence {
     }
   }
 }
+
+// 面试题58（二）：左旋转字符串
+// 题目：字符串的左旋转操作是把字符串前面的若干个字符转移到字符串的尾部。
+// 请定义一个函数实现字符串左旋转操作的功能。比如输入字符串"abcdefg"和数
+// 字2，该函数将返回左旋转2位得到的结果"cdefgab"。
+public class LeftRotateString {
+  func rotate(_ s: String, _ n: Int) -> String {
+    if n > s.count {
+      return s
+    }
+    if s.isEmpty {
+      return s
+    }
+    
+    var cs = Array(s)
+    coreReverse(&cs, 0, n - 1)
+    coreReverse(&cs, n, cs.count - 1)
+    coreReverse(&cs, 0, cs.count - 1)
+    return String(cs)
+  }
+  
+  private func coreReverse(_ s: inout [Character], _ left: Int, _ right: Int) {
+    if right - left < 1 {
+      return
+    }
+    var l = left
+    var r = right
+    while l < r {
+      s.swapAt(l, r)
+      l += 1
+      r -= 1
+    }
+  }
+}
