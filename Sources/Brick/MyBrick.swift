@@ -2938,3 +2938,30 @@ public  class DeepTree1 {
     return max(left, right)
   }
 }
+
+public class DeepTree2 {
+  func deep(_ root: BTTree?) -> Int {
+    return bfs(root)
+  }
+  
+  private func bfs(_ root: BTTree?) -> Int {
+    if root == nil {
+      return 0
+    }
+    var queue = [BTTree]()
+    var levelQueue = [BTTree]()
+    var deep = 0
+    queue.append(root!)
+    while !queue.isEmpty {
+      while !queue.isEmpty {
+        let top = queue.removeLast()
+        top.left.map({ levelQueue.append($0) })
+        top.right.map({ levelQueue.append($0) })
+      }
+      deep += 1
+      queue.append(contentsOf: levelQueue)
+      levelQueue.removeAll()
+    }
+    return deep
+  }
+}
