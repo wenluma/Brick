@@ -4549,6 +4549,31 @@ final class MyBrickTests: XCTestCase {
     } while false
     
   }
+  
+  func testFindNumsAppearOnce() {
+    let item = FindNumsAppearOnce()
+    repeat {
+      let list = [2, 4, 3, 6, 3, 2, 5, 5]
+      var result: [Int] = item.find(list)
+      result = result.sorted()
+      XCTAssertEqual(result, [4,6])
+    } while false
+    
+    repeat {
+      let list = [4,6]
+      var result: [Int] = item.find(list)
+      result = result.sorted()
+      XCTAssertEqual(result, [4,6])
+    } while false
+    
+    repeat {
+      let list = [4, 6, 1, 1, 1, 1]
+      var result: [Int] = item.find(list)
+      result = result.sorted()
+      XCTAssertEqual(result, [4,6])
+    } while false
+  }
+  
 //  MARK: - 辅助
   func testMyHeap() {
     repeat {
@@ -4689,6 +4714,15 @@ final class MyBrickTests: XCTestCase {
     for i in Array(a).indices {
       print(i)
     }
+  }
+  
+  func testForEach() {
+    var number = 10
+    var list = [1,2,3]
+    list.forEach { (r) in
+      number += r
+    }
+    XCTAssert(number == 16)
   }
   
   

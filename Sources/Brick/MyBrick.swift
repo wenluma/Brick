@@ -3035,3 +3035,43 @@ public class BalancedBTree2 {
     return false
   }
 }
+
+// 面试题56（一）：数组中只出现一次的两个数字
+// 题目：一个整型数组里除了两个数字之外，其他的数字都出现了两次。请写程序
+// 找出这两个只出现一次的数字。要求时间复杂度是O(n)，空间复杂度是O(1)。
+public class FindNumsAppearOnce {
+  public func find(_ list: [Int]) -> [Int] {
+    if list.count < 2 {
+      return [Int]()
+    }
+    var number = 0
+    list.forEach { (item) in
+      number ^= item
+    }
+
+    var a: Int = 0
+    var b: Int = 0
+    
+    let index: Int = firstBitIndex(number)
+    for num in list {
+      if num & index == 0 {
+        a ^= num
+      } else {
+        b ^= num
+      }
+    }
+    if a == 0, b == 0 {
+      return result
+    }
+    return [a, b]
+    
+  }
+  
+  private func firstBitIndex(_ num: Int) -> Int {
+    var index = 1
+    while num & index == 0,  index < 8 * MemoryLayout<Int>.size {
+      index <<= 1
+    }
+    return index
+  }
+}
