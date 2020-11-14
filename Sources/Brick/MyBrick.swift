@@ -3060,11 +3060,7 @@ public class FindNumsAppearOnce {
         b ^= num
       }
     }
-    if a == 0, b == 0 {
-      return result
-    }
     return [a, b]
-    
   }
   
   private func firstBitIndex(_ num: Int) -> Int {
@@ -3073,5 +3069,44 @@ public class FindNumsAppearOnce {
       index <<= 1
     }
     return index
+  }
+}
+
+// 面试题56（二）：数组中唯一只出现一次的数字
+// 题目：在一个数组中除了一个数字只出现一次之外，其他数字都出现了三次。请
+// 找出那个吃出现一次的数字。
+public class FindNumsAppearOnce1 {
+  public func find(_ list: [Int]) -> [Int] {
+    if list.count < 4 {
+      return [Int]()
+    }
+    // 思路累加个个位，3次，对3 取余
+    let size = MemoryLayout<Int>.size
+    var bits = Array<Int>(repeating: 0, count: 8 * size)
+    
+    for item in list {
+      var mask = 1
+      for i in 0 ..< bits.count {
+        if item & mask != 0 {
+          bits[i] += 1
+        }
+        mask <<= 1
+      }
+    }
+    
+//    var mask = 1
+//    var sum = 0
+//    for i in 0 ..< bits.count {
+//      sum |= (bits[i] % 3) * mask
+//      mask <<= 1
+//    }
+    // 高位逆序移位
+    var sum = 0
+    for i in (0 ..< bits.count).reversed() {
+      sum <<= 1
+      sum |= (bits[i] % 3)
+    }
+    
+    return [sum]
   }
 }

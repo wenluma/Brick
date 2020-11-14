@@ -4574,7 +4574,142 @@ final class MyBrickTests: XCTestCase {
     } while false
   }
   
+  func testFindNumsAppearOnce1() {
+    let item = FindNumsAppearOnce1()
+    repeat {
+      let list = [1, 1, 2, 2, 2, 1, 3]
+      var result: [Int] = item.find(list)
+      result = result.sorted()
+      XCTAssertEqual(result, [3])
+    } while false
+    
+    repeat {
+      let list = [4, 3, 3, 2, 2, 2, 3]
+      var result: [Int] = item.find(list)
+      result = result.sorted()
+      XCTAssertEqual(result, [4])
+    } while false
+    
+    repeat {
+      let list = [4, 4, 1, 1, 1, 7, 4]
+      var result: [Int] = item.find(list)
+      result = result.sorted()
+      XCTAssertEqual(result, [7])
+    } while false
+    
+    
+    repeat {
+      let list = [-10, 214, 214, 214]
+      var result: [Int] = item.find(list)
+      result = result.sorted()
+      XCTAssertEqual(result, [-10])
+    } while false
+    
+    repeat {
+      let list = [-209, 3467, -209, -209]
+      var result: [Int] = item.find(list)
+      result = result.sorted()
+      XCTAssertEqual(result, [3467])
+    } while false
+    
+    repeat {
+      let list = [1024, -1025, 1024, -1025, 1024, -1025, 1023]
+      var result: [Int] = item.find(list)
+      result = result.sorted()
+      XCTAssertEqual(result, [1023])
+    } while false
+    
+    repeat {
+      let list = [ -1024, -1024, -1024, -1023]
+      var result: [Int] = item.find(list)
+      result = result.sorted()
+      XCTAssertEqual(result, [-1023])
+    } while false
+    
+    repeat {
+      let list = [ -23, 0, 214, -23, 214, -23, 214]
+      var result: [Int] = item.find(list)
+      result = result.sorted()
+      XCTAssertEqual(result, [0])
+    } while false
+    
+    repeat {
+      let list = [  0, 3467, 0, 0, 0, 0, 0, 0]
+      var result: [Int] = item.find(list)
+      result = result.sorted()
+      XCTAssertEqual(result, [3467])
+    } while false
+  }
+  
 //  MARK: - 辅助
+  func testBitShift() {
+    let item = [1,0,2,3]
+    for (idx, v) in item.enumerated() {
+      print("idx = \(idx), v = \(v)")
+    }
+    
+    repeat {
+      let item = [1,1,1,1]
+      for (idx, v) in item.enumerated() {
+        print("idx = \(idx), v = \(v)")
+      }
+      
+      var r = 0
+      for i in 0 ..< item.count {
+        r <<= 1
+        r |= item[item.count - 1 - i]
+      }
+      print(r)
+      
+    } while false
+    
+    repeat {
+      let item = [1,0,0,0]
+      for (idx, v) in item.enumerated() {
+        print("idx = \(idx), v = \(v)")
+      }
+      
+      var r = 0
+      for i in 0 ..< item.count {
+        r <<= 1
+        r |= item[item.count - 1 - i]
+      }
+      print(r)
+      
+    } while false
+    
+    repeat {
+      let item = [0,1,0,0]
+      for (idx, v) in item.enumerated() {
+        print("idx = \(idx), v = \(v)")
+      }
+      
+      var r = 0
+      for i in 0 ..< item.count {
+        r <<= 1
+        r |= item[item.count - 1 - i]
+      }
+      print(r)
+      
+    } while false
+    
+    repeat {
+      // 基于能进行的位移次数
+      let item = [0,0,1,0]
+      for (idx, v) in item.enumerated() {
+        print("idx = \(idx), v = \(v)")
+      }
+      
+      var r = 0
+      for i in (0 ..< item.count).reversed() {
+        r <<= 1
+        r |= item[i]
+      }
+      print(r)
+    } while false
+    
+    
+  }
   func testMyHeap() {
     repeat {
       let list = [3, 2, 8, 5, 0]
