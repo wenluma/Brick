@@ -4864,6 +4864,64 @@ final class MyBrickTests: XCTestCase {
     } while false
     
   }
+  
+  func testSlideWindow() {
+    let item = SlideWindow()
+    repeat {
+      let list = [2, 3, 4, 2, 6, 2, 5, 1]
+      let r = item.slideMaxValues(list, 3)
+      XCTAssertEqual(r, [4, 4, 6, 6, 6, 5])
+    } while false
+    
+    repeat {
+      let list = [1, 3, -1, -3, 5, 3, 6, 7 ]
+      let r = item.slideMaxValues(list, 3)
+      XCTAssertEqual(r, [3, 3, 5, 5, 6, 7 ])
+    } while false
+    
+    repeat {
+      let list = [1, 3, 5, 7, 9, 11, 13, 15 ]
+      let r = item.slideMaxValues(list, 4)
+      XCTAssertEqual(r, [7, 9, 11, 13, 15])
+    } while false
+    
+    repeat {
+      let list = [16, 14, 12, 10, 8, 6, 4 ]
+      let r = item.slideMaxValues(list, 5)
+      XCTAssertEqual(r, [16, 14, 12])
+    } while false
+    
+    repeat {
+      let list = [10, 14, 12, 11]
+      let r = item.slideMaxValues(list, 5)
+      XCTAssertEqual(r, [Int]())
+    } while false
+    
+    repeat {
+      let list = [10, 14, 12, 11 ]
+      let r = item.slideMaxValues(list, 4)
+      XCTAssertEqual(r, [14])
+    } while false
+    
+    repeat {
+      let list = [10, 14, 12, 11 ]
+      let r = item.slideMaxValues(list, 0)
+      XCTAssertEqual(r, [Int]())
+    } while false
+    
+    repeat {
+      let list = [10, 14, 12, 11 ]
+      let r = item.slideMaxValues(list, 10)
+      XCTAssertEqual(r, [Int]())
+    } while false
+    
+    repeat {
+      let list = [Int]()
+      let r = item.slideMaxValues(list, 10)
+      XCTAssertEqual(r, [Int]())
+    } while false
+  }
+  
 //  MARK: - 辅助
   func testBitShift() {
     let item = [1,0,2,3]
