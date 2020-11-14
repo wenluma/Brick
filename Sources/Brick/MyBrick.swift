@@ -2966,6 +2966,26 @@ public class DeepTree2 {
   }
 }
 
+public class DeepTree3 {
+  func deep(_ root: BTTree?) -> Int {
+    var deep = 0
+    dfs(root, &deep)
+    return deep
+  }
+  
+  private func dfs(_ root: BTTree?, _ deep: inout Int){
+    if root == nil {
+      deep = 0
+      return
+    }
+    var left = 0
+    var right = 0
+    dfs(root?.left, &left)
+    dfs(root?.right, &right)
+    deep = 1 + max(left, right)
+  }
+}
+
 // 面试题55（二）：平衡二叉树
 // 题目：输入一棵二叉树的根结点，判断该树是不是平衡二叉树。如果某二叉树中
 // 任意结点的左右子树的深度相差不超过1，那么它就是一棵平衡二叉树。
