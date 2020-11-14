@@ -4922,6 +4922,72 @@ final class MyBrickTests: XCTestCase {
     } while false
   }
   
+  func testNumbersStreamMax() {
+    let item = NumbersStreamMax()
+    repeat {
+      
+      // {2}
+
+      item.append(2)
+      XCTAssertEqual(try item.currentMax(), 2)
+      
+      // {2, 3}
+
+      item.append(3)
+      XCTAssertEqual(try item.currentMax(), 3)
+      
+      // {2, 3, 4}
+      item.append(4)
+      XCTAssertEqual(try item.currentMax(), 4)
+
+
+      // {2, 3, 4, 2}
+      item.append(2)
+      XCTAssertEqual(try item.currentMax(), 4)
+      
+      // {3, 4, 2}
+      try? item.removeFront();
+      XCTAssertEqual(try item.currentMax(), 4)
+
+      // {4, 2}
+      try? item.removeFront();
+      XCTAssertEqual(try item.currentMax(), 4)
+
+      // {2}
+      try? item.removeFront();
+      XCTAssertEqual(try item.currentMax(), 2)
+
+      // {2, 6}
+      item.append(6)
+      XCTAssertEqual(try item.currentMax(), 6)
+
+      // {2, 6, 2}
+      item.append(2)
+      XCTAssertEqual(try item.currentMax(), 6)
+
+      // {2, 6, 2, 5}
+      item.append(5)
+      XCTAssertEqual(try item.currentMax(), 6)
+
+      // {6, 2, 5}
+      try? item.removeFront()
+      XCTAssertEqual(try item.currentMax(), 6)
+
+      // {2, 5}
+      try? item.removeFront()
+      XCTAssertEqual(try item.currentMax(), 5)
+
+      // {5}
+      try? item.removeFront()
+      XCTAssertEqual(try item.currentMax(), 5)
+
+      // {5, 1}
+      item.append(1)
+      XCTAssertEqual(try item.currentMax(), 5)
+
+
+    } while false
+  }
 //  MARK: - 辅助
   func testBitShift() {
     let item = [1,0,2,3]

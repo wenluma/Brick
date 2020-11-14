@@ -3297,3 +3297,47 @@ public class SlideWindow {
     return res
   }
 }
+
+// 面试题59（二）：队列的最大值
+// 题目：给定一个数组和滑动窗口的大小，请找出所有滑动窗口里的最大值。例如，
+// 如果输入数组{2, 3, 4, 2, 6, 2, 5, 1}及滑动窗口的大小3，那么一共存在6个
+// 滑动窗口，它们的最大值分别为{4, 4, 6, 6, 6, 5}，
+
+public class NumbersStreamMax {
+  var index = 0
+  var queue = [InternalData]()
+  var maxQueue = [InternalData]()
+  
+  public func append(_ number: Int) {
+    while !maxQueue.isEmpty, maxQueue.last!.number <= number {
+      maxQueue.removeLast()
+    }
+    let info = InternalData(index: index, number: number)
+    queue.append(info)
+    maxQueue.append(info)
+    index += 1
+  }
+  
+  public func removeFront() throws {
+    if maxQueue.isEmpty {
+      throw BrickError.empty
+    }
+    
+    if maxQueue.first?.index == queue.first?.index {
+      maxQueue.removeFirst()
+    }
+    queue.remove(at: 0)
+  }
+  
+  public func currentMax() throws -> Int {
+    if maxQueue.isEmpty {
+      throw BrickError.empty
+    }
+    return maxQueue.first!.number
+  }
+  
+  struct InternalData {
+    let index: Int
+    let number: Int
+  }
+}
