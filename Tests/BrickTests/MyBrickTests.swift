@@ -3864,6 +3864,140 @@ final class MyBrickTests: XCTestCase {
     } while false
     
   }
+  
+  func testKthNodeInBSTree() {
+    let item = KthNodeInBSTree()
+    repeat {
+      //            8
+      //        6      10
+      //       5 7    9  11
+      
+      let pNode8 = BTTree(value: 8)
+      let pNode6 = BTTree(value: 6)
+      let pNode10 = BTTree(value: 10)
+      let pNode5 = BTTree(value: 5)
+      let pNode7 = BTTree(value: 7)
+      let pNode9 = BTTree(value: 9)
+      let pNode11 = BTTree(value: 11)
+      BTTree.connect(parent: pNode8, left: pNode6, right: pNode10)
+      BTTree.connect(parent: pNode6, left: pNode5, right: pNode7)
+      BTTree.connect(parent: pNode10, left: pNode9, right: pNode11)
+      let TestA0 = item.node(pNode8, 0)
+      XCTAssertEqual(TestA0, -1)
+      let TestA1 = item.node(pNode8, 1)
+      XCTAssertEqual(TestA1, 5)
+      let TestA2 = item.node(pNode8, 2)
+      XCTAssertEqual(TestA2, 6)
+      let TestA3 = item.node(pNode8, 3)
+      XCTAssertEqual(TestA3, 7)
+      let TestA4 = item.node(pNode8, 4)
+      XCTAssertEqual(TestA4, 8)
+      let TestA5 = item.node(pNode8, 5)
+      XCTAssertEqual(TestA5, 9)
+      let TestA6 = item.node(pNode8, 6)
+      XCTAssertEqual(TestA6, 10)
+      let TestA7 = item.node(pNode8, 7)
+      XCTAssertEqual(TestA7, 11)
+      let TestA8 = item.node(pNode8, 8)
+      XCTAssertEqual(TestA8, -1)
+
+    } while false
+    
+    repeat {
+      //               5
+      //              /
+      //             4
+      //            /
+      //           3
+      //          /
+      //         2
+      //        /
+      //       1
+      let pNode5 = BTTree(value: 5)
+      let pNode4 = BTTree(value: 4)
+      let pNode3 = BTTree(value: 3)
+      let pNode2 = BTTree(value: 2)
+      let pNode1 = BTTree(value: 1)
+      BTTree.connect(parent: pNode5, left: pNode4, right: nil)
+      BTTree.connect(parent: pNode4, left: pNode3, right: nil)
+      BTTree.connect(parent: pNode3, left: pNode2, right: nil)
+      BTTree.connect(parent: pNode2, left: pNode1, right: nil)
+      let TestA0 = item.node(pNode5, 0)
+      XCTAssertEqual(TestA0, -1)
+      let TestA1 = item.node(pNode5, 1)
+      XCTAssertEqual(TestA1, 1)
+      let TestA2 = item.node(pNode5, 2)
+      XCTAssertEqual(TestA2, 2)
+      let TestA3 = item.node(pNode5, 3)
+      XCTAssertEqual(TestA3, 3)
+      let TestA4 = item.node(pNode5, 4)
+      XCTAssertEqual(TestA4, 4)
+      let TestA5 = item.node(pNode5, 5)
+      XCTAssertEqual(TestA5, 5)
+      let TestA6 = item.node(pNode5, 6)
+      XCTAssertEqual(TestA6, -1)
+
+    } while false
+    
+    repeat {
+      // 1
+      //  \
+      //   2
+      //    \
+      //     3
+      //      \
+      //       4
+      //        \
+      //         5
+      let pNode1 = BTTree(value: 1)
+      let pNode2 = BTTree(value: 2)
+      let pNode3 = BTTree(value: 3)
+      let pNode4 = BTTree(value: 4)
+      let pNode5 = BTTree(value: 5)
+      BTTree.connect(parent: pNode1, left: nil, right: pNode2)
+      BTTree.connect(parent: pNode2, left: nil, right: pNode3)
+      BTTree.connect(parent: pNode3, left: nil, right: pNode4)
+      BTTree.connect(parent: pNode4, left: nil, right: pNode5)
+      let TestA0 = item.node(pNode1, 0)
+      XCTAssertEqual(TestA0, -1)
+      let TestA1 = item.node(pNode1, 1)
+      XCTAssertEqual(TestA1, 1)
+      let TestA2 = item.node(pNode1, 2)
+      XCTAssertEqual(TestA2, 2)
+      let TestA3 = item.node(pNode1, 3)
+      XCTAssertEqual(TestA3, 3)
+      let TestA4 = item.node(pNode1, 4)
+      XCTAssertEqual(TestA4, 4)
+      let TestA5 = item.node(pNode1, 5)
+      XCTAssertEqual(TestA5, 5)
+      let TestA6 = item.node(pNode1, 6)
+      XCTAssertEqual(TestA6, -1)
+
+    } while false
+    
+    repeat {
+      // There is only one node in a tree
+      let pNode1 = BTTree(value: 1)
+      let TestA0 = item.node(pNode1, 0)
+      XCTAssertEqual(TestA0, -1)
+      let TestA1 = item.node(pNode1, 1)
+      XCTAssertEqual(TestA1, 1)
+      let TestA2 = item.node(pNode1, 2)
+      XCTAssertEqual(TestA2, -1)
+
+
+    } while false
+    
+    repeat {
+       // empty tree
+       let TestA0 = item.node(nil, 0)
+       XCTAssertEqual(TestA0, -1)
+       let TestA1 = item.node(nil, 1)
+       XCTAssertEqual(TestA1, -1)
+     } while false
+    
+  }
+  
 //  MARK: - 辅助
   func testMyHeap() {
     repeat {

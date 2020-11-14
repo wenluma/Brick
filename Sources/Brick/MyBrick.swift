@@ -2885,3 +2885,36 @@ public class MyNumberEqualIndex {
   }
 }
 
+// 面试题54：二叉搜索树的第k个结点
+// 题目：给定一棵二叉搜索树，请找出其中的第k大的结点。
+public class KthNodeInBSTree {
+  func node(_ root: BTTree?, _ k: Int) -> Int {
+    if root == nil || k <= 0 {
+      return -1
+    }
+    var f = k
+    let r = dfs(root, &f)
+    return r?.value ?? -1
+  }
+  
+  private func dfs(_ root: BTTree?,
+                   _ k: inout Int) -> BTTree? {
+    var target: BTTree? = nil
+    if root?.left != nil {
+      target = dfs(root?.left, &k)
+    }
+    
+    if target == nil {
+      if k == 1 {
+        target = root
+      }
+      k -= 1
+    }
+    
+    if target == nil, root?.right != nil {
+      target = dfs(root?.right, &k)
+    }
+    return target
+  }
+  
+}
