@@ -2992,3 +2992,26 @@ public class BalancedBTree1 {
     return left > right ? (left + 1) : (right + 1)
   }
 }
+
+public class BalancedBTree2 {
+  public func isBalance(_ root: BTTree?) -> Bool {
+    var deep = 0
+    return dfs(root, &deep)
+  }
+  
+  public func dfs(_ root: BTTree?, _ deep: inout Int) -> Bool {
+    if root == nil {
+      deep = 0
+      return true
+    }
+    var left = 0
+    var right = 0
+    if dfs(root?.left, &left) && dfs(root?.right, &right) {
+      if left - right <= 1 && left - right >= -1 {
+        deep = 1 + max(left, right)
+        return true
+      }
+    }
+    return false
+  }
+}
