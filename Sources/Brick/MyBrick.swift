@@ -3126,4 +3126,27 @@ public class FindNumsAppearOnce2 {
   }
 }
 
+// 面试题57（一）：和为s的两个数字
+// 题目：输入一个递增排序的数组和一个数字s，在数组中查找两个数，使得它们
+// 的和正好是s。如果有多对数字的和等于s，输出任意一对即可。
+public class MyNumberSum {
+  func find(_ list: [Int], _ target: Int) -> [Int] {
+    if list.count < 2 {
+      return [Int]()
+    }
+    var low = 0
+    var high = list.count - 1
+    while low <= high {
+      let tmp = list[low] + list[high]
+      if list[low] + list[high] == target {
+        return [list[low], list[high]]
+      } else if tmp > target {
+        high -= 1
+      } else {
+        low += 1
+      }
+    }
+    return [Int]()
+  }
+}
 

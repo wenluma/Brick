@@ -4708,6 +4708,39 @@ final class MyBrickTests: XCTestCase {
     } while false
   }
   
+  func testMyNumberSum() {
+    let item = MyNumberSum()
+    repeat {
+      let list = [1, 2, 4, 7, 11, 15]
+      let result = item.find(list, 15)
+      XCTAssertEqual(result, [4,11])
+    } while false
+    
+    repeat {
+      // 存在和为s的两个数字，这两个数字位于数组的两端
+      let list = [1, 2, 4, 7, 11, 16]
+      let result = item.find(list, 17)
+      XCTAssertEqual(result, [1,16])
+    } while false
+    
+    
+    repeat {
+      // 存在和为s的两个数字，这两个数字位于数组的两端
+      let list = [1, 2, 4, 7, 11, 16]
+      let result = item.find(list, 10)
+      XCTAssertEqual(result, [Int]())
+    } while false
+
+    
+    repeat {
+      // 存在和为s的两个数字，这两个数字位于数组的两端
+      let list = [Int]()
+      let result = item.find(list, 10)
+      XCTAssertEqual(result, [Int]())
+    } while false
+    
+  }
+  
 //  MARK: - 辅助
   func testBitShift() {
     let item = [1,0,2,3]
