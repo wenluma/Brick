@@ -5040,6 +5040,82 @@ final class MyBrickTests: XCTestCase {
     } while false
     
   }
+  
+  func testContinuousCard() {
+    let item = ContinuousCard()
+    repeat {
+      let list = [1, 3, 2, 5, 4]
+      let r = item.isContinuous(list)
+      XCTAssertEqual(r, true)
+    } while false
+    
+    repeat {
+      let list = [1, 3, 2, 6, 4]
+      let r = item.isContinuous(list)
+      XCTAssertEqual(r, false)
+    } while false
+    
+    repeat {
+      let list = [0, 3, 2, 6, 4]
+      let r = item.isContinuous(list)
+      XCTAssertEqual(r, true)
+    } while false
+    
+    repeat {
+      let list = [0, 3, 1, 6, 4]
+      let r = item.isContinuous(list)
+      XCTAssertEqual(r, false)
+    } while false
+    
+    repeat {
+      let list = [1, 3, 0, 5, 0]
+      let r = item.isContinuous(list)
+      XCTAssertEqual(r, true)
+    } while false
+    
+    repeat {
+      let list = [1, 3, 0, 7, 0 ]
+      let r = item.isContinuous(list)
+      XCTAssertEqual(r, false)
+    } while false
+    
+    repeat {
+      let list = [1, 0, 0, 5, 0]
+      let r = item.isContinuous(list)
+      XCTAssertEqual(r, true)
+    } while false
+    
+    repeat {
+      let list = [1, 0, 0, 7, 0]
+      let r = item.isContinuous(list)
+      XCTAssertEqual(r, false)
+    } while false
+    
+    repeat {
+      let list = [3, 0, 0, 0, 0]
+      let r = item.isContinuous(list)
+      XCTAssertEqual(r, true)
+    } while false
+    
+    repeat {
+      let list = [0, 0, 0, 0, 0]
+      let r = item.isContinuous(list)
+      XCTAssertEqual(r, true)
+    } while false
+    
+    repeat {
+      let list = [0, 1, 0, 1, 0]
+      let r = item.isContinuous(list)
+      XCTAssertEqual(r, false)
+    } while false
+    
+    repeat {
+      let list = [Int]()
+      let r = item.isContinuous(list)
+      XCTAssertEqual(r, false)
+    } while false
+  }
+  
 //  MARK: - 辅助
   func testBitShift() {
     let item = [1,0,2,3]
