@@ -5116,6 +5116,34 @@ final class MyBrickTests: XCTestCase {
     } while false
   }
   
+  func testLastRemaining() {
+    let item = LastRemaining()
+    repeat {
+      let r = item.remain(4000, 997)
+      XCTAssertEqual(r, 1027)
+    } while false
+    repeat {
+      let r = item.remain(0, 0)
+      XCTAssertEqual(r, -1)
+    } while false
+    repeat {
+      let r = item.remain(6, 6)
+      XCTAssertEqual(r, 3)
+    } while false
+    repeat {
+      let r = item.remain(6, 7)
+      XCTAssertEqual(r, 4)
+    } while false
+    repeat {
+      let r = item.remain(5, 2)
+      XCTAssertEqual(r, 2)
+    } while false
+    repeat {
+      let r = item.remain(5, 3)
+      XCTAssertEqual(r, 3)
+    } while false
+  }
+  
 //  MARK: - 辅助
   func testBitShift() {
     let item = [1,0,2,3]
