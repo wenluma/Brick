@@ -5195,6 +5195,33 @@ final class MyBrickTests: XCTestCase {
     } while false
   }
   
+  func testOne2NSum() {
+    let item = One2NSum()
+    repeat {
+      let n = 10
+      var s = 0
+      item.sum(n, &s)
+      // (1 + 10)5
+      XCTAssertEqual(s, 55)
+    } while false
+    
+    repeat {
+      let n = 0
+      var s = 0
+      item.sum(n, &s)
+      // (1 + 10)5
+      XCTAssertEqual(s, 0)
+    } while false
+    
+    repeat {
+      let n = 2
+      var s = 0
+      item.sum(n, &s)
+      // (1 + 10)5
+      XCTAssertEqual(s, 3)
+    } while false
+  }
+  
 //  MARK: - 辅助
   func testBitShift() {
     let item = [1,0,2,3]
