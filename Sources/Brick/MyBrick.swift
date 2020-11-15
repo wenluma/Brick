@@ -3341,3 +3341,55 @@ public class NumbersStreamMax {
     let number: Int
   }
 }
+
+// 面试题60：n个骰子的点数
+// 题目：把n个骰子扔在地上，所有骰子朝上一面的点数之和为s。输入n，打印出s
+// 的所有可能的值出现的概率。
+public class MyProbability {
+  let maxValue = 6
+  func get(_ number: Int) throws -> [Int: Double] {
+    if number < 1 {
+      throw BrickError.invaildInput(number)
+    }
+    let len = maxValue * number + 1
+    var probalit: [[Int]] = Array(repeating: Array(repeating: 0, count: len), count: 2)
+    
+    var flag = 0
+    for i in 1 ... maxValue {
+      probalit[flag][i] = 1
+    }
+    
+    var k = 2
+    while k <= number {
+      
+      for i in 0 ..< k {
+        probalit[1 - flag][i] = 0
+      }
+      
+      for i in k ... maxValue * k {
+        // clean
+        probalit[1 - flag][i] = 0
+        
+        // 求和
+        let upBound = min(i, maxValue)
+        for j in 1 ... upBound {
+          probalit[1 - flag][i] += probalit[flag][i - j]
+        }
+      }
+      
+      // 交互数据
+      flag = 1 - flag
+      // 更新k
+      k += 1
+    }
+    
+    let total = pow(Double(maxValue), Double(number))
+    var result = [Int: Double]()
+    for i in number ... maxValue * number {
+      let s: Int = probalit[flag][i]
+      let ratio = Double(s) / total
+      result[i] = ratio
+    }
+    return result
+  }
+}

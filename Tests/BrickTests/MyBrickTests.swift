@@ -4988,6 +4988,58 @@ final class MyBrickTests: XCTestCase {
 
     } while false
   }
+  
+  func testMyProbability() {
+    let item = MyProbability()
+    repeat {
+      let n = 1
+      do {
+        let result = try item.get(n)
+        print(result)
+      } catch {
+        
+      }
+      
+      print("--------")
+    } while false
+    
+    repeat {
+      let n = 2
+      do {
+        let result = try item.get(n)
+        print(result)
+      } catch {
+        
+      }
+      
+      print("--------")
+    } while false
+    
+    repeat {
+      let n = 3
+      do {
+        let result = try item.get(n)
+        print(result)
+      } catch {
+        
+      }
+      
+      print("--------")
+    } while false
+    
+    repeat {
+      let n = 4
+      do {
+        let result = try item.get(n)
+        print(result)
+      } catch {
+        
+      }
+      
+      print("--------")
+    } while false
+    
+  }
 //  MARK: - 辅助
   func testBitShift() {
     let item = [1,0,2,3]
