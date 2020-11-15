@@ -3479,3 +3479,26 @@ public class One2NSum {
     return b
   }
 }
+
+// 面试题65：不用加减乘除做加法
+// 题目：写一个函数，求两个整数之和，要求在函数体内不得使用＋、－、×、÷
+// 四则运算符号。
+public class MyAdd {
+  func add(_ n1: Int, _ n2: Int) -> Int {
+    var num1 = n1
+    var num2 = n2
+    var sum = 0
+    var carray = 0
+    repeat {
+      // 相同位相加 结果与 异或 相同
+      sum = num1 ^ num2
+      // 产生进位
+      carray = (num1 & num2) << 1
+      num1 = sum
+      num2 = carray
+    } while num2 != 0
+    
+    return num1
+    
+  }
+}

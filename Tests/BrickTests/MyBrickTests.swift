@@ -5222,6 +5222,45 @@ final class MyBrickTests: XCTestCase {
     } while false
   }
   
+  func testMyAdd() {
+    let item = MyAdd()
+    repeat {
+      let r = item.add(1,2)
+      XCTAssertEqual(r, 3)
+    } while false
+
+    repeat {
+      let r = item.add(111,899)
+      XCTAssertEqual(r, 1010)
+    } while false
+
+    repeat {
+      let r = item.add(-1,2)
+      XCTAssertEqual(r, 1)
+    } while false
+
+    repeat {
+      let r = item.add(1,-2)
+      XCTAssertEqual(r, -1)
+    } while false
+
+    repeat {
+      let r = item.add(3,0)
+      XCTAssertEqual(r, 3)
+    } while false
+
+    repeat {
+      let r = item.add(0,-4)
+      XCTAssertEqual(r, -4)
+    } while false
+
+    repeat {
+      let r = item.add(-2,-8)
+      XCTAssertEqual(r, -10)
+    } while false
+    
+    
+  }
 //  MARK: - 辅助
   func testBitShift() {
     let item = [1,0,2,3]
