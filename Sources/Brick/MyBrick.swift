@@ -3347,6 +3347,7 @@ public class NumbersStreamMax {
 // 的所有可能的值出现的概率。
 public class MyProbability {
   let maxValue = 6
+  // 采用 map 的结果返回，方便测试
   func get(_ number: Int) throws -> [Int: Double] {
     if number < 1 {
       throw BrickError.invaildInput(number)
@@ -3359,18 +3360,19 @@ public class MyProbability {
       probalit[flag][i] = 1
     }
     
+    // 骰子的个数
     var k = 2
     while k <= number {
       
       for i in 0 ..< k {
         probalit[1 - flag][i] = 0
       }
-      
+      // 当k个骰子的 和，， 和为索引，value 为 次数
       for i in k ... maxValue * k {
         // clean
         probalit[1 - flag][i] = 0
         
-        // 求和
+        // 和为i 时，出现的次数，由上一次的 1-6构成
         let upBound = min(i, maxValue)
         for j in 1 ... upBound {
           probalit[1 - flag][i] += probalit[flag][i - j]
