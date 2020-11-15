@@ -5144,6 +5144,57 @@ final class MyBrickTests: XCTestCase {
     } while false
   }
   
+  func testStackMaxProfit() {
+    let item = StackMaxProfit()
+    
+    repeat {
+      // 价格递减
+      let list = [16, 11, 7, 4, 2, 1 ]
+      let r = item.profit(list)
+      XCTAssertEqual(r, -1)
+    } while false
+    
+    repeat {
+      let list = [Int]()
+      let r = item.profit(list)
+      XCTAssertEqual(r, 0)
+    } while false
+    
+    repeat {
+      let list = [ 2,4 ]
+      let r = item.profit(list)
+      XCTAssertEqual(r, 2)
+    } while false
+    
+    repeat {
+      let list = [ 9, 11, 5, 7, 16, 1, 4, 2 ]
+      let r = item.profit(list)
+      XCTAssertEqual(r, 11)
+    } while false
+    
+    repeat {
+      // 价格全部相同
+      let list = [16, 16, 16, 16, 16]
+      let r = item.profit(list)
+      XCTAssertEqual(r, 0)
+    } while false
+    
+    
+    
+    repeat {
+      // 价格递增
+
+      let list = [1, 2, 4, 7, 11, 16]
+      let r = item.profit(list)
+      XCTAssertEqual(r, 15)
+    } while false
+    repeat {
+      let list = [4, 1, 3, 2, 5]
+      let r = item.profit(list)
+      XCTAssertEqual(r, 4)
+    } while false
+  }
+  
 //  MARK: - 辅助
   func testBitShift() {
     let item = [1,0,2,3]
