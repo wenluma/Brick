@@ -3502,3 +3502,28 @@ public class MyAdd {
     
   }
 }
+
+// 面试题66：构建乘积数组
+// 题目：给定一个数组A[0, 1, ⋯, n-1]，请构建一个数组B[0, 1, ⋯, n-1]，其
+// 中B中的元素B[i] =A[0]×A[1]×⋯ ×A[i-1]×A[i+1]×⋯×A[n-1]。不能使用除法。
+public class BuildProductionArray {
+  func mutil(_ list: [Double], _ out: inout [Double]) {
+    if list.count < 2 {
+      out = list
+      return
+    }
+    
+    out[0] = 1
+    // 前半段 list0 * list1 * list2 ... * list[i -1]
+    for i in 1 ..< list.count {
+      out[i] = out[i - 1] * list[i - 1]
+    }
+
+    // 后半段 list[i + 1] ..* list[n-1]
+    var f: Double = 1
+    for i in (0 ... list.count - 2).reversed() {
+      f *= list[i + 1]
+      out[i] *= f
+    }
+  }
+}

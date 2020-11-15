@@ -5261,6 +5261,47 @@ final class MyBrickTests: XCTestCase {
     
     
   }
+  
+  func testBuildProductionArray() {
+  
+    let item = BuildProductionArray()
+    repeat {
+      let list: [Double] = [1, 2, 3, 4, 5]
+      var out: [Double] = [0, 0, 0, 0, 0]
+      item.mutil(list, &out)
+      XCTAssertEqual(out, [120, 60, 40, 30, 24])
+    } while false
+    
+    repeat {
+      let list: [Double] = [1, 2, 0, 4, 5]
+      var out: [Double] = [0, 0, 0, 0, 0]
+      item.mutil(list, &out)
+      XCTAssertEqual(out, [0, 0, 40, 0, 0])
+    } while false
+    
+    repeat {
+      let list: [Double] = [1, 2, 0, 4, 0]
+      var out: [Double] = [0, 0, 0, 0, 0]
+      item.mutil(list, &out)
+      XCTAssertEqual(out, [0, 0, 0, 0, 0])
+    } while false
+    
+    repeat {
+      let list: [Double] = [1, 2, 3, 4, 5]
+      var out: [Double] = [0, 0, 0, 0, 0]
+      item.mutil(list, &out)
+      XCTAssertEqual(out, [120, 60, 40, 30, 24])
+    } while false
+    
+    repeat {
+      let list: [Double] = [1, 2]
+      var out: [Double] = [0, 0]
+      item.mutil(list, &out)
+      XCTAssertEqual(out, [2, 1])
+    } while false
+
+  }
+  
 //  MARK: - 辅助
   func testBitShift() {
     let item = [1,0,2,3]
