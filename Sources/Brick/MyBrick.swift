@@ -472,6 +472,7 @@ public class BTTree {
     return result
     
   }
+  
 //  // 后续遍历定义 根左右
 //  static func postOrder(tree: BTTree?) -> [Int] {
 //
@@ -519,6 +520,14 @@ public class BTTree {
     res.append(path)
     return res
   }
+}
+
+extension BTTree: Equatable {
+  public static func == (lhs: BTTree, rhs: BTTree) -> Bool {
+    Unmanaged.passUnretained(lhs).toOpaque() ==  Unmanaged.passUnretained(rhs).toOpaque()
+  }
+  
+  
 }
 
 // 面试题7：重建二叉树
@@ -3582,5 +3591,59 @@ public class MyStrToInt {
     }
     
     return sign * res
+  }
+}
+
+// 面试题68：树中两个结点的最低公共祖先
+// 题目：输入两个树结点，求它们的最低公共祖先。
+public class MyLowestCommonAncestor {
+  func lowestCommonNode(_ root: BTTree?, _ p: BTTree?, _ q: BTTree?) -> BTTree? {
+    if root == nil || p == nil || q == nil {
+      return nil
+    }
+    
+    var pathP = [BTTree]()
+    var pathQ = [BTTree]()
+    nodePath(root, p, &pathP)
+    nodePath(root, q, &pathQ)
+    let node = commonAncestor(pathQ, pathP)
+    return node
+  }
+  
+  @discardableResult
+  private func nodePath(_ root: BTTree?, _ node: BTTree?, _ path: inout [BTTree]) -> Bool {
+
+    if root == node {
+      return true
+    }
+    
+    if root == nil {
+      return false
+    }
+    
+    path.append(root!)
+    
+    var found = false
+    found = nodePath(root?.left, node, &path)
+    if !found {
+      found = nodePath(root?.right, node, &path)
+    }
+    
+    if !found {
+      path.removeLast()
+    }
+    return found
+  }
+  
+  private func commonAncestor(_ path1: [BTTree], _ path2: [BTTree]) -> BTTree? {
+    var ancestor: BTTree? = nil
+    var i = 0, j = 0
+    while i < path1.count, j < path2.count, path1[i] == path2[j] {
+      ancestor = path2[j]
+      i += 1
+      j += 1
+    }
+    
+    return ancestor
   }
 }

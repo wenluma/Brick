@@ -5421,6 +5421,85 @@ final class MyBrickTests: XCTestCase {
       XCTAssertThrowsError(try item.transfer(info))
     } while false
   }
+  
+  func testMyLowestCommonAncestor() {
+    let item = MyLowestCommonAncestor()
+    repeat {
+      //              1
+      //            /   \
+      //           2     3
+          //       /       \
+          //      4         5
+          //     / \      /  \
+          //    6   7    8    9
+
+      let pNode1 = BTTree(value: 1)
+      let pNode2 = BTTree(value: 2)
+      let pNode3 = BTTree(value: 3)
+      let pNode4 = BTTree(value: 4)
+      let pNode5 = BTTree(value: 5)
+      let pNode6 = BTTree(value: 6)
+      let pNode7 = BTTree(value: 7)
+      let pNode8 = BTTree(value: 8)
+      let pNode9 = BTTree(value: 9)
+      BTTree.connect(parent: pNode1, left: pNode2, right: pNode3)
+      BTTree.connect(parent: pNode2, left: pNode4, right: nil)
+      BTTree.connect(parent: pNode3, left: nil, right: pNode5)
+      BTTree.connect(parent: pNode4, left: pNode6, right: pNode7)
+      BTTree.connect(parent: pNode5, left: pNode8, right: pNode9)
+      let result = item.lowestCommonNode(pNode1, pNode6, pNode8)
+      XCTAssertEqual(result, pNode1)
+    } while false
+    
+    repeat {
+      // 树退化成一个链表
+      //               1
+      //              /
+      //             2
+      //            /
+      //           3
+      //          /
+      //         4
+      //        /
+      //       5
+      
+      let pNode1 = BTTree(value: 1)
+      let pNode2 = BTTree(value: 2)
+      let pNode3 = BTTree(value: 3)
+      let pNode4 = BTTree(value: 4)
+      let pNode5 = BTTree(value: 5)
+
+      BTTree.connect(parent: pNode1, left: pNode2, right: nil)
+      BTTree.connect(parent: pNode2, left: pNode3, right: nil)
+      BTTree.connect(parent: pNode3, left: pNode4, right: nil)
+      BTTree.connect(parent: pNode4, left: pNode5, right: nil)
+      
+      let result = item.lowestCommonNode(pNode1, pNode5, pNode4)
+      XCTAssertEqual(result, pNode3)
+    } while false
+    
+    repeat {
+      let pNode1 = BTTree(value: 1)
+      let pNode2 = BTTree(value: 2)
+      let pNode3 = BTTree(value: 3)
+      let pNode4 = BTTree(value: 4)
+      let pNode5 = BTTree(value: 5)
+      let pNode6 = BTTree(value: 6)
+
+      BTTree.connect(parent: pNode1, left: pNode2, right: nil)
+      BTTree.connect(parent: pNode2, left: pNode3, right: nil)
+      BTTree.connect(parent: pNode3, left: pNode4, right: nil)
+      BTTree.connect(parent: pNode4, left: pNode5, right: nil)
+      
+      let result = item.lowestCommonNode(pNode1, pNode5, pNode6)
+      XCTAssertEqual(result, nil)
+    } while false
+    
+    repeat {
+      let result = item.lowestCommonNode(nil, nil, nil)
+      XCTAssertEqual(result, nil)
+    } while false
+  }
 //  MARK: - 辅助
   func testBitShift() {
     let item = [1,0,2,3]
@@ -5661,6 +5740,15 @@ final class MyBrickTests: XCTestCase {
       XCTAssertEqual(array[2], 6)
       XCTAssertEqual(array[3], 7)
     } while false
+  }
+  
+  func testBTreeEqual() {
+    let p1 = BTTree(value: 1)
+    let p2 = BTTree(value: 2)
+    let p3 = BTTree(value: 3)
+    BTTree.connect(parent: p1, left: p2, right: p3)
+    let r = p1.left == p2
+    XCTAssertEqual(r, true)
   }
   
   // MARK: - 多线程测试
