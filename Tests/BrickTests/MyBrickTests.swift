@@ -5302,6 +5302,125 @@ final class MyBrickTests: XCTestCase {
 
   }
   
+  /*
+   Test("123");
+
+   Test("+123");
+   
+   Test("-123");
+
+   Test("1a33");
+
+   Test("+0");
+
+   Test("-0");
+
+   //有效的最大正整数, 0x7FFFFFFF
+   Test("+2147483647");
+
+   Test("-2147483647");
+
+   Test("+2147483648");
+
+   //有效的最小负整数, 0x80000000
+   Test("-2147483648");
+
+   Test("+2147483649");
+
+   Test("-2147483649");
+
+   Test("+");
+
+   Test("-");
+
+   */
+  func testStr2Int() {
+    let item = MyStrToInt()
+    let min32 = Int32.min
+    let max32 = Int32.max
+    let m2 = Int32.max % 10
+    let m1 = Int32.min % 10
+    let m = m1 * (-1)
+    
+    repeat {
+      let info = "1"
+      let result = try? item.transfer(info)
+      XCTAssertEqual(result, 1)
+    } while false
+    
+    repeat {
+      let info = "+1"
+      let result = try? item.transfer(info)
+      XCTAssertEqual(result, 1)
+    } while false
+    
+    repeat {
+      let info = "-1"
+      let result = try? item.transfer(info)
+      XCTAssertEqual(result, -1)
+    } while false
+    
+    repeat {
+      let info = "-0"
+      let result = try? item.transfer(info)
+      XCTAssertEqual(result, 0)
+    } while false
+    
+    repeat {
+      let info = "-"
+      let result = try? item.transfer(info)
+      XCTAssertEqual(result, 0)
+    } while false
+    
+    repeat {
+      let info = "+2147483649"
+      let result = try? item.transfer(info)
+//      XCTAssertThrowsError(try item.transfer(info))
+
+      XCTAssertEqual(result, 2147483647)
+    } while false
+    
+    repeat {
+      let info = "-2147483649"
+      let result = try? item.transfer(info)
+      XCTAssertEqual(result, -2147483648)
+    } while false
+    
+    repeat {
+      let info = "+2147483647"
+      let result = try? item.transfer(info)
+      XCTAssertEqual(result, 2147483647)
+    } while false
+    
+    repeat {
+      let info = "-2147483647"
+      let result = try? item.transfer(info)
+      XCTAssertEqual(result, -2147483647)
+    } while false
+    
+    repeat {
+      let info = "-2147483648"
+      let result = try? item.transfer(info)
+      XCTAssertEqual(result, -2147483648)
+    } while false
+    
+    
+    repeat {
+      let info = "-0"
+      let result = try? item.transfer(info)
+      XCTAssertEqual(result, 0)
+    } while false
+    
+    repeat {
+      let info = " "
+      XCTAssertThrowsError(try item.transfer(info))
+    } while false
+    
+    repeat {
+      let info = " +1a"
+      XCTAssertThrowsError(try item.transfer(info))
+    } while false
+  }
 //  MARK: - 辅助
   func testBitShift() {
     let item = [1,0,2,3]

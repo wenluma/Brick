@@ -894,6 +894,10 @@ enum BrickError: Error {
   case invaildInput(Int)
   // 无效节点 nil
   case invaildNode
+  // 无效数据
+  case invaildData
+  // 越界
+  case overflows
   // 超限制
   case rangeOut(Int)
 }
@@ -3525,5 +3529,58 @@ public class BuildProductionArray {
       f *= list[i + 1]
       out[i] *= f
     }
+  }
+}
+
+// 面试题67：把字符串转换成整数
+// 题目：请你写一个函数StrToInt，实现把字符串转换成整数这个功能。当然，不
+// 能使用atoi或者其他类似的库函数。
+public class MyStrToInt {
+  func transfer(_ info: String) throws -> Int32 {
+    let str = info.trimmingCharacters(in: CharacterSet.whitespaces)
+    if str.isEmpty {
+      throw BrickError.empty
+    }
+    
+    var cs = Array(str)
+    var sign: Int32 = 1
+    var i = 0
+    var res: Int32 = 0, bndry = Int32.max / 10
+    let zero = Character("0").asciiValue!
+    if cs[i] == "-" {
+      sign = -1
+      i += 1
+    } else if cs[i] == "+" {
+      i += 1
+    }
+    for j in i ..< cs.count {
+      if cs[j] < "0" || cs[j] > "9" {
+        throw BrickError.invaildData
+      }
+      let c = Int32(cs[j].asciiValue! - zero)
+      if sign > 0 {
+        if res > bndry || res == bndry && c > 7 {
+          return Int32.max
+        }
+      } else {
+        if res > bndry || res == bndry && c > 8 {
+          return Int32.min
+        }
+      }
+      let diff = Int32(cs[j].asciiValue! - zero)
+      if res == bndry {
+        if sign > 0 {
+          res = res * 10 + diff
+          return res
+        } else {
+          res = sign * res * 10 - diff
+          return res
+        }
+      } else {
+        res = res * 10 + diff
+      }
+    }
+    
+    return sign * res
   }
 }
