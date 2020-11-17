@@ -3551,7 +3551,7 @@ public class MyStrToInt {
       throw BrickError.empty
     }
     
-    var cs = Array(str)
+    let cs = Array(str)
     var sign: Int32 = 1
     var i = 0
     var res: Int32 = 0, bndry = Int32.max / 10
@@ -3567,29 +3567,15 @@ public class MyStrToInt {
         throw BrickError.invaildData
       }
       let c = Int32(cs[j].asciiValue! - zero)
-      if sign > 0 {
-        if res > bndry || res == bndry && c > 7 {
+      if res > bndry || (res == bndry && c > 7) {
+        if sign > 0 {
           return Int32.max
-        }
-      } else {
-        if res > bndry || res == bndry && c > 8 {
+        } else {
           return Int32.min
         }
       }
-      let diff = Int32(cs[j].asciiValue! - zero)
-      if res == bndry {
-        if sign > 0 {
-          res = res * 10 + diff
-          return res
-        } else {
-          res = sign * res * 10 - diff
-          return res
-        }
-      } else {
-        res = res * 10 + diff
-      }
+      res  = res * 10 + c
     }
-    
     return sign * res
   }
 }
