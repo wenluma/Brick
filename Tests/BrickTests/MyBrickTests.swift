@@ -5500,6 +5500,35 @@ final class MyBrickTests: XCTestCase {
       XCTAssertEqual(result, nil)
     } while false
   }
+  
+  func testDeleteLeafNode() {
+    let item = DeleteLeafNode()
+    repeat {
+      /*
+              1
+            /   \
+          2       3
+            \    / \
+            4   4   6
+       */
+      let node1 = BTTree(value: 1)
+      let node2 = BTTree(value: 2)
+      let node3 = BTTree(value: 3)
+      let node4 = BTTree(value: 4)
+      let node5 = BTTree(value: 4)
+      let node6 = BTTree(value: 6)
+      BTTree.connect(parent: node1, left: node2, right: node3)
+      BTTree.connect(parent: node2, left: nil, right: node4)
+      BTTree.connect(parent: node3, left: node5, right: node6)
+      let result = item.deleteLeafNode(node: node1, target: 4)
+      
+      
+      print(result?.value)
+      
+      
+    } while false
+  }
+  
 //  MARK: - 辅助
   func testBitShift() {
     let item = [1,0,2,3]
