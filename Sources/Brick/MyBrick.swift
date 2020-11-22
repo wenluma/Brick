@@ -2157,7 +2157,7 @@ public struct MyHeap<T> {
   }
   
   private mutating func buildHeap() {
-    for i in (0 ..< count).reversed() {
+    for i in (0 ..< count/2).reversed() {
       siftDown(for: i)
     }
     
