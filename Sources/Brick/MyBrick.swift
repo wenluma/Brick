@@ -3656,3 +3656,34 @@ public class DeleteLeafNode {
     return node
   }
 }
+
+// s1, pattern ，pattern ，在s1 中找到与 pattern 最大长度的匹配
+// Case 1： A = "Ahbesara", B = "behavior" => 2
+public class LongestMatch {
+  public func matchLength(_ s1: String, _ pattern: String) -> Int {
+    if s1.isEmpty || pattern.isEmpty {
+      return 0
+    }
+    
+    var longest = Int.min
+    for i in 0 ..< s1.count {
+      let count = checkLength(s1, pattern, from: i)
+      if count > longest {
+        longest = count
+      }
+    }
+    return longest
+  }
+  
+  private func checkLength(_ s1: String, _ pattern: String, from: Int) -> Int {
+    var j = 0
+    var count = 0
+    var i = from
+    while i < s1.count, j < pattern.count, s1[i] == pattern[j]  {
+      count += 1
+      i += 1
+      j += 1
+    }
+    return count
+  }
+}

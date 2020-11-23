@@ -5522,10 +5522,51 @@ final class MyBrickTests: XCTestCase {
       BTTree.connect(parent: node3, left: node5, right: node6)
       let result = item.deleteLeafNode(node: node1, target: 4)
       
-      
       print(result?.value)
-      
-      
+
+    } while false
+  }
+  
+  
+  func testLongestMatch() {
+    let item =  LongestMatch()
+    
+    repeat {
+      let a = "hbe"
+      let b = "be"
+      let r = item.matchLength(a, b)
+      XCTAssertEqual(r, 2)
+    } while false
+    
+    repeat {
+      let a = "hbe"
+      let b = "hbe"
+      let r = item.matchLength(a, b)
+      XCTAssertEqual(r, a.count)
+    } while false
+    
+    repeat {
+//      Case 1： A = "Ahbesara", B = "behavior" => 2
+      let a = "Ahbesara"
+      let b = "behavior"
+      let r = item.matchLength(a, b)
+      XCTAssertEqual(r, 2)
+    } while false
+    
+    repeat {
+      //      Case 2： A = "MorningStar", B = "month" => 0
+      let a = "MorningStar"
+      let b = "month"
+      let r = item.matchLength(a, b)
+      XCTAssertEqual(r, 0)
+    } while false
+    
+    repeat {
+      //      Case 3： A = "bananax", B = "anax" => 4
+      let a = "bananax"
+      let b = "anax"
+      let r = item.matchLength(a, b)
+      XCTAssertEqual(r, 4)
     } while false
   }
   
