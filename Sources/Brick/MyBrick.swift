@@ -3687,3 +3687,47 @@ public class LongestMatch {
     return count
   }
 }
+
+/*
+ 题目：
+ 给出一个元素无序的数组，求出使得其左边的数都小于它，右边的数都大于等于它的所有数字。
+ 举例：
+ （1）1,2,3,1,2,0,5,6 ： 输出5,6
+ （2）1,2,3,1,2,0,5,5 ： 输出5（第一个5）
+ （3）1,2,3,4,5,6,7 ： 输出1,2,3,4,5,6,7
+ 
+ 思路：
+ 使用一个数组nArrMin[i]来保存[i,nLen-1]区间内的最小值。
+ 使用一个变量nMax保存区间[0,i-1]的最大值。
+ 对于第i个数，如果它满足nArr[i]大于左边的最大数nMax 且 小于右边的最小数nArrMin[i]，则该数即为所求。
+ 复杂度：时间：O（n），空间O（n）
+ */
+
+public class MyFindKNumber {
+  func findKth(list: [Int]) -> [Int] {
+    if list.isEmpty {
+      return [Int]()
+    }
+    
+    var rightMinList: [Int] = Array(repeating: Int.max, count: list.count)
+    rightMinList[list.count - 1] = list.last!
+    // build 1 - n-2, 的最大值集合
+    // 0  1  2  3
+    // i ~ n-1 的最小值
+    for i in (0 ..< list.count-1).reversed() {
+      rightMinList[i] = min(rightMinList[i + 1], list[i])
+    }
+    
+    var leftMax = Int.min
+    var res = [Int]()
+    for i in 0 ..< list.count {
+      if list[i] > leftMax {
+        if list[i] <= rightMinList[i] {
+          res.append(list[i])
+        }
+        leftMax = list[i]
+      }
+    }
+    return res
+  }
+}

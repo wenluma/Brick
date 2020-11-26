@@ -5570,6 +5570,29 @@ final class MyBrickTests: XCTestCase {
     } while false
   }
   
+  func testMyFindKNumber() {
+    let item = MyFindKNumber()
+    repeat {
+      let list = [1,2,3,1,2,0,5,6]
+      let result = item.findKth(list: list)
+      XCTAssertEqual(result, [5,6])
+      
+    } while false
+    
+    repeat {
+      let list = [1,2,3,1,2,0,5,5]
+      let result = item.findKth(list: list)
+      XCTAssertEqual(result, [5])
+      
+    } while false
+    
+    repeat {
+      let list = [1,2,3,4,5,6,7]
+      let result = item.findKth(list: list)
+      XCTAssertEqual(result, [1,2,3,4,5,6,7])
+      
+    } while false
+  }
 //  MARK: - 辅助
   func testBitShift() {
     let item = [1,0,2,3]
