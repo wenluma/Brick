@@ -3731,3 +3731,43 @@ public class MyFindKNumber {
     return res
   }
 }
+
+//1414. 和为 K 的最少斐波那契数字数目
+/*
+ 给你数字 k ，请你返回和为 k 的斐波那契数字的最少数目，其中，每个斐波那契数字都可以被使用多次。
+
+ 斐波那契数字定义为：
+
+ F1 = 1
+ F2 = 1
+ Fn = Fn-1 + Fn-2 ， 其中 n > 2 。
+ 数据保证对于给定的 k ，一定能找到可行解。
+ https://leetcode-cn.com/problems/find-the-minimum-number-of-fibonacci-numbers-whose-sum-is-k/solution/he-wei-k-de-zui-shao-fei-bo-na-qi-shu-zi-shu-mu-by/
+ */
+public class KSumFibo {
+  public func kSum(_ k: Int) -> Int {
+    
+    var fibo = [Int]()
+    fibo.append(1)
+    fibo.append(1)
+
+    var f1 = 1
+    var f2 = 1
+    while f1 + f2 <= k {
+      let tmp = f1 + f2
+      fibo.append(tmp)
+      f2 = f1
+      f1 = tmp
+    }
+    
+    var ans = 0
+    var sum = k
+    for i in (0 ... fibo.count-1).reversed() {
+      if fibo[i] <= sum {
+        ans += 1
+        sum -= fibo[i]
+      }
+    }
+    return ans
+  }
+}

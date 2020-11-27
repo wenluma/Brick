@@ -5593,6 +5593,27 @@ final class MyBrickTests: XCTestCase {
       
     } while false
   }
+  
+  func testKSumFibo() {
+    let item = KSumFibo()
+    repeat {
+      let count = item.kSum(7)
+      XCTAssertEqual(count, 2)
+    } while false
+    
+    repeat {
+      let count = item.kSum(10)
+      XCTAssertEqual(count, 2)
+    } while false
+    
+    
+    repeat {
+      let count = item.kSum(19)
+      XCTAssertEqual(count, 3)
+    } while false
+    
+  }
+  
 //  MARK: - 辅助
   func testBitShift() {
     let item = [1,0,2,3]
