@@ -5904,6 +5904,39 @@ final class MyBrickTests: XCTestCase {
     print("5...\(Thread.current)")
   }
   
+  // 多线程操作 map 会导致 crash
+  func testMyWorkQueue2() {
+    let exp = expectation(description: "workqueue")
+    
+    let group = DispatchGroup()
+    var map = [String: Int]()
+    var i = 0
+    for _ in 0 ..< 10 {
+      group.enter()
+      DispatchQueue.global(qos: .userInteractive).async {
+        i += 1
+        map["key1"] = i
+        group.leave()
+      }
+
+      group.enter()
+      DispatchQueue.global(qos: .userInteractive).async {
+        i += 1
+        map["key2"] = i
+        group.leave()
+      }
+    }
+    group.notify(queue: .main) {
+      print("result: ----")
+      print(i)
+      print(map)
+    }
+    
+    waitForExpectations(timeout: 2) { (error) in
+      print(error)
+    }
+  }
+  
   func testMyWorkQueue() {
     let exp = expectation(description: "workqueue")
     
