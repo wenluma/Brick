@@ -3833,3 +3833,62 @@ public class MyRainTrap1 {
     return ans
   }
 }
+
+public class MyRainTrap2 {
+    
+  /*
+   方法 4：使用双指针
+   直观想法
+
+   int left = 0, right = height.length - 1;
+       int ans = 0;
+       int left_max = 0, right_max = 0;
+       while (left < right) {
+           if (height[left] < height[right]) {
+               if (height[left] >= left_max) {
+                   left_max = height[left];
+               } else {
+                   ans += (left_max - height[left]);
+               }
+               ++left;
+           } else {
+               if (height[right] >= right_max) {
+                   right_max = height[right];
+               } else {
+                   ans += (right_max - height[right]);
+               }
+               --right;
+           }
+       }
+       return ans;
+   */
+  
+  func trap(_ heights: [Int]) -> Int {
+    if heights.isEmpty {
+      return 0
+    }
+    var left = 0
+    var right = heights.count - 1
+    var ans = 0
+    var leftMax = 0
+    var rightMax = 0
+    while left < right {
+      if heights[left] < heights[right] {
+        if heights[left] >= leftMax {
+          leftMax = heights[left]
+        } else {
+          ans += (leftMax - heights[left])
+        }
+        left += 1
+      } else {
+        if heights[right] > rightMax {
+          rightMax = heights[right]
+        } else {
+          ans += rightMax - heights[right]
+        }
+        right -= 1
+      }
+    }
+    return ans
+  }
+}
