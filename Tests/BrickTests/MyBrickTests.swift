@@ -5904,6 +5904,37 @@ final class MyBrickTests: XCTestCase {
     print("5...\(Thread.current)")
   }
   
+  // 多线程操作 queue 会导致 crash
+  func testMyWorkQueue3() {
+    let exp = expectation(description: "workqueue")
+    
+    var queue = [Int]()
+    var i = 0
+    DispatchQueue.global(qos: .userInteractive).async {
+      while true {
+        if i < 10 {
+          print("\(i) ---")
+          queue.append(i)
+        } else {
+          print("removeAll ---")
+          queue.removeAll()
+        }
+        i += 1
+      }
+    }
+
+    DispatchQueue.global(qos: .userInteractive).async {
+      while true {
+        print(queue)
+        // 会导致crash
+        queue.remove(at: 0)
+      }
+    }
+    
+    waitForExpectations(timeout: 3) { (error) in
+      print(error)
+    }
+  }
   // 多线程操作 map 会导致 crash
   func testMyWorkQueue2() {
     let exp = expectation(description: "workqueue")
@@ -5915,6 +5946,7 @@ final class MyBrickTests: XCTestCase {
       group.enter()
       DispatchQueue.global(qos: .userInteractive).async {
         i += 1
+        // 会导致crash
         map["key1"] = i
         group.leave()
       }
