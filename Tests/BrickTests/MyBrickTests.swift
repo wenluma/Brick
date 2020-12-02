@@ -5614,6 +5614,27 @@ final class MyBrickTests: XCTestCase {
     
   }
   
+  func testMyRainTrap1() {
+    let item = MyRainTrap1()
+    repeat {
+      let hights = [0,1,0,2,1,0,1,3,2,1,2,1]
+      let r = item.trap(hights)
+      XCTAssertEqual(r, 6)
+    } while false
+
+    repeat {
+      let hights = [1,2,3,4]
+      let r = item.trap(hights)
+      XCTAssertEqual(r, 0)
+    } while false
+
+    repeat {
+      let hights = [4,3,2,1]
+      let r = item.trap(hights)
+      XCTAssertEqual(r, 0)
+    } while false
+  }
+  
 //  MARK: - 辅助
   func testBitShift() {
     let item = [1,0,2,3]

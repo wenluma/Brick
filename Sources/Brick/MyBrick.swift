@@ -3771,3 +3771,65 @@ public class KSumFibo {
     return ans
   }
 }
+/*
+ 给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。
+
+  
+
+ 示例 1：
+ 输入：height = [0,1,0,2,1,0,1,3,2,1,2,1]
+ 输出：6
+ 解释：上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下，可以接 6 个单位的雨水（蓝色部分表示雨水）。
+
+ 提示：
+
+ n == height.length
+ 0 <= n <= 3 * 104
+ 0 <= height[i] <= 105
+ 
+ 链接：https://leetcode-cn.com/problems/trapping-rain-water
+ */
+public class MyRainTrap1 {
+  /*
+   算法
+   找到数组中从下标 i 到最左端最高的条形块高度 \text{left\_max}left_max。
+   找到数组中从下标 i 到最右端最高的条形块高度 \text{right\_max}right_max。
+   扫描数组 \text{height}height 并更新答案：
+   累加 \min(\text{max\_left}[i],\text{max\_right}[i]) - \text{height}[i]min(max_left[i],max_right[i])−height[i] 到 ansans 上
+   */
+  
+  func trap(_ hights: [Int]) -> Int {
+    if hights.isEmpty {
+      return 0
+    }
+    
+    var leftMax = Array<Int>(repeating: 0, count: hights.count)
+    var rightMax = Array<Int>(repeating: 0, count: hights.count)
+    // leftMax
+    leftMax[0] = hights[0]
+    var i = 1
+    while i < hights.count {
+      leftMax[i] = max(hights[i], leftMax[i - 1])
+      i += 1
+    }
+    
+    i = hights.count - 2
+    rightMax[hights.count - 1] = hights.last!
+    while i >= 0 {
+      let tmp = max(hights[i], rightMax[i + 1])
+      rightMax[i] = tmp
+      i -= 1
+    }
+    
+    i = 0
+    var ans = 0
+    while i < hights.count {
+      let tmp = min(leftMax[i], rightMax[i]) - hights[i]
+      if tmp > 0 {
+        ans += tmp
+      }
+      i += 1
+    }
+    return ans
+  }
+}
