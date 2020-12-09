@@ -5657,6 +5657,44 @@ final class MyBrickTests: XCTestCase {
     } while false
   }
   
+  func testDeleteKChars() {
+    let item = DeleteKChars()
+    repeat {
+      let s = "a"
+      let k = 2
+      let r = item.delete(s, k)
+      XCTAssertEqual(r, "")
+    } while false
+    
+    repeat {
+      let s = "aa"
+      let k = 2
+      let r = item.delete(s, k)
+      XCTAssertEqual(r, "")
+    } while false
+    
+    repeat {
+      let s = "baa"
+      let k = 2
+      let r = item.delete(s, k)
+      XCTAssertEqual(r, "b")
+    } while false
+    
+    repeat {
+      let s = "babca"
+      let k = 2
+      let r = item.delete(s, k)
+      XCTAssertEqual(r, "bbc")
+    } while false
+    
+    repeat {
+      let s = "babca"
+      let k = 3
+      let r = item.delete(s, k)
+      XCTAssertEqual(r, "bc")
+    } while false
+  }
+  
 //  MARK: - 辅助
   func testBitShift() {
     let item = [1,0,2,3]

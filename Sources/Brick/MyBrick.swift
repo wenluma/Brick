@@ -3881,7 +3881,7 @@ public class MyRainTrap2 {
         }
         left += 1
       } else {
-        if heights[right] > rightMax {
+        if heights[right] >= rightMax {
           rightMax = heights[right]
         } else {
           ans += rightMax - heights[right]
@@ -3890,5 +3890,89 @@ public class MyRainTrap2 {
       }
     }
     return ans
+  }
+}
+
+/*
+ 给定一个长度为n的小写字符数组，一次操作是删除一个最小字母，如有多个删除最靠左的。要求输出操作k次后的字符串。
+输入：abaacd, k = 3
+输出： bcd
+ 基本思路，统计出，数组中每个字符个个数，与k做比较
+ */
+
+public class DeleteKChars {
+  private let len = 26
+  private let base = Character("a").asciiValue!
+
+  
+  private struct DeleteInfo {
+    let deleteIndex: [Int]
+    let stopIndex: Int
+    var stopCount: Int
+  }
+  
+  func delete(_ s: String, _ k: Int) -> String {
+    if s.count <= k {
+      return ""
+    }
+    
+    let cs = Array(s)
+    let times: [Int] = charToTimes(cs: cs)
+    let deleteInfo = buildDeleteCharsInfo(times, k: k)
+    let result = rebuildString(cs, deleteInfo)
+    return result
+  }
+  
+  // 统计各种字符出现的次数
+  private func charToTimes(cs: [Character]) -> [Int] {
+    var times: [Int] = Array<Int>(repeating: 0, count: len)
+    let list = cs.map{ return Int($0.asciiValue! - base) }
+    for i in list {
+      times[i] += 1
+    }
+    return times
+  }
+  // 构建要删除的信息
+  private func buildDeleteCharsInfo(_ times: [Int], k: Int) -> DeleteInfo {
+    var deleteChars: [Int] = [Int]()
+    var i = 0
+    var count = k
+    var stop = -1
+    while i < len {
+      let tmp = count - times[i]
+      if tmp >= 0 {
+        count = tmp
+        deleteChars.append(i)
+      } else {
+        stop = i
+        break
+      }
+      i += 1
+    }
+    var stopCount = 0
+    if stop > 0 {
+      stopCount = count
+    }
+    return DeleteInfo(deleteIndex: deleteChars, stopIndex: stop, stopCount: stopCount)
+  }
+  
+  // 重新连接字符串
+  private func rebuildString(_ cs: [Character], _ info: DeleteInfo) -> String {
+    var result = ""
+    var deleteInfo = info
+    for c in cs {
+      let diff = Int(c.asciiValue! - base)
+      if deleteInfo.deleteIndex.contains(diff) {
+        continue
+      } else if diff == deleteInfo.stopIndex {
+        if deleteInfo.stopCount > 0 {
+          deleteInfo.stopCount -= 1
+          continue
+        }
+      }
+      result += String(c)
+    }
+    
+    return result
   }
 }
